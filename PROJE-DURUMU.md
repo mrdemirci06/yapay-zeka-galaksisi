@@ -6,7 +6,7 @@
 
 ## 📅 Son Güncelleme
 **Tarih:** 23 Mayıs 2026
-**Versiyon:** v0.2 — Gezegen 2 eklendi, GitHub'a taşındık
+**Versiyon:** v0.2 — Gezegen 2 tamamlandı, GitHub'a taşındık
 
 ---
 
@@ -20,42 +20,39 @@
 - [x] Rozet ve XP sistemi
 - [x] Kilit/Açık mantığı (önceki gezegen tamamlanmadan sonraki açılmaz)
 - [x] "İlerlemeyi sıfırla" butonu
-- [x] **Proje GitHub'a taşındı** 🐙
+- [x] **Proje GitHub'a taşındı** 🐙 (https://github.com/mrdemirci06/yapay-zeka-galaksisi)
 
-### Gezegen 1: Başlangıç (Yapay Zeka Nedir?)
-- [x] Konu anlatımı (4 bölüm)
-- [x] 1 quiz sorusu (yanlış cevapta tekrar şansı)
-- [x] Claude ile gerçek zamanlı sohbet alanı (Anthropic API)
-- [x] Öneri çipleri (örnek sorular)
+### Gezegen 1: Başlangıç (Yapay Zeka Nedir?) ✅
+- [x] 4 bölüm ders + quiz + Claude sohbeti + öneri çipleri
 - [x] Rozet: 🚀 İlk Adımlar (100 XP)
 
-### Gezegen 2: Konuşma (Prompt Sanatı) ✨ YENİ
-- [x] Konu anlatımı (4 bölüm: Prompt nedir, İyi vs Kötü, Sihirli ipuçları, Rol verme)
-- [x] Yan yana karşılaştırma kutuları (kötü vs iyi prompt örnekleri)
-- [x] 1 quiz sorusu (yanlış cevapta tekrar şansı)
-- [x] **Prompt Laboratuvarı**: Kırmızı (kötü) ve yeşil (iyi) prompt çipleri
-- [x] Claude, kötü promptlara şaşkın cevap + ipucu veriyor (system prompt'la)
+### Gezegen 2: Konuşma (Prompt Sanatı) ✅
+- [x] 4 bölüm ders (Prompt nedir, İyi vs Kötü, Sihirli ipuçları, Rol verme)
+- [x] Yan yana karşılaştırma kutuları
+- [x] Quiz + Prompt Laboratuvarı (kırmızı/yeşil çipler)
 - [x] Rozet: 💬 Konuşma Ustası (150 XP)
 
 ---
 
 ## 🔄 Şu An Yapılıyor
 
-GitHub kurulumu yapıldı. Gezegen 2 test ediliyor. Sırada Gezegen 3 (Yaratım — Artifacts) var.
+**Ara verildi (23 Mayıs).** Yarın devam edilecek:
+1. Gezegen 3 (Yaratım — Artifacts) yapımına başlanacak
+2. Galeri yaklaşımı seçildi (3 demo: oyun, animasyon, üçüncü demo henüz karar verilmedi)
+3. Kullanıcının açık soruları var — konuşulacak
 
 ---
 
 ## 📋 Sıradaki Adımlar
 
 ### Yakın Öncelik
-- [ ] Gezegen 2'yi sınıfta veya tek başına test et
-- [ ] Gezegen 3 (Yaratım — Artifacts) için içerik taslağı yaz
-- [ ] Artifacts kavramını ortaokul seviyesinde nasıl anlatacağız karar ver
+- [ ] Gezegen 3 (Yaratım) için içerik geliştir
+- [ ] Galeri için 3 demo örneği hazırla (3.'sünü yeniden değerlendir)
+- [ ] Kullanıcının sorularını cevapla, gerekirse plan revize et
 
 ### Orta Vadeli
 - [ ] Gezegen 3-7 içeriklerini sırayla ekle
 - [ ] Final gezegeni için "mini proje yap" şablonu hazırla
-- [ ] Quiz çeşitliliği — her gezegene 2-3 soru ekleyebilir miyiz?
 
 ### Uzun Vadeli
 - [ ] Öğretmen paneli (sınıf yönetimi)
@@ -66,7 +63,7 @@ GitHub kurulumu yapıldı. Gezegen 2 test ediliyor. Sırada Gezegen 3 (Yaratım 
 
 ## 🐛 Bilinen Sorunlar / İyileştirmeler
 
-(Şimdilik yok. Test ettikten sonra buraya not düş.)
+(Şimdilik yok. Gezegen 3 yapılırken not düşülecek.)
 
 ---
 
