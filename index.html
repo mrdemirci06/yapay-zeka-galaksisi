@@ -1,0 +1,1514 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yapay Zeka Galaksisi 🚀</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Space+Grotesk:wght@400;500;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  
+  :root {
+    --space-deep: #050818;
+    --space-mid: #0a1128;
+    --space-light: #1a2456;
+    --neon-cyan: #00f0ff;
+    --neon-pink: #ff2e92;
+    --neon-yellow: #ffd60a;
+    --neon-green: #39ff14;
+    --neon-purple: #b026ff;
+    --star-white: #ffffff;
+    --locked-gray: #3a4567;
+  }
+  
+  body {
+    font-family: 'Space Grotesk', sans-serif;
+    background: var(--space-deep);
+    color: var(--star-white);
+    overflow-x: hidden;
+    min-height: 100vh;
+    position: relative;
+  }
+  
+  /* YILDIZLAR */
+  .stars {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle var(--dur, 3s) ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.5); }
+  }
+  
+  /* KAYAN YILDIZ */
+  .shooting-star {
+    position: fixed;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    box-shadow: 0 0 6px white;
+    z-index: 1;
+    pointer-events: none;
+  }
+  .shooting-star::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, white, transparent);
+    transform: translateX(-80px);
+  }
+  
+  /* NEBULA ARKAPLAN */
+  .nebula {
+    position: fixed;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    z-index: 0;
+    pointer-events: none;
+  }
+  .nebula-1 { width: 500px; height: 500px; background: var(--neon-purple); top: -100px; left: -100px; animation: float 20s ease-in-out infinite; }
+  .nebula-2 { width: 400px; height: 400px; background: var(--neon-pink); bottom: 10%; right: -100px; animation: float 25s ease-in-out infinite reverse; }
+  .nebula-3 { width: 300px; height: 300px; background: var(--neon-cyan); top: 40%; left: 30%; animation: float 30s ease-in-out infinite; }
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(50px, -50px); }
+  }
+  
+  /* ÜST BAR */
+  .header {
+    position: relative;
+    z-index: 10;
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(0, 240, 255, 0.2);
+    background: rgba(5, 8, 24, 0.7);
+    backdrop-filter: blur(10px);
+  }
+  
+  .logo {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 900;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 2px;
+    text-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+  }
+  
+  .stats {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+  }
+  
+  .stat {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    border-radius: 30px;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+  }
+  
+  .stat-icon { font-size: 1.2rem; }
+  
+  .reset-btn {
+    background: transparent;
+    border: 1px solid rgba(255, 46, 146, 0.5);
+    color: var(--neon-pink);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    transition: all 0.3s;
+  }
+  .reset-btn:hover {
+    background: rgba(255, 46, 146, 0.2);
+  }
+  
+  /* ANA KONTAINER */
+  .container {
+    position: relative;
+    z-index: 5;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  /* HOŞGELDİN */
+  .welcome {
+    text-align: center;
+    margin: 2rem 0 3rem;
+  }
+  
+  .welcome h1 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+    background: linear-gradient(135deg, var(--neon-cyan) 0%, var(--neon-pink) 50%, var(--neon-yellow) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 3px;
+    animation: glow 2s ease-in-out infinite alternate;
+  }
+  @keyframes glow {
+    from { filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.5)); }
+    to { filter: drop-shadow(0 0 30px rgba(255, 46, 146, 0.8)); }
+  }
+  
+  .welcome p {
+    font-size: 1.1rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  
+  /* GALAKSİ HARİTASI */
+  .galaxy-map {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 2rem;
+    margin: 3rem 0;
+  }
+  
+  .planet-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(26, 36, 86, 0.6), rgba(10, 17, 40, 0.8));
+    border: 2px solid rgba(0, 240, 255, 0.2);
+    border-radius: 20px;
+    padding: 2rem;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+  
+  .planet-card.unlocked:hover {
+    transform: translateY(-8px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 20px 60px rgba(0, 240, 255, 0.3);
+  }
+  
+  .planet-card.locked {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(70%);
+  }
+  
+  .planet-card.completed {
+    border-color: var(--neon-green);
+    background: linear-gradient(135deg, rgba(57, 255, 20, 0.1), rgba(10, 17, 40, 0.8));
+  }
+  
+  .planet-card::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.1) 0%, transparent 50%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    pointer-events: none;
+  }
+  
+  .planet-card.unlocked:hover::before { opacity: 1; }
+  
+  .planet-emoji {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: orbit 8s linear infinite;
+  }
+  @keyframes orbit {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+  
+  .planet-number {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-family: 'Press Start 2P', monospace;
+    font-size: 0.7rem;
+    opacity: 0.5;
+    color: var(--neon-cyan);
+  }
+  
+  .planet-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: var(--neon-cyan);
+  }
+  
+  .planet-desc {
+    font-size: 0.9rem;
+    opacity: 0.7;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  .planet-status {
+    display: inline-block;
+    padding: 0.3rem 0.8rem;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .status-locked { background: rgba(255,255,255,0.1); color: #888; }
+  .status-open { background: rgba(0, 240, 255, 0.2); color: var(--neon-cyan); }
+  .status-done { background: rgba(57, 255, 20, 0.2); color: var(--neon-green); }
+  
+  .lock-icon {
+    position: absolute;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    font-size: 1.5rem;
+    opacity: 0.5;
+  }
+  
+  /* MODAL / DETAY EKRANI */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(5, 8, 24, 0.95);
+    backdrop-filter: blur(20px);
+    z-index: 100;
+    overflow-y: auto;
+    padding: 2rem;
+  }
+  .modal-overlay.active {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    animation: fadeIn 0.3s;
+  }
+  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  
+  .modal-content {
+    background: linear-gradient(135deg, rgba(26, 36, 86, 0.95), rgba(10, 17, 40, 0.98));
+    border: 2px solid var(--neon-cyan);
+    border-radius: 24px;
+    max-width: 900px;
+    width: 100%;
+    padding: 3rem;
+    position: relative;
+    box-shadow: 0 0 60px rgba(0, 240, 255, 0.3);
+    margin: 2rem auto;
+  }
+  
+  .close-btn {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: rgba(255, 46, 146, 0.2);
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1.2rem;
+    transition: all 0.3s;
+  }
+  .close-btn:hover {
+    background: var(--neon-pink);
+    color: white;
+    transform: rotate(90deg);
+  }
+  
+  .modal-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .modal-emoji {
+    font-size: 5rem;
+    margin-bottom: 1rem;
+    display: inline-block;
+    animation: float-emoji 3s ease-in-out infinite;
+  }
+  @keyframes float-emoji {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+  
+  .modal-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 2rem;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-pink));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  /* DERS İÇERİĞİ */
+  .lesson-section {
+    background: rgba(0, 0, 0, 0.3);
+    border-left: 3px solid var(--neon-cyan);
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-radius: 8px;
+  }
+  
+  .lesson-section h3 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-yellow);
+    margin-bottom: 0.8rem;
+    font-size: 1.2rem;
+  }
+  
+  .lesson-section p {
+    line-height: 1.7;
+    margin-bottom: 0.8rem;
+    font-size: 1rem;
+  }
+  
+  .lesson-section ul {
+    list-style: none;
+    padding-left: 0;
+  }
+  
+  .lesson-section li {
+    padding: 0.5rem 0 0.5rem 2rem;
+    position: relative;
+  }
+  
+  .lesson-section li::before {
+    content: '🚀';
+    position: absolute;
+    left: 0;
+  }
+  
+  .fun-fact {
+    background: linear-gradient(135deg, rgba(255, 214, 10, 0.15), rgba(255, 46, 146, 0.15));
+    border: 1px solid var(--neon-yellow);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+  }
+  
+  .fun-fact-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-yellow);
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+  
+  /* QUIZ */
+  .quiz-box {
+    background: linear-gradient(135deg, rgba(176, 38, 255, 0.15), rgba(0, 240, 255, 0.1));
+    border: 2px solid var(--neon-purple);
+    padding: 2rem;
+    border-radius: 16px;
+    margin: 2rem 0;
+  }
+  
+  .quiz-question {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: var(--neon-purple);
+  }
+  
+  .quiz-options {
+    display: grid;
+    gap: 0.8rem;
+  }
+  
+  .quiz-option {
+    background: rgba(255, 255, 255, 0.05);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    color: white;
+    padding: 1rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+    text-align: left;
+    transition: all 0.3s;
+  }
+  
+  .quiz-option:hover {
+    border-color: var(--neon-cyan);
+    background: rgba(0, 240, 255, 0.1);
+    transform: translateX(8px);
+  }
+  
+  .quiz-option.correct {
+    background: rgba(57, 255, 20, 0.2);
+    border-color: var(--neon-green);
+    animation: correct-pulse 0.5s;
+  }
+  
+  .quiz-option.wrong {
+    background: rgba(255, 46, 146, 0.2);
+    border-color: var(--neon-pink);
+    animation: shake 0.4s;
+  }
+  
+  @keyframes correct-pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+  }
+  
+  @keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+  }
+  
+  .quiz-feedback {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 8px;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; animation: fadeIn 0.4s; }
+  .quiz-feedback.success { background: rgba(57, 255, 20, 0.15); border: 1px solid var(--neon-green); color: var(--neon-green); }
+  .quiz-feedback.error { background: rgba(255, 46, 146, 0.15); border: 1px solid var(--neon-pink); color: var(--neon-pink); }
+  
+  /* CLAUDE SOHBET */
+  .chat-section {
+    background: linear-gradient(135deg, rgba(0, 240, 255, 0.08), rgba(176, 38, 255, 0.08));
+    border: 2px solid var(--neon-cyan);
+    border-radius: 16px;
+    padding: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .chat-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .chat-subtitle {
+    opacity: 0.7;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+  }
+  
+  .chat-messages {
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 12px;
+    padding: 1rem;
+    max-height: 400px;
+    overflow-y: auto;
+    margin-bottom: 1rem;
+    min-height: 200px;
+  }
+  
+  .chat-message {
+    margin: 0.8rem 0;
+    padding: 0.8rem 1.2rem;
+    border-radius: 12px;
+    max-width: 85%;
+    animation: messageIn 0.3s;
+  }
+  
+  @keyframes messageIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  .chat-message.user {
+    background: linear-gradient(135deg, var(--neon-cyan), #0099cc);
+    color: var(--space-deep);
+    margin-left: auto;
+    text-align: right;
+    font-weight: 600;
+  }
+  
+  .chat-message.assistant {
+    background: rgba(176, 38, 255, 0.15);
+    border-left: 3px solid var(--neon-purple);
+    color: white;
+    white-space: pre-wrap;
+  }
+  
+  .chat-message.thinking {
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--neon-cyan);
+    font-style: italic;
+  }
+  
+  .chat-input-area {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .chat-input {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: white;
+    padding: 0.8rem 1.2rem;
+    border-radius: 10px;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 1rem;
+  }
+  
+  .chat-input:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
+  }
+  
+  .chat-send {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: white;
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s;
+  }
+  
+  .chat-send:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
+  }
+  
+  .chat-send:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .suggestion-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .chip {
+    background: rgba(0, 240, 255, 0.1);
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    color: var(--neon-cyan);
+    padding: 0.4rem 0.9rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  
+  .chip:hover {
+    background: rgba(0, 240, 255, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  /* GÖREV TAMAMLA BUTONU */
+  .complete-mission {
+    display: block;
+    margin: 2rem auto 1rem;
+    background: linear-gradient(135deg, var(--neon-green), var(--neon-cyan));
+    color: var(--space-deep);
+    border: none;
+    padding: 1.2rem 3rem;
+    font-family: 'Orbitron', sans-serif;
+    font-weight: 900;
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-transform: uppercase;
+  }
+  
+  .complete-mission:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 40px rgba(57, 255, 20, 0.6);
+  }
+  
+  .complete-mission:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: gray;
+  }
+  
+  /* ROZET KAZANMA */
+  .badge-popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    background: linear-gradient(135deg, var(--neon-yellow), var(--neon-pink));
+    color: var(--space-deep);
+    padding: 3rem;
+    border-radius: 24px;
+    text-align: center;
+    z-index: 200;
+    box-shadow: 0 0 100px rgba(255, 214, 10, 0.8);
+    transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  .badge-popup.show {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  
+  .badge-icon {
+    font-size: 6rem;
+    animation: badge-spin 1s ease-out;
+  }
+  
+  @keyframes badge-spin {
+    0% { transform: rotate(0) scale(0); }
+    100% { transform: rotate(720deg) scale(1); }
+  }
+  
+  .badge-title {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.8rem;
+    margin: 1rem 0;
+    font-weight: 900;
+  }
+  
+  /* MOBİL UYUM */
+  @media (max-width: 768px) {
+    .header { padding: 1rem; flex-direction: column; gap: 1rem; }
+    .stats { flex-wrap: wrap; justify-content: center; }
+    .container { padding: 1rem; }
+    .modal-content { padding: 1.5rem; }
+    .modal-title { font-size: 1.4rem; }
+  }
+  
+  /* Scroll bar */
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--space-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 4px; }
+</style>
+</head>
+<body>
+
+<!-- Yıldızlı arkaplan -->
+<div class="stars" id="stars"></div>
+<div class="nebula nebula-1"></div>
+<div class="nebula nebula-2"></div>
+<div class="nebula nebula-3"></div>
+
+<!-- ÜST BAR -->
+<header class="header">
+  <div class="logo">⚡ YZ GALAKSİSİ</div>
+  <div class="stats">
+    <div class="stat">
+      <span class="stat-icon">🏆</span>
+      <span id="badges-count">0</span>
+      <span>Rozet</span>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">🌟</span>
+      <span id="xp-count">0</span>
+      <span>XP</span>
+    </div>
+    <div class="stat">
+      <span class="stat-icon">🪐</span>
+      <span id="planets-count">0</span>
+      <span>/ 8 Gezegen</span>
+    </div>
+    <button class="reset-btn" onclick="resetProgress()">İlerlemeyi Sıfırla</button>
+  </div>
+</header>
+
+<!-- ANA İÇERİK -->
+<div class="container">
+  
+  <div class="welcome">
+    <h1>YAPAY ZEKA GALAKSİSİ</h1>
+    <p>Uzay kâşifi! 8 gezegenlik bir maceraya hazır mısın? Her gezegende yapay zeka hakkında yeni bir sır seni bekliyor. Hadi başlayalım! 🌌</p>
+  </div>
+  
+  <!-- GALAKSİ HARİTASI -->
+  <div class="galaxy-map" id="galaxyMap">
+    <!-- Gezegenler JS ile basılacak -->
+  </div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-overlay" id="modal" onclick="if(event.target===this) closeModal()">
+  <div class="modal-content" id="modalContent">
+    <!-- İçerik dinamik basılacak -->
+  </div>
+</div>
+
+<!-- ROZET POPUP -->
+<div class="badge-popup" id="badgePopup">
+  <div class="badge-icon" id="badgeIcon">🏆</div>
+  <div class="badge-title" id="badgeTitle">Rozet Kazandın!</div>
+  <div id="badgeDesc"></div>
+</div>
+
+<script>
+  // =====================================================
+  // GEZEGEN VERİLERİ
+  // =====================================================
+  const planets = [
+    {
+      id: 1,
+      emoji: '🌍',
+      name: 'Başlangıç Gezegeni',
+      desc: 'Yapay zeka aslında nedir? Maceraya buradan başlıyoruz!',
+      content: 'intro',
+      badge: { icon: '🚀', title: 'İlk Adımlar', desc: 'YZ Galaksisi\'ne ilk adımını attın!' },
+      xp: 100
+    },
+    {
+      id: 2,
+      emoji: '🪐',
+      name: 'Konuşma Gezegeni',
+      desc: 'Claude.ai\'da nasıl konuşulur, iyi soru nasıl sorulur?',
+      content: 'conversation',
+      badge: { icon: '💬', title: 'Konuşma Ustası', desc: 'Prompt yazmayı öğrendin — YZ ile artık çok daha iyi konuşabilirsin!' },
+      xp: 150
+    },
+    {
+      id: 3,
+      emoji: '✨',
+      name: 'Yaratım Gezegeni',
+      desc: 'Artifacts ile kendi oyunlarını yaratacaksın!',
+      content: 'comingSoon',
+      badge: { icon: '🎨', title: 'Yaratıcı', desc: '' },
+      xp: 200
+    },
+    {
+      id: 4,
+      emoji: '🛠️',
+      name: 'Atölye Gezegeni',
+      desc: 'Skills ile Claude\'a süper güçler kazandır.',
+      content: 'comingSoon',
+      badge: { icon: '⚙️', title: 'Yetenek Mühendisi', desc: '' },
+      xp: 200
+    },
+    {
+      id: 5,
+      emoji: '🌐',
+      name: 'Köprü Gezegeni',
+      desc: 'MCP ile dış dünyaya bağlan.',
+      content: 'comingSoon',
+      badge: { icon: '🔗', title: 'Köprü Kurucu', desc: '' },
+      xp: 250
+    },
+    {
+      id: 6,
+      emoji: '💻',
+      name: 'Kod Gezegeni',
+      desc: 'Claude Code ile gerçek programcı ol.',
+      content: 'comingSoon',
+      badge: { icon: '👨‍💻', title: 'Kod Kâşifi', desc: '' },
+      xp: 300
+    },
+    {
+      id: 7,
+      emoji: '🤝',
+      name: 'Takım Gezegeni',
+      desc: 'Cowork: Claude ile takım çalışması.',
+      content: 'comingSoon',
+      badge: { icon: '👥', title: 'Takım Oyuncusu', desc: '' },
+      xp: 250
+    },
+    {
+      id: 8,
+      emoji: '⭐',
+      name: 'Final Gezegeni',
+      desc: 'Kendi mini projeni yap ve YZ Uzmanı ol!',
+      content: 'comingSoon',
+      badge: { icon: '👑', title: 'YZ Uzmanı', desc: '' },
+      xp: 500
+    }
+  ];
+  
+  // =====================================================
+  // PROGRESS YÖNETİMİ (window.storage ile)
+  // =====================================================
+  let progress = {
+    completedPlanets: [],
+    badges: [],
+    xp: 0,
+    currentQuizAnswered: {}
+  };
+  
+  async function loadProgress() {
+    try {
+      const result = await window.storage.get('yz_galaksisi_progress');
+      if (result && result.value) {
+        progress = JSON.parse(result.value);
+      }
+    } catch (e) {
+      // İlk açılış - sorun değil
+      console.log('İlk başlangıç');
+    }
+    updateStats();
+    renderPlanets();
+  }
+  
+  async function saveProgress() {
+    try {
+      await window.storage.set('yz_galaksisi_progress', JSON.stringify(progress));
+    } catch (e) {
+      console.error('Kayıt hatası:', e);
+    }
+  }
+  
+  async function resetProgress() {
+    if (!confirm('Tüm ilerlemen silinecek. Emin misin?')) return;
+    progress = { completedPlanets: [], badges: [], xp: 0, currentQuizAnswered: {} };
+    try {
+      await window.storage.delete('yz_galaksisi_progress');
+    } catch(e) {}
+    updateStats();
+    renderPlanets();
+  }
+  
+  function updateStats() {
+    document.getElementById('badges-count').textContent = progress.badges.length;
+    document.getElementById('xp-count').textContent = progress.xp;
+    document.getElementById('planets-count').textContent = progress.completedPlanets.length;
+  }
+  
+  // =====================================================
+  // GEZEGEN HARİTASI
+  // =====================================================
+  function isUnlocked(planetId) {
+    if (planetId === 1) return true;
+    return progress.completedPlanets.includes(planetId - 1);
+  }
+  
+  function renderPlanets() {
+    const map = document.getElementById('galaxyMap');
+    map.innerHTML = '';
+    planets.forEach(p => {
+      const unlocked = isUnlocked(p.id);
+      const completed = progress.completedPlanets.includes(p.id);
+      let statusClass, statusText;
+      if (completed) { statusClass = 'status-done'; statusText = '✓ Tamamlandı'; }
+      else if (unlocked) { statusClass = 'status-open'; statusText = '🚀 Hazır'; }
+      else { statusClass = 'status-locked'; statusText = '🔒 Kilitli'; }
+      
+      const cardClass = completed ? 'completed' : (unlocked ? 'unlocked' : 'locked');
+      
+      const card = document.createElement('div');
+      card.className = `planet-card ${cardClass}`;
+      card.innerHTML = `
+        <div class="planet-number">#0${p.id}</div>
+        <div class="planet-emoji">${p.emoji}</div>
+        <div class="planet-name">${p.name}</div>
+        <div class="planet-desc">${p.desc}</div>
+        <div class="planet-status ${statusClass}">${statusText}</div>
+        ${!unlocked ? '<div class="lock-icon">🔒</div>' : ''}
+      `;
+      if (unlocked) {
+        card.onclick = () => openPlanet(p);
+      }
+      map.appendChild(card);
+    });
+  }
+  
+  // =====================================================
+  // GEZEGEN DETAYI AÇMA
+  // =====================================================
+  function openPlanet(planet) {
+    const modal = document.getElementById('modal');
+    const content = document.getElementById('modalContent');
+    
+    if (planet.content === 'intro') {
+      content.innerHTML = renderIntroPlanet(planet);
+    } else if (planet.content === 'conversation') {
+      quizPassed2 = false;
+      hasTried2 = false;
+      content.innerHTML = renderConversationPlanet(planet);
+    } else {
+      content.innerHTML = renderComingSoon(planet);
+    }
+    
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+  
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+  
+  // =====================================================
+  // GEZEGEN 1: YAPAY ZEKA NEDİR?
+  // =====================================================
+  function renderIntroPlanet(planet) {
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Yapay Zeka Nedir?</p>
+      </div>
+      
+      <div class="lesson-section">
+        <h3>🤔 Yapay Zeka Tam Olarak Ne?</h3>
+        <p>Düşün bir: Bilgisayar nasıl matematik yapar? Çok hızlı ama <strong>sadece kendisine söylediğin şeyleri</strong> yapar. 2+2 sor, 4 der. Ama "bana bir hikaye yaz" desen? Hiçbir şey yapamaz, çünkü ona kimse öğretmemiştir.</p>
+        <p><strong>Yapay zeka (YZ)</strong> ise farklı. Milyonlarca kitap, makale ve sohbet okuyarak <strong>kendi başına öğrenir</strong>. Sonra senin sorularına cevap verir, hikaye yazar, kod yazar, hatta resim çizer!</p>
+        <p>Yani YZ, "öğrenmeyi öğrenmiş" bir bilgisayar gibidir. 🤖</p>
+      </div>
+      
+      <div class="fun-fact">
+        <div class="fun-fact-title">⚡ İlginç Bilgi</div>
+        <p>"Yapay zeka" terimi <strong>1956 yılında</strong> bulundu. Yani senin doğumundan çok önce! Ama gerçekten kullanışlı YZ'ler ancak son 10 yılda ortaya çıktı, çünkü bilgisayarlar artık çok daha güçlü.</p>
+      </div>
+      
+      <div class="lesson-section">
+        <h3>🎯 YZ Neler Yapabilir?</h3>
+        <ul>
+          <li><strong>Yazı yazar:</strong> Şiir, hikaye, ödev, e-posta...</li>
+          <li><strong>Soru cevaplar:</strong> Bir kütüphane kadar bilgisi var</li>
+          <li><strong>Kod yazar:</strong> Web siteleri, oyunlar yapabilir</li>
+          <li><strong>Resim çizer:</strong> Hayal ettiğin sahneleri görseller</li>
+          <li><strong>Çeviri yapar:</strong> Türkçe → İngilizce → Japonca, hepsi anında</li>
+          <li><strong>Fikir verir:</strong> Sıkıştığında beyin fırtınası arkadaşı</li>
+        </ul>
+      </div>
+      
+      <div class="lesson-section">
+        <h3>🚫 YZ Neler Yapamaz?</h3>
+        <p>YZ süper güçlü ama <strong>her şeyi bilmiyor</strong>:</p>
+        <ul>
+          <li>Senin hissettiklerini gerçekten hissetmez (sadece anlayabilir)</li>
+          <li>Yeni yeni olan olayları bilmeyebilir</li>
+          <li>Bazen <strong>yanlış</strong> da olabilir — her dediğine güvenme!</li>
+          <li>Senin yerine ödev yapmamalı (öğretmenin de fark eder 😄)</li>
+        </ul>
+      </div>
+      
+      <div class="fun-fact">
+        <div class="fun-fact-title">🧠 Claude Kim?</div>
+        <p><strong>Claude</strong>, Anthropic şirketinin yarattığı bir yapay zeka. Şu anda <strong>konuştuğumuz YZ bu</strong>. Aşağıdaki sohbet kutusunda gerçek Claude ile konuşabilirsin!</p>
+      </div>
+      
+      <!-- QUIZ -->
+      <div class="quiz-box">
+        <div class="quiz-question">🎮 Mini Quiz: Hangisi YZ'nin yapabildiği bir şey DEĞİL?</div>
+        <div class="quiz-options">
+          <button class="quiz-option" onclick="checkAnswer(this, false)">Hikaye yazmak</button>
+          <button class="quiz-option" onclick="checkAnswer(this, false)">Soruları cevaplamak</button>
+          <button class="quiz-option" onclick="checkAnswer(this, true)">Gerçekten üzülmek veya sevinmek</button>
+          <button class="quiz-option" onclick="checkAnswer(this, false)">Kod yazmak</button>
+        </div>
+        <div class="quiz-feedback" id="quizFeedback"></div>
+      </div>
+      
+      <!-- CLAUDE SOHBETİ -->
+      <div class="chat-section">
+        <div class="chat-title">🤖 Claude ile Tanış</div>
+        <div class="chat-subtitle">Aşağıya bir soru yaz, Claude sana cevap versin! İlk soruyu hemen sorabilirsin.</div>
+        
+        <div class="suggestion-chips">
+          <div class="chip" onclick="useChip(this)">Sen kimsin?</div>
+          <div class="chip" onclick="useChip(this)">Bir fıkra anlatır mısın?</div>
+          <div class="chip" onclick="useChip(this)">Uzay hakkında ilginç bilgi ver</div>
+          <div class="chip" onclick="useChip(this)">Matematik bilmecesi sor</div>
+        </div>
+        
+        <div class="chat-messages" id="chatMessages">
+          <div class="chat-message assistant">Merhaba uzay kâşifi! 🚀 Ben Claude. YZ Galaksisi'nde sana eşlik edeceğim. Yukarıdaki örneklerden birini seç ya da kendi sorunu yaz!</div>
+        </div>
+        
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput" placeholder="Bir şey sor..." onkeypress="if(event.key==='Enter') sendMessage()">
+          <button class="chat-send" id="sendBtn" onclick="sendMessage()">Gönder</button>
+        </div>
+      </div>
+      
+      <button class="complete-mission" id="completeMissionBtn" onclick="completeMission(1)" 
+        ${progress.completedPlanets.includes(1) ? 'disabled' : ''}>
+        ${progress.completedPlanets.includes(1) ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+      
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: Quiz'i çöz ve Claude'la en az bir soru konuş!
+      </p>
+    `;
+  }
+  
+  // =====================================================
+  // GEZEGEN 2: KONUŞMA GEZEGENİ (PROMPT YAZMA)
+  // =====================================================
+  let quizPassed2 = false;
+  let hasTried2 = false;
+
+  function renderConversationPlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(2);
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Prompt Sanatı: YZ ile Nasıl Konuşulur?</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>💬 Prompt Nedir?</h3>
+        <p>YZ'ye yazdığın her şeye <strong>prompt</strong> denir. Türkçe'de "komut" veya "istek" diyebiliriz. YZ bir okuyucu gibidir — ona ne yazarsan onu anlamaya çalışır.</p>
+        <p>Ama dikkat: YZ aklını okuyamaz! 😄 Kafanda ne düşündüğünü bilemez. Bu yüzden <strong>ne istediğini net yazmak</strong> çok önemli.</p>
+        <p>İyi prompt = İyi cevap. Kötü prompt = Şaşkın cevap. 🤷</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>⚔️ İyi Prompt vs Kötü Prompt</h3>
+        <p>Aşağıdaki örneklere bak. Farkı hissediyor musun?</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;">
+          <div style="background:rgba(255,46,146,0.1);border:1px solid var(--neon-pink);padding:1rem;border-radius:10px;">
+            <div style="color:var(--neon-pink);font-weight:700;margin-bottom:0.5rem;">❌ Kötü Prompt</div>
+            <p style="font-size:0.9rem;">"Yardım et"</p>
+            <p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem;">→ YZ ne yapacağını bilemez!</p>
+          </div>
+          <div style="background:rgba(57,255,20,0.1);border:1px solid var(--neon-green);padding:1rem;border-radius:10px;">
+            <div style="color:var(--neon-green);font-weight:700;margin-bottom:0.5rem;">✅ İyi Prompt</div>
+            <p style="font-size:0.9rem;">"5. sınıf öğrencisine uzayı 3 cümlede anlat"</p>
+            <p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem;">→ Net, spesifik, harika!</p>
+          </div>
+          <div style="background:rgba(255,46,146,0.1);border:1px solid var(--neon-pink);padding:1rem;border-radius:10px;">
+            <div style="color:var(--neon-pink);font-weight:700;margin-bottom:0.5rem;">❌ Kötü Prompt</div>
+            <p style="font-size:0.9rem;">"Hikaye"</p>
+            <p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem;">→ Hangi tür? Kim için? Ne hakkında?</p>
+          </div>
+          <div style="background:rgba(57,255,20,0.1);border:1px solid var(--neon-green);padding:1rem;border-radius:10px;">
+            <div style="color:var(--neon-green);font-weight:700;margin-bottom:0.5rem;">✅ İyi Prompt</div>
+            <p style="font-size:0.9rem;">"Bir köpek ve robot arkadaş olan 5 cümlelik eğlenceli hikaye yaz"</p>
+            <p style="font-size:0.85rem;opacity:0.6;margin-top:0.5rem;">→ Mükemmel! 🎉</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="fun-fact">
+        <div class="fun-fact-title">⚡ İlginç Bilgi</div>
+        <p>ChatGPT, Claude, Gemini... Bütün YZ'ler aynı mantıkla çalışır. <strong>Ne kadar iyi soru, o kadar iyi cevap!</strong> "Prompt mühendisliği" artık gerçek bir meslek bile — şirketler bunu bilen kişilere maaş ödüyor! 💰</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>✨ Sihirli İpuçları</h3>
+        <p>Bu kelimeleri promptuna ekle, sonuçlar çok daha iyi olsun:</p>
+        <ul>
+          <li><strong>"Adım adım anlat"</strong> → Karmaşık konuları parçalara böler</li>
+          <li><strong>"Sanki … gibi açıkla"</strong> → Örn: "Sanki 10 yaşındaymışım gibi"</li>
+          <li><strong>"Kısa tut, 3 madde"</strong> → Uzun cevaplar yerine özet</li>
+          <li><strong>"Türkçe yaz"</strong> → Bazen otomatik İngilizce cevap verebilir</li>
+          <li><strong>"Örnek ver"</strong> → Soyut kavramları somutlaştırır</li>
+        </ul>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎭 Rol Ver, Mucize Yarat!</h3>
+        <p>YZ'ye bir <strong>rol</strong> verirsen çok daha yaratıcı cevaplar alırsın. Dene:</p>
+        <ul>
+          <li><strong>"Sen bir uzay rehberisin."</strong> Gezegenleri gez bana anlat.</li>
+          <li><strong>"Sen bir tarih öğretmenisin."</strong> Atatürk'ü anlat.</li>
+          <li><strong>"Sen bir film yönetmenisin."</strong> Bana sahne yaz.</li>
+        </ul>
+        <p style="margin-top:0.8rem;opacity:0.8;">Rol vermek YZ'yi daha odaklı ve eğlenceli yapar! 🎬</p>
+      </div>
+
+      <!-- QUIZ -->
+      <div class="quiz-box">
+        <div class="quiz-question">🎮 Mini Quiz: Hangisi en iyi prompt?</div>
+        <div class="quiz-options" id="quizOptions2">
+          <button class="quiz-option" onclick="checkAnswer2(this, false)">A) "Bilgi ver"</button>
+          <button class="quiz-option" onclick="checkAnswer2(this, false)">B) "Matematik"</button>
+          <button class="quiz-option" onclick="checkAnswer2(this, true)">C) "6. sınıf öğrencisine kesirleri adım adım, örneklerle anlat"</button>
+          <button class="quiz-option" onclick="checkAnswer2(this, false)">D) "Yardım et lütfen"</button>
+        </div>
+        <div class="quiz-feedback" id="quizFeedback2"></div>
+      </div>
+
+      <!-- PRATİK ALAN: KÖTÜ → İYİ PROMPT KARŞILAŞTIRMA -->
+      <div class="chat-section">
+        <div class="chat-title">🔬 Prompt Laboratuvarı</div>
+        <div class="chat-subtitle">Önce kötü bir prompt dene, sonra iyi versiyonunu yaz — farkı gör!</div>
+
+        <div style="margin-bottom:1rem;">
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--neon-yellow);margin-bottom:0.5rem;">⚡ KÖTÜ PROMPT ÖRNEKLERI (tıkla, sonucu gör)</div>
+          <div class="suggestion-chips">
+            <div class="chip" style="border-color:var(--neon-pink);color:var(--neon-pink);" onclick="useChip2(this)">Yardım et</div>
+            <div class="chip" style="border-color:var(--neon-pink);color:var(--neon-pink);" onclick="useChip2(this)">Matematik</div>
+            <div class="chip" style="border-color:var(--neon-pink);color:var(--neon-pink);" onclick="useChip2(this)">Hikaye</div>
+          </div>
+          <div style="font-family:'Orbitron',sans-serif;font-size:0.85rem;color:var(--neon-green);margin-bottom:0.5rem;margin-top:0.8rem;">✅ İYİ PROMPT ÖRNEKLERI (tıkla, sonucu gör)</div>
+          <div class="suggestion-chips">
+            <div class="chip" style="border-color:var(--neon-green);color:var(--neon-green);" onclick="useChip2(this)">6. sınıfa kesirleri adım adım anlat</div>
+            <div class="chip" style="border-color:var(--neon-green);color:var(--neon-green);" onclick="useChip2(this)">Sen bir uzay kaptanısın, Mars'ı anlat</div>
+            <div class="chip" style="border-color:var(--neon-green);color:var(--neon-green);" onclick="useChip2(this)">5 cümlelik eğlenceli robot hikayesi yaz</div>
+          </div>
+        </div>
+
+        <div class="chat-messages" id="chatMessages2">
+          <div class="chat-message assistant">🔬 Prompt Laboratuvarı'na hoş geldin! Yukarıdaki örneklere tıkla ya da kendi promptunu yaz. Kötü ve iyi örneklerin farkını gör!</div>
+        </div>
+
+        <div class="chat-input-area">
+          <input type="text" class="chat-input" id="chatInput2" placeholder="Kendi promptunu yaz..." onkeypress="if(event.key==='Enter') sendMessage2()">
+          <button class="chat-send" id="sendBtn2" onclick="sendMessage2()">Gönder</button>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn2" onclick="completeMission(2)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: Quiz'i çöz ve en az bir prompt dene!
+      </p>
+    `;
+  }
+
+  function checkAnswer2(btn, isCorrect) {
+    const allOptions = document.querySelectorAll('#quizOptions2 .quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback2');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '✨ <strong>Süper!</strong> Evet! "6. sınıf öğrencisine kesirleri adım adım, örneklerle anlat" — kim için, ne konu, nasıl anlatılsın, hepsi belli. Mükemmel prompt!';
+      quizPassed2 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Bu prompt çok belirsiz. YZ ne yapacağını tam bilemez. Daha spesifik olan hangisi? Tekrar dene!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2000);
+    }
+  }
+
+  function useChip2(chip) {
+    document.getElementById('chatInput2').value = chip.textContent;
+    sendMessage2();
+  }
+
+  async function sendMessage2() {
+    const input = document.getElementById('chatInput2');
+    const text = input.value.trim();
+    if (!text) return;
+
+    const messages = document.getElementById('chatMessages2');
+    const sendBtn = document.getElementById('sendBtn2');
+
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.textContent = text;
+    messages.appendChild(userMsg);
+
+    input.value = '';
+    sendBtn.disabled = true;
+    sendBtn.textContent = '...';
+
+    const thinking = document.createElement('div');
+    thinking.className = 'chat-message thinking';
+    thinking.textContent = '🤖 Claude düşünüyor...';
+    messages.appendChild(thinking);
+    messages.scrollTop = messages.scrollHeight;
+
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Eğer kullanıcı çok kısa veya belirsiz bir şey yazarsa (örn: sadece 'yardım et', 'matematik', 'hikaye'), önce kısa ve şaşkın bir cevap ver, sonra şunu söyle: '💡 İpucu: Bana daha net bir şey sorsaydın daha iyi yardım edebilirdim! Örneğin: [daha iyi bir prompt örneği ver]'. Eğer prompt iyiyse normal ve eğlenceli şekilde cevap ver. Cevaplar kısa ve emoji'li olsun.",
+          messages: [{ role: "user", content: text }]
+        })
+      });
+      const data = await response.json();
+      thinking.remove();
+      const reply = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'chat-message assistant';
+      aiMsg.textContent = reply || 'Hmm, cevap üretemedim. Tekrar dener misin?';
+      messages.appendChild(aiMsg);
+      messages.scrollTop = messages.scrollHeight;
+      hasTried2 = true;
+    } catch (err) {
+      thinking.remove();
+      const errMsg = document.createElement('div');
+      errMsg.className = 'chat-message assistant';
+      errMsg.style.borderColor = 'var(--neon-pink)';
+      errMsg.textContent = '⚠️ Bir hata oluştu. Tekrar dene.';
+      messages.appendChild(errMsg);
+    }
+
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Gönder';
+    input.focus();
+  }
+
+  function renderComingSoon(planet) {
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+      </div>
+      <div class="lesson-section" style="text-align:center;padding:3rem;">
+        <h3>🛸 Yakında!</h3>
+        <p style="margin-top:1rem;">Bu gezegen henüz keşfedilmedi.</p>
+        <p style="margin-top:1rem;opacity:0.7;">Öğretmenin yakında bu gezegenin içeriğini ekleyecek!</p>
+      </div>
+    `;
+  }
+  
+  // =====================================================
+  // QUIZ KONTROL
+  // =====================================================
+  let quizPassed = false;
+  let hasChatted = false;
+  
+  function checkAnswer(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback');
+    
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '✨ <strong>Harika!</strong> Aynen öyle. YZ duyguları "anlayabilir" ama gerçekten hissedemez. O sadece bir bilgisayar programı.';
+      quizPassed = true;
+      checkMissionReady();
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış cevap!</strong> Bunu YZ yapabiliyor. Tekrar dene veya açıklamaları oku.';
+      // 1.5 saniye sonra yeniden dene
+      setTimeout(() => {
+        allOptions.forEach(o => {
+          o.disabled = false;
+          o.classList.remove('wrong');
+        });
+        feedback.classList.remove('show');
+      }, 2000);
+    }
+  }
+  
+  // =====================================================
+  // CLAUDE SOHBETİ (Anthropic API)
+  // =====================================================
+  function useChip(chip) {
+    document.getElementById('chatInput').value = chip.textContent;
+    sendMessage();
+  }
+  
+  async function sendMessage() {
+    const input = document.getElementById('chatInput');
+    const text = input.value.trim();
+    if (!text) return;
+    
+    const messages = document.getElementById('chatMessages');
+    const sendBtn = document.getElementById('sendBtn');
+    
+    // Kullanıcı mesajı
+    const userMsg = document.createElement('div');
+    userMsg.className = 'chat-message user';
+    userMsg.textContent = text;
+    messages.appendChild(userMsg);
+    
+    input.value = '';
+    sendBtn.disabled = true;
+    sendBtn.textContent = '...';
+    
+    // Düşünme animasyonu
+    const thinking = document.createElement('div');
+    thinking.className = 'chat-message thinking';
+    thinking.textContent = '🤖 Claude düşünüyor...';
+    messages.appendChild(thinking);
+    messages.scrollTop = messages.scrollHeight;
+    
+    try {
+      const response = await fetch("https://api.anthropic.com/v1/messages", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          model: "claude-sonnet-4-20250514",
+          max_tokens: 1000,
+          system: "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Cevapların: kısa (3-4 cümle), eğlenceli, samimi ve emoji'li olsun. Karmaşık konuları basit anlat. Öğrencinin sorularını sevecenlikle yanıtla. Sen YZ Galaksisi macerasında onlara eşlik ediyorsun.",
+          messages: [{ role: "user", content: text }]
+        })
+      });
+      
+      const data = await response.json();
+      thinking.remove();
+      
+      const reply = data.content
+        .filter(b => b.type === 'text')
+        .map(b => b.text)
+        .join('\n');
+      
+      const aiMsg = document.createElement('div');
+      aiMsg.className = 'chat-message assistant';
+      aiMsg.textContent = reply || 'Hmm, cevap üretemedim. Tekrar dener misin?';
+      messages.appendChild(aiMsg);
+      messages.scrollTop = messages.scrollHeight;
+      
+      hasChatted = true;
+      checkMissionReady();
+      
+    } catch (err) {
+      thinking.remove();
+      const errMsg = document.createElement('div');
+      errMsg.className = 'chat-message assistant';
+      errMsg.style.borderColor = 'var(--neon-pink)';
+      errMsg.textContent = '⚠️ Bir hata oluştu. İnternet bağlantını kontrol et veya tekrar dene.';
+      messages.appendChild(errMsg);
+    }
+    
+    sendBtn.disabled = false;
+    sendBtn.textContent = 'Gönder';
+    input.focus();
+  }
+  
+  function checkMissionReady() {
+    // İsterse otomatik tamamlanabilir, ama öğrenci butona basarak tamamlasın
+  }
+  
+  // =====================================================
+  // GÖREVİ TAMAMLA
+  // =====================================================
+  async function completeMission(planetId) {
+    if (planetId === 1) {
+      if (!quizPassed) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+      if (!hasChatted) { alert('Önce Claude ile en az bir soru konuş! 💬'); return; }
+    }
+    if (planetId === 2) {
+      if (!quizPassed2) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+      if (!hasTried2) { alert('Prompt Laboratuvarı\'nda en az bir prompt dene! 🔬'); return; }
+    }
+    
+    if (progress.completedPlanets.includes(planetId)) return;
+    
+    const planet = planets.find(p => p.id === planetId);
+    progress.completedPlanets.push(planetId);
+    progress.badges.push(planet.badge);
+    progress.xp += planet.xp;
+    
+    await saveProgress();
+    updateStats();
+    
+    // Rozet popup göster
+    showBadge(planet.badge);
+    
+    // Modalı kapat ve haritayı yenile
+    setTimeout(() => {
+      closeModal();
+      renderPlanets();
+    }, 3500);
+  }
+  
+  function showBadge(badge) {
+    const popup = document.getElementById('badgePopup');
+    document.getElementById('badgeIcon').textContent = badge.icon;
+    document.getElementById('badgeTitle').textContent = badge.title;
+    document.getElementById('badgeDesc').textContent = badge.desc;
+    popup.classList.add('show');
+    
+    // Yıldız patlaması efekti
+    createStarBurst();
+    
+    setTimeout(() => popup.classList.remove('show'), 3000);
+  }
+  
+  function createStarBurst() {
+    for (let i = 0; i < 30; i++) {
+      const star = document.createElement('div');
+      star.className = 'shooting-star';
+      star.style.left = '50%';
+      star.style.top = '50%';
+      const angle = (Math.PI * 2 * i) / 30;
+      const distance = 300 + Math.random() * 200;
+      const dx = Math.cos(angle) * distance;
+      const dy = Math.sin(angle) * distance;
+      star.style.transition = 'all 1.5s ease-out';
+      document.body.appendChild(star);
+      setTimeout(() => {
+        star.style.transform = `translate(${dx}px, ${dy}px)`;
+        star.style.opacity = '0';
+      }, 50);
+      setTimeout(() => star.remove(), 2000);
+    }
+  }
+  
+  // =====================================================
+  // YILDIZ ARKAPLANI OLUŞTURMA
+  // =====================================================
+  function createStars() {
+    const container = document.getElementById('stars');
+    for (let i = 0; i < 150; i++) {
+      const star = document.createElement('div');
+      star.className = 'star';
+      const size = Math.random() * 3;
+      star.style.width = size + 'px';
+      star.style.height = size + 'px';
+      star.style.left = Math.random() * 100 + '%';
+      star.style.top = Math.random() * 100 + '%';
+      star.style.setProperty('--dur', (2 + Math.random() * 3) + 's');
+      star.style.animationDelay = Math.random() * 3 + 's';
+      container.appendChild(star);
+    }
+  }
+  
+  // Kayan yıldız efekti (rastgele)
+  function randomShootingStar() {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.left = Math.random() * 100 + '%';
+    star.style.top = Math.random() * 50 + '%';
+    star.style.transition = 'all 1.5s linear';
+    document.body.appendChild(star);
+    setTimeout(() => {
+      star.style.transform = `translate(${300 + Math.random() * 200}px, ${200 + Math.random() * 100}px)`;
+      star.style.opacity = '0';
+    }, 50);
+    setTimeout(() => star.remove(), 2000);
+  }
+  
+  // =====================================================
+  // BAŞLAT
+  // =====================================================
+  createStars();
+  loadProgress();
+  setInterval(randomShootingStar, 4000);
+</script>
+
+</body>
+</html>
