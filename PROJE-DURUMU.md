@@ -5,8 +5,8 @@
 ---
 
 ## 📅 Son Güncelleme
-**Tarih:** 23 Mayıs 2026 (gece)
-**Versiyon:** v0.4 — Renk paleti + mobil + Konu/Araç ayrımı netleşti
+**Tarih:** 25 Mayıs 2026
+**Versiyon:** v0.5 — Gemini API + PIN kilidi sistemi tamamlandı
 
 ---
 
@@ -29,75 +29,59 @@
 - [x] Rozet ve XP sistemi
 - [x] Kilit/Açık mantığı
 - [x] "İlerlemeyi sıfırla" butonu
-- [x] **Proje GitHub'a taşındı** 🐙 (https://github.com/mrdemirci06/yapay-zeka-galaksisi)
-- [x] CLAUDE.md baştan yazıldı (v3) — Konu/Araç ayrımı netleşti, ilk iş protokolü güçlendi
-- [x] **Renk paleti v2:** WCAG AAA seviyesinde erişilebilirlik, derin uzay teması
-- [x] **Yıldız efektleri:** 3 yıldız tipi (parlak/sarı/cyan), 120px kuyruklu kayan yıldız
-- [x] **Mobil optimizasyon:** 2 sütun grid, dokunmatik dostu (min 48px), iOS zoom önleme
+- [x] **Proje GitHub'a taşındı** 🐙
+- [x] CLAUDE.md baştan yazıldı (v3)
+- [x] **Renk paleti v2:** WCAG AAA seviyesinde erişilebilirlik
+- [x] **Yıldız efektleri:** 3 yıldız tipi, kayan yıldız
+- [x] **Mobil optimizasyon:** 2 sütun grid, dokunmatik dostu
 
 ### Renk Paleti (v2 — Final)
 - Arkaplan derin: `#020617` | orta: `#0f172a` | açık: `#1e293b`
 - Cyan (ana tema): `#5eead4` | Pembe (aktif): `#ec4899` | Turuncu (XP): `#fb923c`
 - Yeşil (başarı): `#4ade80` | Mor (bonus): `#8b5cf6` | Beyaz: `#f1f5f9` | Kilitli: `#94a3b8`
 
+### 🔐 Gemini + PIN Sistemi (v0.5 — YENİ!) ✅
+- [x] **Hoşgeldin modalı** — API anahtarı + 4 haneli PIN belirleme ekranı
+- [x] **PIN giriş modalı** — Sonraki açılışlarda rakam tuş takımı
+- [x] **Web Crypto API şifreleme** — PBKDF2 (100k iterasyon) + AES-GCM
+- [x] **Gemini 2.0 Flash Lite** — Her iki sohbet alanı güncellendi
+- [x] **Güvenlik:** 3 yanlış → 30sn bekleme | 5 yanlış → otomatik silme
+- [x] **API testi** — Kayıt öncesi Gemini anahtarı doğrulanıyor
+- [x] **Hata mesajları** — Rate limit, yanlış PIN, bağlantı hatası ayrı ayrı
+- [x] **Sıfırlama** — "PIN'i unuttum" → onay sonrası tüm veriler silinir
+
 ### Gezegen 1: Başlangıç (Yapay Zeka Nedir?) ✅
 - [x] 4 bölüm ders + quiz + sohbet alanı + öneri çipleri
-- [x] Pratik aracı: Anthropic API (artifact ortamında) — **yarın Gemini'ye çevrilecek**
+- [x] Pratik aracı: Gemini API ✅
 - [x] Rozet: 🚀 İlk Adımlar (100 XP)
 
 ### Gezegen 2: Konuşma (Prompt Sanatı) ✅
-- [x] 4 bölüm ders (Prompt nedir, İyi vs Kötü, Sihirli ipuçları, Rol verme)
-- [x] Yan yana karşılaştırma kutuları
-- [x] Quiz + Prompt Laboratuvarı (kırmızı/yeşil çipler)
-- [x] Pratik aracı: Anthropic API — **yarın Gemini'ye çevrilecek**
+- [x] 4 bölüm ders + karşılaştırma kutuları
+- [x] Quiz + Prompt Laboratuvarı
+- [x] Pratik aracı: Gemini API ✅
 - [x] Rozet: 💬 Konuşma Ustası (150 XP)
 
 ---
 
-## 🎯 BÜYÜK KARAR: API Stratejisi (23 Mayıs)
+## 🎯 API Stratejisi (Kesinleşti)
 
-### Problem
-Öğrenciler (11-14 yaş) Claude.ai'a yaş sınırı (18+) nedeniyle üye olamıyor.
-Emre kendi hesabını öğrencilerle paylaşmak istemiyor.
-
-### Çözüm: Gemini API + PIN Kilidi
-- **Sadece Gezegen 1 ve 2'de** API çağrısı (diğer gezegenlerde gerekmiyor)
-- Her öğrenci kendi Gemini anahtarını alır (ai.google.dev'den ücretsiz)
-- Anahtar PIN ile şifrelenip tarayıcıda saklanır
-- **Konu hep Claude, pratik aracı Gemini** — bu ayrım kritik
-
-### Akış (Yarın Uygulanacak)
-1. **İlk açılış:** Modal → API anahtarı + 4 haneli PIN belirle
-2. **Sonraki açılışlar:** Sadece PIN sor → galaksiye geç
-3. **PIN unutulursa:** "Sıfırla" → anahtar silinir, baştan
-4. **Şifreleme:** Web Crypto API (PBKDF2 + AES-GCM)
-5. **Güvenlik:** 3 yanlış PIN sonrası 30sn bekleme, 5 yanlış sonrası otomatik silme
-
-### Gemini API Detayları
-- **Endpoint:** `https://generativelanguage.googleapis.com/v1beta/models/gemini-...:generateContent`
-- **Model:** `gemini-2.5-flash-lite` (ücretsiz, hızlı, Türkçe iyi)
+### Kullanılan Sistem
+- **Model:** `gemini-2.0-flash-lite` (ücretsiz, hızlı, Türkçe iyi)
+- **Endpoint:** `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent`
 - **Limit (free tier):** 15 istek/dk, 1000 istek/gün
+- **Şifreleme:** PBKDF2 (100.000 iterasyon) + AES-GCM 256-bit
 
-### Neden Sunucu Değil?
-- Emre: "Sunucu kuramıyorum, sadece HTML çözüm istiyorum"
-- Projenin DNA'sı: Tek dosya, kurulum yok, sade
+### Akış
+1. **İlk açılış:** Modal → API anahtarı gir + 4 haneli PIN belirle → test edilip şifrelenerek kaydedilir
+2. **Sonraki açılışlar:** PIN giriş modalı → doğru PIN → galaksiye geç
+3. **PIN unutulursa:** "Sıfırla" → onay sonrası anahtar+ilerleme silinir, baştan
+4. **Güvenlik:** 3 yanlış → 30sn bekleme | 5 yanlış → otomatik sıfırlama
 
 ---
 
-## 🔄 Yarınki Hedef (24 Mayıs)
+## 🔄 Sıradaki Hedef
 
-### 🥇 Ana Hedef: Gemini + PIN Altyapısı (Sadece Gezegen 1 ve 2)
-Detaylı adımlar:
-1. **Hoşgeldin modal'i** — API anahtarı + PIN belirleme ekranı
-2. **PIN giriş modal'i** — sonraki açılışlarda
-3. **Web Crypto API entegrasyonu** — şifreleme/çözme
-4. **Gemini API çağrısı** — Anthropic API yerine
-5. **Gezegen 1 sohbet alanını güncelle**
-6. **Gezegen 2 Prompt Laboratuvarı'nı güncelle**
-7. **Hata yönetimi** — yanlış PIN, anahtar bozulması, rate limit
-8. **Test**
-
-### 🥈 Sonra: Gezegen 3 (Yaratım — Artifacts)
+### 🥇 Gezegen 3 (Yaratım — Claude Artifacts)
 - 4 bölüm ders — **Claude Artifacts'ı anlat**
 - Galeri: 3 demo (oyun + animasyon + üçüncüsü kararlaşacak)
 - Quiz + rozet
@@ -107,46 +91,39 @@ Detaylı adımlar:
 
 ## 📋 Sıradaki Adımlar (Orta Vadeli)
 
-### Gezegenler (her birinde Claude'un farklı bir özelliği)
+### Gezegenler
+- [x] Gezegen 1 (Başlangıç) — Tamamlandı
+- [x] Gezegen 2 (Konuşma) — Tamamlandı
 - [ ] Gezegen 3 (Yaratım) — **Claude Artifacts**, galeri pratik
-- [ ] Gezegen 4 (Atölye) — **Claude Skills**, gerçek SKILL.md örnekleri
-- [ ] Gezegen 5 (Köprü) — **Claude MCP**, bağlantı şeması
+- [ ] Gezegen 4 (Atölye) — **Claude Skills**
+- [ ] Gezegen 5 (Köprü) — **Claude MCP**
 - [ ] Gezegen 6 (Kod) — **Claude Code**, terminal simülasyonu
-- [ ] Gezegen 7 (Takım) — **Anthropic Cowork**, tanıtım/video
+- [ ] Gezegen 7 (Takım) — **Anthropic Cowork**
 - [ ] Gezegen 8 (Final) — Mini proje fikri seçici
-
-### Genel
-- [ ] Final gezegeni için "mini proje yap" şablonu
-- [ ] Belki: "Güvenlik Gezegeni" ekle (PIN deneyiminden esinlenerek)
 
 ---
 
 ## 💡 Bu Oturumda Öğrenilenler / Kararlar
 
-1. **GitHub akışı:** Claude push yapamaz, Emre manuel commit eder.
-2. **"Yapıldı ≠ Kaydedildi":** Local'de yapılan, GitHub'a yüklenene kadar "olmamış" sayılır.
-3. **Sade kal:** Sunucu yok, tek dosya, basit kurulum.
-4. **Yaş sorunu:** Claude.ai 18+, Gmail 13+ — veliler ve öğretmen rolü kritik.
-5. **PIN kilidi:** Profesyonel uygulamaların standardı.
-6. **Erişilebilirlik (a11y):** WCAG kontrast kuralları (4.5+ AA, 7+ AAA).
-7. **Tasarım sistemi:** Her renge bir görev verildi (cyan=ana, yeşil=başarı, vb).
-8. **Mobil öncelik:** Öğrenciler telefondan açacak — 2 sütun grid, dokunmatik dostu.
-9. **🎭 Konu vs Araç ayrımı:** Öğretilen=Claude, pratik aracı=Gemini. Bu ayrım kritik!
+1. **Gemini 2.0 Flash Lite** seçildi — ücretsiz tier, hızlı, Türkçe yeterli
+2. **Web Crypto API** — PBKDF2+AES-GCM, tarayıcı native, kütüphane gerekmez
+3. **API testi önce** — Kurulum modalında kaydetmeden önce anahtar doğrulanıyor
+4. **5 yanlış PIN → silme** — Güvenlik standardı uygulandı
+5. **Tek callGemini() fonksiyonu** — Her iki sohbet alanı buradan çağırıyor
 
 ---
 
 ## 🐛 Bilinen Sorunlar / Notlar
 
-- Gezegen 1 ve 2'deki mevcut sohbet alanları **şu an Anthropic API** kullanıyor (artifact ortamında otomatik). Yarın Gemini'ye çevrilecek.
-- Memory'de "HuggingFace token embedded" notu var — bu eski AFETSONAR projesiyle ilgili, bu projeyle ilgisi yok.
+- Gemini API anahtarı tarayıcının localStorage'ında AES-GCM ile şifreli saklanıyor. Farklı cihazda açıldığında kurulum modalı tekrar çıkar (beklenen davranış).
+- Gezegen 3-8 henüz "Yakında!" ekranı gösteriyor.
 
 ---
 
 ## 💭 İleride Düşünülecek Fikirler
 
 - Öğretmen modu (sınıf yönetimi)
-- Veli raporu (öğrencinin ilerlemesi)
+- Veli raporu
 - Sertifika oluşturma (8 gezegen biten öğrenci için PDF)
 - Sesli anlatım (TTS)
-- "Günün YZ ipucu" ana sayfada
-- GitHub Pages'te yayınlama (öğrenciler linkle açabilsin)
+- GitHub Pages'te yayınlama

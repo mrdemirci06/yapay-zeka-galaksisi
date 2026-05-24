@@ -864,11 +864,206 @@
   ::-webkit-scrollbar { width: 8px; }
   ::-webkit-scrollbar-track { background: var(--space-deep); }
   ::-webkit-scrollbar-thumb { background: var(--neon-cyan); border-radius: 4px; }
+
+  /* =====================================================
+     GEMİNİ / PIN MODAL STİLLERİ
+     ===================================================== */
+  .api-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(2,6,23,0.95);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .api-overlay.active { display: flex; }
+
+  .api-box {
+    background: var(--space-mid);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 1.5rem;
+    padding: 2rem;
+    max-width: 420px;
+    width: 100%;
+    box-shadow: 0 0 40px rgba(94,234,212,0.2);
+  }
+  .api-box h2 {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+  }
+  .api-box p {
+    font-size: 0.88rem;
+    color: var(--locked-gray);
+    text-align: center;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+  }
+  .api-box label {
+    display: block;
+    font-size: 0.82rem;
+    color: var(--neon-cyan);
+    margin-bottom: 0.3rem;
+    font-weight: 600;
+  }
+  .api-box input {
+    width: 100%;
+    background: var(--space-light);
+    border: 1.5px solid var(--space-light);
+    border-radius: 0.6rem;
+    padding: 0.7rem 1rem;
+    color: var(--star-white);
+    font-size: 1rem;
+    font-family: 'Space Grotesk', sans-serif;
+    margin-bottom: 1rem;
+    transition: border-color 0.2s;
+    letter-spacing: 0.05em;
+  }
+  .api-box input:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+  }
+  .api-box input.error { border-color: var(--neon-pink) !important; }
+
+  .api-btn {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 0.8rem;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s, transform 0.1s;
+    margin-top: 0.5rem;
+  }
+  .api-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .api-btn:active { transform: translateY(0); }
+  .api-btn:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+  .api-error {
+    background: rgba(236,72,153,0.15);
+    border: 1px solid var(--neon-pink);
+    border-radius: 0.5rem;
+    padding: 0.6rem 0.9rem;
+    font-size: 0.82rem;
+    color: var(--neon-pink);
+    margin-bottom: 0.8rem;
+    display: none;
+  }
+  .api-error.show { display: block; }
+
+  .api-hint {
+    font-size: 0.75rem;
+    color: var(--locked-gray);
+    text-align: center;
+    margin-top: 1rem;
+  }
+  .api-hint a { color: var(--neon-cyan); text-decoration: none; }
+
+  .pin-dots {
+    display: flex;
+    gap: 0.8rem;
+    justify-content: center;
+    margin: 1.2rem 0;
+  }
+  .pin-dot {
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    border: 2px solid var(--neon-cyan);
+    background: transparent;
+    transition: background 0.15s;
+  }
+  .pin-dot.filled { background: var(--neon-cyan); }
+
+  .pin-keypad {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+  .pin-key {
+    background: var(--space-light);
+    border: 1.5px solid rgba(94,234,212,0.3);
+    border-radius: 0.6rem;
+    padding: 0.9rem;
+    color: var(--star-white);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: background 0.15s, border-color 0.15s;
+    text-align: center;
+  }
+  .pin-key:hover { background: rgba(94,234,212,0.15); border-color: var(--neon-cyan); }
+  .pin-key.del { color: var(--neon-pink); }
+  .pin-key.zero { grid-column: 2; }
+
+  .wait-msg {
+    font-size: 0.85rem;
+    color: var(--neon-yellow);
+    text-align: center;
+    margin-top: 0.5rem;
+    display: none;
+  }
+  .wait-msg.show { display: block; }
 </style>
 </head>
 <body>
 
 <!-- Yıldızlı arkaplan -->
+<!-- ============ MODAL 1: İLK AÇILIŞ — API ANAHTARI + PIN ============ -->
+<div class="api-overlay" id="setupOverlay">
+  <div class="api-box">
+    <h2>🚀 Galaksiye Hoş Geldin!</h2>
+    <p>Yapay zeka ile konuşabilmek için bir kez kurulum yapman gerekiyor. Sana özel, güvenli bir alan oluşturuyoruz.</p>
+    <div class="api-error" id="setupError"></div>
+    <label>🔑 Gemini API Anahtarın</label>
+    <input type="text" id="setupKey" placeholder="AIzaSy..." autocomplete="off" spellcheck="false">
+    <label>🔐 4 Haneli PIN Belirle</label>
+    <input type="password" id="setupPin" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*">
+    <label>🔐 PIN'i Tekrar Gir</label>
+    <input type="password" id="setupPin2" placeholder="••••" maxlength="4" inputmode="numeric" pattern="[0-9]*">
+    <button class="api-btn" id="setupBtn" onclick="handleSetup()">✨ Galaksiyi Başlat</button>
+    <p class="api-hint">Gemini anahtarın yok mu? <a href="https://aistudio.google.com/apikey" target="_blank">Buradan ücretsiz al →</a></p>
+  </div>
+</div>
+
+<!-- ============ MODAL 2: PIN GİRİŞİ ============ -->
+<div class="api-overlay" id="pinOverlay">
+  <div class="api-box">
+    <h2>🔐 PIN ile Giriş</h2>
+    <p>Galaksiye girmek için PIN'ini gir.</p>
+    <div class="api-error" id="pinError"></div>
+    <div class="pin-dots">
+      <div class="pin-dot" id="dot0"></div>
+      <div class="pin-dot" id="dot1"></div>
+      <div class="pin-dot" id="dot2"></div>
+      <div class="pin-dot" id="dot3"></div>
+    </div>
+    <div class="pin-keypad">
+      <button class="pin-key" onclick="pinKey('1')">1</button>
+      <button class="pin-key" onclick="pinKey('2')">2</button>
+      <button class="pin-key" onclick="pinKey('3')">3</button>
+      <button class="pin-key" onclick="pinKey('4')">4</button>
+      <button class="pin-key" onclick="pinKey('5')">5</button>
+      <button class="pin-key" onclick="pinKey('6')">6</button>
+      <button class="pin-key" onclick="pinKey('7')">7</button>
+      <button class="pin-key" onclick="pinKey('8')">8</button>
+      <button class="pin-key" onclick="pinKey('9')">9</button>
+      <button class="pin-key del" onclick="pinDel()">⌫</button>
+      <button class="pin-key zero" onclick="pinKey('0')">0</button>
+    </div>
+    <div class="wait-msg" id="waitMsg"></div>
+    <p class="api-hint" style="margin-top:0.5rem;">PIN'ini unuttun mu? <a href="#" onclick="resetAll(); return false;">Sıfırla (anahtar silinir)</a></p>
+  </div>
+</div>
+
 <div class="stars" id="stars"></div>
 <div class="nebula nebula-1"></div>
 <div class="nebula nebula-2"></div>
@@ -1392,22 +1587,14 @@
     messages.scrollTop = messages.scrollHeight;
 
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Eğer kullanıcı çok kısa veya belirsiz bir şey yazarsa (örn: sadece 'yardım et', 'matematik', 'hikaye'), önce kısa ve şaşkın bir cevap ver, sonra şunu söyle: '💡 İpucu: Bana daha net bir şey sorsaydın daha iyi yardım edebilirdim! Örneğin: [daha iyi bir prompt örneği ver]'. Eğer prompt iyiyse normal ve eğlenceli şekilde cevap ver. Cevaplar kısa ve emoji'li olsun.",
-          messages: [{ role: "user", content: text }]
-        })
-      });
-      const data = await response.json();
+      const reply = await callGemini(
+        text,
+        "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Eğer kullanıcı çok kısa veya belirsiz bir şey yazarsa (örn: sadece 'yardım et', 'matematik', 'hikaye'), önce kısa ve şaşkın bir cevap ver, sonra şunu söyle: '💡 İpucu: Bana daha net bir şey sorsaydın daha iyi yardım edebilirdim! Örneğin: [daha iyi bir prompt örneği ver]'. Eğer prompt iyiyse normal ve eğlenceli şekilde cevap ver. Cevaplar kısa ve emoji'li olsun."
+      );
       thinking.remove();
-      const reply = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
       const aiMsg = document.createElement('div');
       aiMsg.className = 'chat-message assistant';
-      aiMsg.textContent = reply || 'Hmm, cevap üretemedim. Tekrar dener misin?';
+      aiMsg.textContent = reply;
       messages.appendChild(aiMsg);
       messages.scrollTop = messages.scrollHeight;
       hasTried2 = true;
@@ -1416,7 +1603,11 @@
       const errMsg = document.createElement('div');
       errMsg.className = 'chat-message assistant';
       errMsg.style.borderColor = 'var(--neon-pink)';
-      errMsg.textContent = '⚠️ Bir hata oluştu. Tekrar dene.';
+      if (err.message === 'RATE_LIMIT') {
+        errMsg.textContent = '⚠️ Çok hızlı! Biraz bekle ve tekrar dene.';
+      } else {
+        errMsg.textContent = '⚠️ Bir hata oluştu. Tekrar dene.';
+      }
       messages.appendChild(errMsg);
     }
 
@@ -1473,7 +1664,7 @@
   }
   
   // =====================================================
-  // CLAUDE SOHBETİ (Anthropic API)
+  // CLAUDE SOHBETİ (Gemini API)
   // =====================================================
   function useChip(chip) {
     document.getElementById('chatInput').value = chip.textContent;
@@ -1506,40 +1697,30 @@
     messages.scrollTop = messages.scrollHeight;
     
     try {
-      const response = await fetch("https://api.anthropic.com/v1/messages", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          model: "claude-sonnet-4-20250514",
-          max_tokens: 1000,
-          system: "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Cevapların: kısa (3-4 cümle), eğlenceli, samimi ve emoji'li olsun. Karmaşık konuları basit anlat. Öğrencinin sorularını sevecenlikle yanıtla. Sen YZ Galaksisi macerasında onlara eşlik ediyorsun.",
-          messages: [{ role: "user", content: text }]
-        })
-      });
-      
-      const data = await response.json();
+      const reply = await callGemini(
+        text,
+        "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Cevapların: kısa (3-4 cümle), eğlenceli, samimi ve emoji'li olsun. Karmaşık konuları basit anlat. Öğrencinin sorularını sevecenlikle yanıtla. Sen YZ Galaksisi macerasında onlara eşlik ediyorsun."
+      );
       thinking.remove();
-      
-      const reply = data.content
-        .filter(b => b.type === 'text')
-        .map(b => b.text)
-        .join('\n');
-      
       const aiMsg = document.createElement('div');
       aiMsg.className = 'chat-message assistant';
-      aiMsg.textContent = reply || 'Hmm, cevap üretemedim. Tekrar dener misin?';
+      aiMsg.textContent = reply;
       messages.appendChild(aiMsg);
       messages.scrollTop = messages.scrollHeight;
-      
       hasChatted = true;
       checkMissionReady();
-      
     } catch (err) {
       thinking.remove();
       const errMsg = document.createElement('div');
       errMsg.className = 'chat-message assistant';
       errMsg.style.borderColor = 'var(--neon-pink)';
-      errMsg.textContent = '⚠️ Bir hata oluştu. İnternet bağlantını kontrol et veya tekrar dene.';
+      if (err.message === 'RATE_LIMIT') {
+        errMsg.textContent = '⚠️ Çok hızlı! Biraz bekle ve tekrar dene. (Dakika limiti doldu)';
+      } else if (err.message === 'NO_KEY') {
+        errMsg.textContent = '⚠️ API anahtarı bulunamadı. Sayfayı yenile.';
+      } else {
+        errMsg.textContent = '⚠️ Bir hata oluştu. İnternet bağlantını kontrol et.';
+      }
       messages.appendChild(errMsg);
     }
     
@@ -1675,11 +1856,291 @@
   }
   
   // =====================================================
+  // GEMİNİ API + PIN + ŞİFRELEME SİSTEMİ
+  // =====================================================
+
+  const STORAGE_KEY_ENC  = 'yzg_enc_key';   // Şifreli API anahtarı
+  const STORAGE_KEY_SALT = 'yzg_salt';       // Şifreleme tuzu
+  const STORAGE_KEY_IV   = 'yzg_iv';         // IV
+  const STORAGE_KEY_FAIL = 'yzg_fails';      // Yanlış PIN sayısı
+  const STORAGE_KEY_WAIT = 'yzg_wait';       // Bekleme bitiş zamanı
+
+  let geminiKey = null; // Bellekte şifresi çözülmüş anahtar (sayfa kapatılınca uçar)
+
+  // ---------- Yardımcı: ArrayBuffer <-> Base64 ----------
+  function bufToB64(buf) {
+    return btoa(String.fromCharCode(...new Uint8Array(buf)));
+  }
+  function b64ToBuf(b64) {
+    return Uint8Array.from(atob(b64), c => c.charCodeAt(0)).buffer;
+  }
+
+  // ---------- PIN'den şifreleme anahtarı türet (PBKDF2) ----------
+  async function deriveKey(pin, salt) {
+    const enc = new TextEncoder();
+    const keyMaterial = await crypto.subtle.importKey(
+      'raw', enc.encode(pin), { name: 'PBKDF2' }, false, ['deriveKey']
+    );
+    return crypto.subtle.deriveKey(
+      { name: 'PBKDF2', salt: salt, iterations: 100000, hash: 'SHA-256' },
+      keyMaterial,
+      { name: 'AES-GCM', length: 256 },
+      false,
+      ['encrypt', 'decrypt']
+    );
+  }
+
+  // ---------- Şifrele ----------
+  async function encryptKey(apiKey, pin) {
+    const salt = crypto.getRandomValues(new Uint8Array(16));
+    const iv   = crypto.getRandomValues(new Uint8Array(12));
+    const key  = await deriveKey(pin, salt);
+    const enc  = new TextEncoder();
+    const encrypted = await crypto.subtle.encrypt({ name: 'AES-GCM', iv }, key, enc.encode(apiKey));
+    localStorage.setItem(STORAGE_KEY_ENC,  bufToB64(encrypted));
+    localStorage.setItem(STORAGE_KEY_SALT, bufToB64(salt));
+    localStorage.setItem(STORAGE_KEY_IV,   bufToB64(iv));
+  }
+
+  // ---------- Şifre Çöz ----------
+  async function decryptKey(pin) {
+    const enc  = localStorage.getItem(STORAGE_KEY_ENC);
+    const salt = localStorage.getItem(STORAGE_KEY_SALT);
+    const iv   = localStorage.getItem(STORAGE_KEY_IV);
+    if (!enc || !salt || !iv) return null;
+    try {
+      const key = await deriveKey(pin, b64ToBuf(salt));
+      const dec = await crypto.subtle.decrypt(
+        { name: 'AES-GCM', iv: b64ToBuf(iv) },
+        key,
+        b64ToBuf(enc)
+      );
+      return new TextDecoder().decode(dec);
+    } catch { return null; }
+  }
+
+  // ---------- İlk açılış: kurulum var mı? ----------
+  function hasSetup() {
+    return !!(localStorage.getItem(STORAGE_KEY_ENC));
+  }
+
+  // ---------- Sıfırla ----------
+  function resetAll() {
+    if (!confirm('⚠️ Tüm ayarlar silinecek (API anahtarı + ilerleme). Emin misin?')) return;
+    [STORAGE_KEY_ENC, STORAGE_KEY_SALT, STORAGE_KEY_IV, STORAGE_KEY_FAIL, STORAGE_KEY_WAIT].forEach(k => localStorage.removeItem(k));
+    geminiKey = null;
+    location.reload();
+  }
+
+  // ---------- Başlangıç: hangi modal açılsın? ----------
+  function initGeminiAuth() {
+    if (!hasSetup()) {
+      document.getElementById('setupOverlay').classList.add('active');
+    } else {
+      // Bekleme süresi var mı?
+      const waitUntil = parseInt(localStorage.getItem(STORAGE_KEY_WAIT) || '0');
+      if (Date.now() < waitUntil) {
+        document.getElementById('pinOverlay').classList.add('active');
+        startWaitCountdown(waitUntil);
+      } else {
+        document.getElementById('pinOverlay').classList.add('active');
+      }
+    }
+  }
+
+  // ---------- SETUP FORMU ----------
+  async function handleSetup() {
+    const apiKeyInput = document.getElementById('setupKey').value.trim();
+    const pin1 = document.getElementById('setupPin').value.trim();
+    const pin2 = document.getElementById('setupPin2').value.trim();
+    const errEl = document.getElementById('setupError');
+    const btn = document.getElementById('setupBtn');
+
+    errEl.classList.remove('show');
+    [document.getElementById('setupKey'), document.getElementById('setupPin'), document.getElementById('setupPin2')]
+      .forEach(el => el.classList.remove('error'));
+
+    // Validasyon
+    if (!apiKeyInput.startsWith('AIzaSy') || apiKeyInput.length < 20) {
+      showSetupError('API anahtarı geçersiz görünüyor. "AIzaSy..." ile başlamalı.', 'setupKey');
+      return;
+    }
+    if (!/^\d{4}$/.test(pin1)) {
+      showSetupError('PIN tam 4 rakam olmalı.', 'setupPin');
+      return;
+    }
+    if (pin1 !== pin2) {
+      showSetupError('PIN\'ler eşleşmiyor.', 'setupPin2');
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = '⏳ Kaydediliyor...';
+
+    try {
+      // Önce API anahtarını test et
+      const testOk = await testGeminiKey(apiKeyInput);
+      if (!testOk) {
+        showSetupError('API anahtarı çalışmıyor. Kontrol et ve tekrar dene.', 'setupKey');
+        btn.disabled = false;
+        btn.textContent = '✨ Galaksiyi Başlat';
+        return;
+      }
+      await encryptKey(apiKeyInput, pin1);
+      geminiKey = apiKeyInput;
+      localStorage.setItem(STORAGE_KEY_FAIL, '0');
+      document.getElementById('setupOverlay').classList.remove('active');
+    } catch(e) {
+      showSetupError('Kayıt sırasında bir hata oluştu. Tekrar dene.', null);
+      btn.disabled = false;
+      btn.textContent = '✨ Galaksiyi Başlat';
+    }
+  }
+
+  function showSetupError(msg, fieldId) {
+    const el = document.getElementById('setupError');
+    el.textContent = '⚠️ ' + msg;
+    el.classList.add('show');
+    if (fieldId) document.getElementById(fieldId).classList.add('error');
+  }
+
+  // ---------- Gemini API Test ----------
+  async function testGeminiKey(key) {
+    try {
+      const r = await fetch(
+        `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${key}`,
+        {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ contents: [{ parts: [{ text: 'Merhaba' }] }] })
+        }
+      );
+      return r.ok;
+    } catch { return false; }
+  }
+
+  // ---------- PIN Klavyesi ----------
+  let pinBuffer = '';
+  const MAX_FAILS = 5;
+  const WAIT_AFTER_3 = 30; // saniye
+
+  function pinKey(digit) {
+    const waitUntil = parseInt(localStorage.getItem(STORAGE_KEY_WAIT) || '0');
+    if (Date.now() < waitUntil) return; // bekleme süresi varsa engelle
+
+    if (pinBuffer.length >= 4) return;
+    pinBuffer += digit;
+    updatePinDots();
+    if (pinBuffer.length === 4) {
+      setTimeout(checkPin, 200); // kısa gecikme — son dot dolsun
+    }
+  }
+
+  function pinDel() {
+    pinBuffer = pinBuffer.slice(0, -1);
+    updatePinDots();
+  }
+
+  function updatePinDots() {
+    for (let i = 0; i < 4; i++) {
+      document.getElementById('dot' + i).classList.toggle('filled', i < pinBuffer.length);
+    }
+  }
+
+  async function checkPin() {
+    const fails = parseInt(localStorage.getItem(STORAGE_KEY_FAIL) || '0');
+    const errEl = document.getElementById('pinError');
+
+    const decrypted = await decryptKey(pinBuffer);
+    pinBuffer = '';
+    updatePinDots();
+
+    if (decrypted) {
+      // ✅ Doğru PIN
+      geminiKey = decrypted;
+      localStorage.setItem(STORAGE_KEY_FAIL, '0');
+      localStorage.removeItem(STORAGE_KEY_WAIT);
+      document.getElementById('pinOverlay').classList.remove('active');
+      errEl.classList.remove('show');
+    } else {
+      // ❌ Yanlış PIN
+      const newFails = fails + 1;
+      localStorage.setItem(STORAGE_KEY_FAIL, String(newFails));
+
+      if (newFails >= MAX_FAILS) {
+        // 5 yanlışta sıfırla
+        errEl.textContent = '⛔ 5 yanlış deneme! Tüm veriler silindi.';
+        errEl.classList.add('show');
+        setTimeout(() => resetAll(), 2000);
+        return;
+      }
+
+      if (newFails === 3) {
+        // 3 yanlışta 30 sn bekleme
+        const waitUntil = Date.now() + WAIT_AFTER_3 * 1000;
+        localStorage.setItem(STORAGE_KEY_WAIT, String(waitUntil));
+        startWaitCountdown(waitUntil);
+        errEl.textContent = `⚠️ ${newFails} yanlış. 30 saniye bekle.`;
+      } else {
+        errEl.textContent = `⚠️ Yanlış PIN. (${newFails}/${MAX_FAILS})`;
+      }
+      errEl.classList.add('show');
+
+      // Hatalı titreme animasyonu
+      document.querySelectorAll('.pin-dot').forEach(d => {
+        d.style.borderColor = 'var(--neon-pink)';
+        setTimeout(() => d.style.borderColor = '', 800);
+      });
+    }
+  }
+
+  function startWaitCountdown(waitUntil) {
+    const waitEl = document.getElementById('waitMsg');
+    const keypad = document.querySelectorAll('.pin-key');
+    waitEl.classList.add('show');
+    const iv = setInterval(() => {
+      const remaining = Math.ceil((waitUntil - Date.now()) / 1000);
+      if (remaining <= 0) {
+        clearInterval(iv);
+        waitEl.classList.remove('show');
+        keypad.forEach(k => k.disabled = false);
+      } else {
+        waitEl.textContent = `⏳ ${remaining} saniye bekle...`;
+        keypad.forEach(k => k.disabled = true);
+      }
+    }, 500);
+  }
+
+  // ---------- Gemini API çağrısı (ortak fonksiyon) ----------
+  async function callGemini(userText, systemPrompt) {
+    if (!geminiKey) throw new Error('NO_KEY');
+    const prompt = systemPrompt
+      ? `${systemPrompt}\n\nKullanıcı: ${userText}`
+      : userText;
+    const r = await fetch(
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent?key=${geminiKey}`,
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ contents: [{ parts: [{ text: prompt }] }] })
+      }
+    );
+    if (!r.ok) {
+      const err = await r.json().catch(() => ({}));
+      if (r.status === 429) throw new Error('RATE_LIMIT');
+      throw new Error('API_ERROR');
+    }
+    const data = await r.json();
+    return data?.candidates?.[0]?.content?.parts?.[0]?.text || 'Cevap alınamadı.';
+  }
+
+  // =====================================================
   // BAŞLAT
   // =====================================================
   createStars();
   loadProgress();
   setInterval(randomShootingStar, 3000);
+  initGeminiAuth();
 </script>
 
 </body>
