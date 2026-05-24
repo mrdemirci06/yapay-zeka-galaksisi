@@ -1,24 +1,52 @@
 # 🚀 YAPAY ZEKA GALAKSİSİ - Proje Talimat Dosyası
 
+> ⚠️ **CLAUDE, BU DOSYAYI BAŞTAN SONA OKU. AŞAĞIDAKİ İLK İŞ BÖLÜMÜ ZORUNLUDUR.**
+
 ## 👋 Sevgili Claude
 
 Bu projede bana yardım edecek bir geliştirici ortağsın. Aşağıdaki bilgileri **her oturumda mutlaka oku** ve buna göre davran.
 
 ---
 
-## 🚦 İLK İŞ: Oturum Açılışı
+## 🚨 İLK İŞ — ZORUNLU! KULLANICI MESAJINI YANITLAMADAN ÖNCE YAP!
 
-Yeni bir sohbet başlattığımda **sırayla şunları yap:**
+**Kullanıcı sana ne yazarsa yazsın** (örn: "merhaba", "devam edelim", "Gemini'ye başlayalım", "şunu yap"), ilk mesajda **ZORUNLU OLARAK** şu sırayla hareket et:
 
-1. **CLAUDE.md'yi oku** (bu dosya, otomatik gelir)
-2. **PROJE-DURUMU.md'yi oku** (otomatik gelir)
-3. **index.html'in son halini GitHub'dan çek:**
-   ```
-   https://raw.githubusercontent.com/mrdemirci06/yapay-zeka-galaksisi/main/index.html
-   ```
-   `bash_tool` ile `curl -sL <url> -o /home/claude/index.html` çalıştır.
-4. **Bana kısa bir özet ver** — "Şu an buradayız, sırada X var. Devam edelim mi?"
-5. Onayımı bekle, sonra başla.
+### Adım 1: PROJE-DURUMU.md'yi tamamen oku
+Otomatik olarak sana gelir. Burada "Yarınki Hedef" ve "Şu An Yapılıyor" bölümleri **kritik**.
+
+### Adım 2: GitHub'dan index.html'i çek
+```bash
+curl -sL https://raw.githubusercontent.com/mrdemirci06/yapay-zeka-galaksisi/main/index.html -o /home/claude/index.html
+```
+Bu **mecburi bir adım** — index.html projeye yüklü olmadığı için sadece GitHub'da güncel hali var.
+
+### Adım 3: Kullanıcıya KISA bir durum özeti ver
+Şu formatta:
+```
+Merhaba Emre! Dosyaları okudum. Şu an durumumuz:
+
+✅ Tamamlananlar: [kısa liste]
+🎯 Sıradaki hedef: [PROJE-DURUMU.md'deki "Yarınki Hedef"]
+
+[Hedefe göre 1-2 cümle ne yapacağımıza dair plan]
+
+Başlayalım mı?
+```
+
+### Adım 4: Onay bekle, sonra başla
+Kullanıcı "evet", "başla", "tamam", "devam" gibi onay verince → işe gir.
+
+### ⚠️ KESİNLİKLE YAPMAMA:
+- ❌ Kullanıcının mesajını dosyaları okumadan yorumlama
+- ❌ Bağlamı bilmeden "anlamadım" deme (önce dosyaları oku!)
+- ❌ Adımları atlama
+- ❌ "Hangi proje?" diye sorma (CLAUDE.md ve PROJE-DURUMU.md zaten projede)
+
+### ✅ NORMAL AKIŞ ÖRNEĞİ:
+Kullanıcı: "Gemini + PIN'e başlayalım"
+Claude (içinden): "Önce dosyaları oku, GitHub'dan index'i çek, sonra konuş"
+Claude (dışarı): [Dosyaları okur, curl çalıştırır, özet verir, onay ister, başlar]
 
 ---
 
@@ -53,6 +81,38 @@ Yeni bir sohbet başlattığımda **sırayla şunları yap:**
 - Sınıfta projeksiyondan birlikte
 - Öğrenciler kendi cihazlarından evde
 - Web tarayıcısında, kurulum gerekmez
+
+---
+
+## 🎭 KRİTİK AYRIM: Öğretilen Konu vs Pratik Aracı
+
+Bu projenin **DNA**'sı! Karıştırma:
+
+### 🎓 ÖĞRETİLEN KONU = Claude
+Tüm gezegenlerde **Claude'u** anlatıyoruz:
+- Claude.ai (chat interface)
+- Claude Code (terminal aracı)
+- Artifacts (görsel üretim)
+- Skills (özel yetenekler)
+- MCP (bağlantı protokolü)
+- Cowork (yeni Anthropic ürünü)
+- Anthropic firması, güvenlik felsefesi, vb.
+
+### 🛠️ PRATİK ARACI = Gemini (sadece Gezegen 1 ve 2'de)
+Gemini sadece **prompt yazma deneyimi** için kullanılır çünkü:
+- Claude.ai 18+ yaş, öğrenciler üye olamaz
+- Öğrenciye somut bir "YZ ile konuşma" deneyimi gerekli
+- "Beceri" evrenseldir — marka değişebilir, prensip aynı
+
+### Hangi Gezegende Gemini Çağrısı?
+- ✅ **Gezegen 1** (Başlangıç) — ilk YZ sohbet deneyimi
+- ✅ **Gezegen 2** (Konuşma) — Prompt Laboratuvarı
+- ❌ **Gezegen 3-8** — Sadece içerik, galeri, görseller, kavramsal anlatım
+
+### Öğrenciye Söylenecek Cümle (örnek):
+> *"Bu uygulamada **Claude'u öğreniyoruz** ama prompt pratik için **Gemini** kullanıyoruz. Çünkü Claude.ai 18 yaş kuralı var. Ama unutma — iyi prompt iyi prompttur, hangi YZ'ye yazarsan yaz."*
+
+Bu **dürüst, pedagojik ve evrensel** bir mesaj.
 
 ---
 
@@ -115,16 +175,20 @@ Bana commit mesajı önerirken **kısa ve açıklayıcı** ol:
 
 ## 🪐 Galaksi Yapısı (8 Gezegen)
 
-| # | Gezegen | Konu | Durum |
-|---|---------|------|-------|
-| 1 | 🌍 Başlangıç | Yapay Zeka Nedir? | ✅ Tamamlandı |
-| 2 | 🪐 Konuşma | Claude.ai ve prompt yazma | ✅ Tamamlandı |
-| 3 | ✨ Yaratım | Artifacts | 🔄 Sırada |
-| 4 | 🛠️ Atölye | Skills | ⏳ Bekliyor |
-| 5 | 🌐 Köprü | MCP | ⏳ Bekliyor |
-| 6 | 💻 Kod | Claude Code | ⏳ Bekliyor |
-| 7 | 🤝 Takım | Cowork | ⏳ Bekliyor |
-| 8 | ⭐ Final | Mini proje | ⏳ Bekliyor |
+| # | Gezegen | Konu (öğretilen) | Pratik Aracı | Durum |
+|---|---------|------|------|-------|
+| 1 | 🌍 Başlangıç | Yapay Zeka Nedir? Claude da bir YZ | 🛠️ Gemini sohbet | ✅ Tamamlandı |
+| 2 | 🪐 Konuşma | Claude'a iyi prompt nasıl yazılır | 🛠️ Gemini (Prompt Lab) | ✅ Tamamlandı |
+| 3 | ✨ Yaratım | **Claude Artifacts** | 🖼️ Sadece galeri | 🔄 Sırada |
+| 4 | 🛠️ Atölye | **Claude Skills** | 📜 Sadece içerik | ⏳ Bekliyor |
+| 5 | 🌐 Köprü | **Claude MCP** | 📊 Sadece şema/görsel | ⏳ Bekliyor |
+| 6 | 💻 Kod | **Claude Code** | 🎬 Sadece ekran görüntüsü | ⏳ Bekliyor |
+| 7 | 🤝 Takım | **Anthropic Cowork** | 📺 Sadece tanıtım | ⏳ Bekliyor |
+| 8 | ⭐ Final | Mini proje fikri | 🧠 Konsept | ⏳ Bekliyor |
+
+**ÖNEMLİ:** "Pratik Aracı" = uygulamada öğrencinin ne yaptığı. "Konu" = öğretilen şey (her zaman Claude).
+
+Gemini sadece **Gezegen 1 ve 2**'de API çağrısı yapar. Diğer gezegenlerde API yok — sadece içerik, görsel, kavramsal anlatım.
 
 **NOT:** Bu tablo durumun **özeti**. Detaylar PROJE-DURUMU.md'de.
 
@@ -134,19 +198,24 @@ Bana commit mesajı önerirken **kısa ve açıklayıcı** ol:
 
 Her gezegende şunlar olmalı:
 1. **Hoşgeldin başlığı** — emoji ve neon başlık
-2. **Konu anlatımı** — 3-5 kısa bölüm (lesson-section), basit dilde
+2. **Konu anlatımı** — 3-5 kısa bölüm (lesson-section), Claude'u anlatan
 3. **En az 1 "İlginç Bilgi" kutusu** (fun-fact)
 4. **Mini quiz** — 1 soru, 4 şık, yanlış cevapta tekrar şansı
-5. **Pratik alan** — Claude ile sohbet, artifact denemesi, vb.
+5. **Pratik alan** — gezegene göre değişir (aşağıya bak)
 6. **Görev Tamamla butonu** — quiz + pratik tamamlanmalı
 7. **Rozet ve XP ödülü**
 
-### Pratik Alan Çeşitliliği
-Her gezegende aynı pratik olmasın, çeşitlilik olsun:
-- Gezegen 1: Açık sohbet (Claude'la tanışma)
-- Gezegen 2: Prompt Laboratuvarı (kötü vs iyi karşılaştırma)
-- Gezegen 3: Galeri (hazır artifact örnekleri — iframe ile)
-- Gezegen 4+: (henüz tasarlanmadı)
+### Pratik Alan Çeşitliliği (Her Gezegende Aynı Olmasın!)
+Sadece **Gezegen 1 ve 2**'de Gemini API çağrısı var. Diğerleri farklı pratik biçimi:
+
+- **Gezegen 1** (Başlangıç): 🛠️ Gemini ile **açık sohbet** — ilk YZ deneyimi
+- **Gezegen 2** (Konuşma): 🛠️ Gemini ile **Prompt Laboratuvarı** — kötü/iyi karşılaştırma
+- **Gezegen 3** (Yaratım): 🖼️ **Galeri** — hazır Claude artifact örnekleri iframe ile
+- **Gezegen 4** (Atölye): 📜 **Skill örnekleri** — gerçek SKILL.md dosya görüntüleri, açıklamalı
+- **Gezegen 5** (Köprü): 📊 **Bağlantı şeması** — Claude ↔ Google Drive vb. görsel
+- **Gezegen 6** (Kod): 🎬 **Terminal simülasyonu** — sahte terminal, "böyle görünür" deneyimi
+- **Gezegen 7** (Takım): 📺 **Tanıtım/video** — Cowork ne yapar, görsel anlatım
+- **Gezegen 8** (Final): 🧠 **Mini proje fikri seçici** — öğrenci kendi projesini düşünür
 
 ---
 
@@ -156,7 +225,8 @@ Her gezegende aynı pratik olmasın, çeşitlilik olsun:
 - **Pure HTML/CSS/JS** (React YOK — öğrenciler kolayca açabilsin)
 - **Tek dosya** (`index.html`) — CSS+JS hepsi içinde
 - **window.storage** — ilerleme kaydı (kalıcı)
-- **Anthropic API** — uygulama içi Claude sohbeti (artifact ortamında otomatik çalışır)
+- **Google Gemini API** — SADECE Gezegen 1 ve 2'deki sohbet pratiği için (Claude.ai yaş sınırı nedeniyle)
+- **Web Crypto API** — anahtarı PIN ile şifreleyip tarayıcıda saklamak için
 - **Google Fonts** — Orbitron, Space Grotesk, Press Start 2P
 
 ### İlerleme Kayıt Şeması (window.storage)
@@ -174,11 +244,20 @@ Kayıt anahtarı: `yz_galaksisi_progress`
 - Gezegen N, sadece Gezegen N-1 tamamlanmışsa açılır
 - Gezegen 1 her zaman açıktır
 
-### Anthropic API Çağrıları
-- Model: `claude-sonnet-4-20250514`
-- `max_tokens: 1000`
+### Gemini API Çağrıları
+- **Endpoint:** `https://generativelanguage.googleapis.com/v1beta/models/gemini-...:generateContent`
+- **Model:** `gemini-2.5-flash-lite` (ücretsiz tier, hızlı, Türkçe iyi)
+- **Anahtar:** Kullanıcının kendi API anahtarı (PIN ile şifrelenmiş, tarayıcıda saklı)
+- **Limit (free tier):** 15 istek/dk, 1000 istek/gün, 250K token/dk paylaşımlı
 - Her gezegenin sohbet alanı için system prompt'u **o gezegene özel** olsun
 - Türkçe konuşma vurgusu sistem prompt'una eklenmiş olmalı
+
+### PIN/Anahtar Akışı
+- **İlk açılış:** Modal → API anahtarı + 4 haneli PIN belirle
+- **Sonraki açılışlar:** Sadece PIN sor → galaksiye geç
+- **PIN unutulursa:** "Sıfırla" → anahtar silinir, baştan
+- **Şifreleme:** Web Crypto API (PBKDF2 + AES-GCM)
+- **Güvenlik:** 3 yanlış PIN sonrası 30sn bekleme, 5 yanlış sonrası otomatik silme
 
 ---
 
@@ -236,8 +315,10 @@ Sırasıyla:
 - **Repo public:** Hassas bilgi koyma, API anahtarı gömme
 
 ### API Anahtarı
-- Artifact ortamında Anthropic API anahtarı **otomatik** sağlanır
-- Dışarı dağıtırsam (öğrencilerin tarayıcısında çalıştırırsam) **anahtar yönetimi gerekir** — şimdilik sorun değil ama unutma
+- **Gemini API anahtarı** kullanılır — Anthropic değil!
+- Her kullanıcı kendi anahtarını alır (ai.google.dev → Get API key)
+- Anahtar **kullanıcının tarayıcısında PIN ile şifreli** saklanır (Web Crypto API)
+- Kod içinde **asla anahtar gömme** — repo public!
 - Memory'de eski bir projeden kalan HuggingFace token notu var — bu projeyle ilgisi yok
 
 ### Kod Yazarken
