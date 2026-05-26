@@ -1012,6 +1012,247 @@
     display: none;
   }
   .wait-msg.show { display: block; }
+  /* =====================================================
+     GEZEGEN 3 — YARATIM GALERİSİ
+     ===================================================== */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  .demo-card {
+    background: var(--space-light);
+    border: 2px solid rgba(94,234,212,0.3);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+    text-align: center;
+    position: relative;
+  }
+  .demo-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(94,234,212,0.3);
+  }
+  .demo-card.opened::after {
+    content: '✓';
+    position: absolute;
+    top: 8px; right: 12px;
+    color: var(--neon-green);
+    font-size: 1.3rem;
+    font-weight: bold;
+  }
+  .demo-emoji {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+  .demo-name {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    font-size: 0.95rem;
+    margin-bottom: 0.3rem;
+  }
+  .demo-desc {
+    font-size: 0.78rem;
+    color: var(--locked-gray);
+    line-height: 1.4;
+  }
+
+  /* Demo görüntüleme alanı */
+  .demo-stage {
+    background: var(--space-deep);
+    border: 2px solid var(--neon-purple);
+    border-radius: 1rem;
+    margin: 1rem 0;
+    overflow: hidden;
+    display: none;
+  }
+  .demo-stage.active { display: block; }
+  .demo-stage-header {
+    background: var(--space-mid);
+    padding: 0.7rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid var(--neon-purple);
+  }
+  .demo-stage-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-purple);
+    font-size: 0.9rem;
+  }
+  .demo-close {
+    background: transparent;
+    border: 1px solid var(--neon-pink);
+    color: var(--neon-pink);
+    border-radius: 0.4rem;
+    padding: 0.3rem 0.7rem;
+    cursor: pointer;
+    font-size: 0.8rem;
+  }
+  .demo-content {
+    padding: 1rem;
+    min-height: 280px;
+  }
+
+  /* Uzay animasyonu */
+  #spaceCanvas {
+    width: 100%;
+    height: 280px;
+    background: linear-gradient(180deg, #000010 0%, #0a0020 100%);
+    border-radius: 0.5rem;
+    display: block;
+  }
+  .space-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  .space-btn {
+    background: var(--space-light);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .space-btn:hover { background: rgba(94,234,212,0.15); }
+
+  /* Çizim tahtası */
+  #drawCanvas {
+    width: 100%;
+    height: 280px;
+    background: white;
+    border-radius: 0.5rem;
+    cursor: crosshair;
+    display: block;
+    touch-action: none;
+  }
+  .draw-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+  }
+  .color-swatch {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.15s, border-color 0.15s;
+  }
+  .color-swatch:hover { transform: scale(1.15); }
+  .color-swatch.active { border-color: white; transform: scale(1.2); }
+
+  /* Hava durumu */
+  .weather-stage {
+    background: linear-gradient(180deg, #87ceeb 0%, #b0e0e6 100%);
+    height: 280px;
+    border-radius: 0.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: background 0.8s;
+  }
+  .weather-stage.night {
+    background: linear-gradient(180deg, #0a0e27 0%, #1a1f4e 100%);
+  }
+  .weather-stage.rain {
+    background: linear-gradient(180deg, #5a6878 0%, #7a8898 100%);
+  }
+  .weather-stage.snow {
+    background: linear-gradient(180deg, #c0d0e0 0%, #e0e8f0 100%);
+  }
+  .weather-stage.storm {
+    background: linear-gradient(180deg, #2a2a3a 0%, #4a4a5a 100%);
+  }
+  .weather-sun {
+    position: absolute;
+    width: 80px; height: 80px;
+    background: radial-gradient(circle, #ffeb3b, #ffa726);
+    border-radius: 50%;
+    top: 30px; left: 50%;
+    transform: translateX(-50%);
+    box-shadow: 0 0 60px rgba(255,193,7,0.8);
+    transition: opacity 0.5s, transform 0.5s;
+  }
+  .weather-moon {
+    position: absolute;
+    width: 60px; height: 60px;
+    background: radial-gradient(circle at 30% 30%, #f5f5dc, #a0a0a0);
+    border-radius: 50%;
+    top: 40px; right: 40px;
+    box-shadow: 0 0 30px rgba(255,255,255,0.5);
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .weather-stage.night .weather-sun { opacity: 0; }
+  .weather-stage.night .weather-moon { opacity: 1; }
+
+  .weather-controls {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.7rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .weather-btn {
+    background: var(--space-light);
+    border: 1px solid var(--neon-cyan);
+    color: var(--star-white);
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-size: 0.85rem;
+    transition: background 0.2s;
+  }
+  .weather-btn:hover { background: rgba(94,234,212,0.2); }
+  .weather-btn.active { background: var(--neon-cyan); color: #000; font-weight: 700; }
+  .weather-info {
+    position: absolute;
+    bottom: 15px; left: 15px; right: 15px;
+    background: rgba(0,0,0,0.6);
+    color: white;
+    padding: 0.6rem 1rem;
+    border-radius: 0.5rem;
+    font-size: 0.9rem;
+    text-align: center;
+  }
+  .rain-drop {
+    position: absolute;
+    width: 2px;
+    background: linear-gradient(180deg, transparent, #aaccff);
+    animation: rainFall linear infinite;
+  }
+  @keyframes rainFall {
+    from { transform: translateY(-20px); }
+    to { transform: translateY(300px); }
+  }
+  .snowflake {
+    position: absolute;
+    color: white;
+    font-size: 1.2rem;
+    animation: snowFall linear infinite;
+  }
+  @keyframes snowFall {
+    from { transform: translateY(-20px) rotate(0deg); }
+    to { transform: translateY(300px) rotate(360deg); }
+  }
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.85;
+  }
+
 </style>
 </head>
 <body>
@@ -1147,9 +1388,9 @@
       id: 3,
       emoji: '✨',
       name: 'Yaratım Gezegeni',
-      desc: 'Artifacts ile kendi oyunlarını yaratacaksın!',
-      content: 'comingSoon',
-      badge: { icon: '🎨', title: 'Yaratıcı', desc: '' },
+      desc: 'Artifacts ile Claude\'un sihirli "ekran" özelliğini keşfet!',
+      content: 'creation',
+      badge: { icon: '🎨', title: 'Yaratıcı', desc: 'Artifacts\'ı keşfettin — artık Claude\'la sadece konuşmuyor, birlikte yaratıyorsun!' },
       xp: 200
     },
     {
@@ -1299,6 +1540,10 @@
       quizPassed2 = false;
       hasTried2 = false;
       content.innerHTML = renderConversationPlanet(planet);
+    } else if (planet.content === 'creation') {
+      quizPassed3 = false;
+      demosOpened = new Set();
+      content.innerHTML = renderCreationPlanet(planet);
     } else {
       content.innerHTML = renderComingSoon(planet);
     }
@@ -1677,6 +1922,369 @@
     }, 800 + Math.random() * 700);
   }
 
+  // =====================================================
+  // GEZEGEN 3: YARATIM GEZEGENİ (ARTIFACTS)
+  // =====================================================
+  let quizPassed3 = false;
+  let demosOpened = new Set();
+
+  function renderCreationPlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(3);
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Artifacts: Claude'un Sihirli Ekranı</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎨 Artifacts Nedir?</h3>
+        <p>Şimdiye kadar Claude ile <strong>yazı</strong> yoluyla konuştuk. Ama Claude'un başka bir süper gücü daha var: <strong>Artifacts!</strong> ✨</p>
+        <p>Artifacts, Claude'un yazıdan çıkıp <strong>sana özel uygulamalar</strong>, <strong>oyunlar</strong>, <strong>animasyonlar</strong> ve <strong>araçlar</strong> oluşturmasıdır. Yani Claude sadece anlatmaz, <strong>yapar ve gösterir!</strong></p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>✨ Artifacts Neler Yapabilir?</h3>
+        <p>Aklına gelen hemen her şey! 🚀</p>
+        <p>🎮 <strong>Oyunlar:</strong> "Yılan oyunu yap" → 30 saniyede oynanabilir oyun!</p>
+        <p>🎨 <strong>Çizim araçları:</strong> "Çizim tahtası yap" → fareyle çizebileceğin tahta!</p>
+        <p>🌌 <strong>Animasyonlar:</strong> "Uzayda yıldızlar uçsun" → hareketli görsel!</p>
+        <p>📊 <strong>Hesaplayıcılar:</strong> "Not ortalaması hesaplayıcı yap" → çalışan araç!</p>
+        <p>📚 <strong>Eğitim araçları:</strong> "Çarpım tablosu testi yap" → interaktif quiz!</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>💡 İyi Bir Artifact Promptu Nasıl Yazılır?</h3>
+        <p>Gezegen 2'deki kuralları hatırla — onlar burada da geçerli!</p>
+        <div class="prompt-comparison" style="margin-top:1rem;">
+          <div class="prompt-box bad">
+            <div style="color:var(--neon-pink);font-weight:700;margin-bottom:0.5rem;">❌ Kötü Prompt</div>
+            <em>"Oyun yap"</em>
+          </div>
+          <div class="prompt-box good">
+            <div style="color:var(--neon-green);font-weight:700;margin-bottom:0.5rem;">✅ İyi Prompt</div>
+            <em>"Tahmin oyunu yap. Bilgisayar 1-100 arası sayı tutsun, ben tahmin edeyim. Her tahmin sonrası 'daha büyük' veya 'daha küçük' söylesin."</em>
+          </div>
+        </div>
+        <p style="margin-top:1rem;"><strong>Sır:</strong> Ne kadar net anlatırsan, Claude o kadar tam olarak istediğin şeyi yapar! 🎯</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🚀 Hadi Görelim! — Mini Galeri</h3>
+        <p>Aşağıda 3 örnek Artifact var. <strong>Hepsine tıkla, dene, oyna!</strong> Bunlar gerçekten kod yazılarak yapılmış — Claude'un nelere yetenekli olduğunu görmen için.</p>
+
+        <div class="gallery">
+          <div class="demo-card" id="card-space" onclick="openDemo('space')">
+            <div class="demo-emoji">🌌</div>
+            <div class="demo-name">Uzay Animasyonu</div>
+            <div class="demo-desc">Yıldızlar uzayda akıp gidiyor</div>
+          </div>
+          <div class="demo-card" id="card-draw" onclick="openDemo('draw')">
+            <div class="demo-emoji">🎨</div>
+            <div class="demo-name">Çizim Tahtası</div>
+            <div class="demo-desc">Fareyle istediğini çiz</div>
+          </div>
+          <div class="demo-card" id="card-weather" onclick="openDemo('weather')">
+            <div class="demo-emoji">🌬️</div>
+            <div class="demo-name">Hava Sim.</div>
+            <div class="demo-desc">Hava durumlarını değiştir</div>
+          </div>
+        </div>
+
+        <div class="demo-stage" id="demoStage">
+          <div class="demo-stage-header">
+            <div class="demo-stage-title" id="demoStageTitle">Demo</div>
+            <button class="demo-close" onclick="closeDemo()">Kapat ✕</button>
+          </div>
+          <div class="demo-content" id="demoContent"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎯 Mini Quiz</h3>
+        <p style="margin-bottom:1rem;">Artifacts hakkında bir soru:</p>
+        <div class="quiz-question">
+          <p><strong>Aşağıdakilerden hangisi Claude Artifacts ile YAPILAMAZ?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer3(this, false)">Bir tahmin oyunu</button>
+          <button class="quiz-option" onclick="checkAnswer3(this, false)">Animasyonlu bir kart</button>
+          <button class="quiz-option" onclick="checkAnswer3(this, true)">Gerçek bir uçağı kontrol etmek ✈️</button>
+          <button class="quiz-option" onclick="checkAnswer3(this, false)">Bir çizim tahtası</button>
+          <div class="quiz-feedback" id="quizFeedback3"></div>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn3" onclick="completeMission(3)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: 3 demoyu da aç ve quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Quiz 3 ----------
+  function checkAnswer3(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback3');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '✨ <strong>Doğru!</strong> Artifacts sadece dijital şeyler yapar — gerçek dünyadaki cihazları (uçak, araba, robot) kontrol etmez. O bir kod kutusu, fiziksel dünyaya bağlı değil.';
+      quizPassed3 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Bunu Artifacts yapabilir. Tekrar düşün — hangisi <em>fiziksel</em> bir şey?';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+  }
+
+  // ---------- Demo açma/kapama ----------
+  function openDemo(name) {
+    demosOpened.add(name);
+    document.getElementById('card-' + name).classList.add('opened');
+    const stage = document.getElementById('demoStage');
+    const title = document.getElementById('demoStageTitle');
+    const cont  = document.getElementById('demoContent');
+    stage.classList.add('active');
+    if (name === 'space')   { title.textContent = '🌌 Uzay Animasyonu'; cont.innerHTML = spaceDemoHTML(); initSpaceDemo(); }
+    if (name === 'draw')    { title.textContent = '🎨 Çizim Tahtası';   cont.innerHTML = drawDemoHTML();  initDrawDemo(); }
+    if (name === 'weather') { title.textContent = '🌬️ Hava Simülatörü'; cont.innerHTML = weatherDemoHTML(); initWeatherDemo(); }
+    stage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function closeDemo() {
+    const stage = document.getElementById('demoStage');
+    stage.classList.remove('active');
+    if (window.spaceAnimId) cancelAnimationFrame(window.spaceAnimId);
+  }
+
+  // ============== DEMO 1: UZAY ANİMASYONU ==============
+  function spaceDemoHTML() {
+    return `
+      <canvas id="spaceCanvas"></canvas>
+      <div class="space-controls">
+        <button class="space-btn" onclick="setSpaceSpeed(0.5)">🐢 Yavaş</button>
+        <button class="space-btn" onclick="setSpaceSpeed(1.5)">🚀 Normal</button>
+        <button class="space-btn" onclick="setSpaceSpeed(4)">⚡ Hızlı</button>
+        <button class="space-btn" onclick="setSpaceSpeed(8)">🌀 Warp!</button>
+      </div>
+    `;
+  }
+  let spaceSpeed = 1.5;
+  function setSpaceSpeed(v) { spaceSpeed = v; }
+  function initSpaceDemo() {
+    const canvas = document.getElementById('spaceCanvas');
+    const ctx = canvas.getContext('2d');
+    function resize() { canvas.width = canvas.clientWidth; canvas.height = canvas.clientHeight; }
+    resize();
+    window.addEventListener('resize', resize);
+    const stars = [];
+    for (let i = 0; i < 200; i++) {
+      stars.push({
+        x: (Math.random() - 0.5) * canvas.width,
+        y: (Math.random() - 0.5) * canvas.height,
+        z: Math.random() * canvas.width,
+      });
+    }
+    function animate() {
+      ctx.fillStyle = 'rgba(0,0,16,0.3)';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      const cx = canvas.width / 2, cy = canvas.height / 2;
+      stars.forEach(s => {
+        s.z -= spaceSpeed;
+        if (s.z <= 0) {
+          s.x = (Math.random() - 0.5) * canvas.width;
+          s.y = (Math.random() - 0.5) * canvas.height;
+          s.z = canvas.width;
+        }
+        const k = 128 / s.z;
+        const px = s.x * k + cx;
+        const py = s.y * k + cy;
+        if (px >= 0 && px < canvas.width && py >= 0 && py < canvas.height) {
+          const size = (1 - s.z / canvas.width) * 3;
+          ctx.fillStyle = `rgba(${180 + Math.random()*75}, ${200 + Math.random()*55}, 255, ${1 - s.z/canvas.width})`;
+          ctx.fillRect(px, py, size, size);
+        }
+      });
+      window.spaceAnimId = requestAnimationFrame(animate);
+    }
+    animate();
+  }
+
+  // ============== DEMO 2: ÇİZİM TAHTASI ==============
+  function drawDemoHTML() {
+    return `
+      <canvas id="drawCanvas"></canvas>
+      <div class="draw-controls">
+        <div class="color-swatch active" data-c="#000" style="background:#000" onclick="setDrawColor(this,'#000')"></div>
+        <div class="color-swatch" data-c="#e11d48" style="background:#e11d48" onclick="setDrawColor(this,'#e11d48')"></div>
+        <div class="color-swatch" data-c="#0ea5e9" style="background:#0ea5e9" onclick="setDrawColor(this,'#0ea5e9')"></div>
+        <div class="color-swatch" data-c="#10b981" style="background:#10b981" onclick="setDrawColor(this,'#10b981')"></div>
+        <div class="color-swatch" data-c="#f59e0b" style="background:#f59e0b" onclick="setDrawColor(this,'#f59e0b')"></div>
+        <div class="color-swatch" data-c="#8b5cf6" style="background:#8b5cf6" onclick="setDrawColor(this,'#8b5cf6')"></div>
+        <button class="space-btn" onclick="clearDraw()">🧹 Temizle</button>
+      </div>
+    `;
+  }
+  let drawColor = '#000';
+  function setDrawColor(el, c) {
+    drawColor = c;
+    document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('active'));
+    el.classList.add('active');
+  }
+  function clearDraw() {
+    const canvas = document.getElementById('drawCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+  function initDrawDemo() {
+    const canvas = document.getElementById('drawCanvas');
+    canvas.width = canvas.clientWidth;
+    canvas.height = canvas.clientHeight;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = 'white';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.lineCap = 'round';
+    ctx.lineJoin = 'round';
+    ctx.lineWidth = 4;
+
+    let drawing = false;
+    function getPos(e) {
+      const rect = canvas.getBoundingClientRect();
+      const t = e.touches ? e.touches[0] : e;
+      return { x: t.clientX - rect.left, y: t.clientY - rect.top };
+    }
+    function start(e) {
+      e.preventDefault();
+      drawing = true;
+      const p = getPos(e);
+      ctx.strokeStyle = drawColor;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+    }
+    function move(e) {
+      if (!drawing) return;
+      e.preventDefault();
+      const p = getPos(e);
+      ctx.lineTo(p.x, p.y);
+      ctx.stroke();
+    }
+    function end() { drawing = false; }
+
+    canvas.addEventListener('mousedown', start);
+    canvas.addEventListener('mousemove', move);
+    canvas.addEventListener('mouseup', end);
+    canvas.addEventListener('mouseleave', end);
+    canvas.addEventListener('touchstart', start);
+    canvas.addEventListener('touchmove', move);
+    canvas.addEventListener('touchend', end);
+  }
+
+  // ============== DEMO 3: HAVA SİMÜLATÖRÜ ==============
+  function weatherDemoHTML() {
+    return `
+      <div class="weather-stage" id="weatherStage">
+        <div class="weather-sun"></div>
+        <div class="weather-moon"></div>
+        <div class="weather-info" id="weatherInfo">☀️ Güneşli — Harika bir gün!</div>
+      </div>
+      <div class="weather-controls">
+        <button class="weather-btn active" data-w="sunny"  onclick="setWeather('sunny',this)">☀️ Güneşli</button>
+        <button class="weather-btn" data-w="rain"   onclick="setWeather('rain',this)">🌧️ Yağmurlu</button>
+        <button class="weather-btn" data-w="snow"   onclick="setWeather('snow',this)">❄️ Karlı</button>
+        <button class="weather-btn" data-w="storm"  onclick="setWeather('storm',this)">⛈️ Fırtınalı</button>
+        <button class="weather-btn" data-w="night"  onclick="setWeather('night',this)">🌙 Gece</button>
+      </div>
+    `;
+  }
+  function initWeatherDemo() {
+    setWeather('sunny', document.querySelector('.weather-btn'));
+  }
+  function setWeather(type, btn) {
+    const stage = document.getElementById('weatherStage');
+    const info  = document.getElementById('weatherInfo');
+    if (!stage) return;
+    // Eski efektleri temizle
+    stage.querySelectorAll('.rain-drop, .snowflake, .cloud').forEach(el => el.remove());
+    stage.className = 'weather-stage';
+    document.querySelectorAll('.weather-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+
+    if (type === 'sunny') {
+      info.textContent = '☀️ Güneşli — Harika bir gün!';
+    } else if (type === 'rain') {
+      stage.classList.add('rain');
+      info.textContent = '🌧️ Yağmurlu — Şemsiyeni unutma!';
+      for (let i = 0; i < 60; i++) addRainDrop(stage);
+      addCloud(stage, 30, 20, 120); addCloud(stage, 180, 40, 100);
+    } else if (type === 'snow') {
+      stage.classList.add('snow');
+      info.textContent = '❄️ Karlı — Kardan adam yapma vakti!';
+      for (let i = 0; i < 40; i++) addSnowflake(stage);
+      addCloud(stage, 60, 30, 100);
+    } else if (type === 'storm') {
+      stage.classList.add('storm');
+      info.textContent = '⛈️ Fırtınalı — Evde kal, güvende ol!';
+      for (let i = 0; i < 80; i++) addRainDrop(stage);
+      addCloud(stage, 20, 15, 140); addCloud(stage, 200, 35, 120);
+    } else if (type === 'night') {
+      stage.classList.add('night');
+      info.textContent = '🌙 Gece — Yıldızlar parlıyor!';
+      for (let i = 0; i < 30; i++) addStar(stage);
+    }
+  }
+  function addRainDrop(stage) {
+    const d = document.createElement('div');
+    d.className = 'rain-drop';
+    d.style.left = Math.random() * 100 + '%';
+    d.style.height = (15 + Math.random() * 15) + 'px';
+    d.style.animationDuration = (0.4 + Math.random() * 0.5) + 's';
+    d.style.animationDelay = (Math.random() * 0.8) + 's';
+    stage.appendChild(d);
+  }
+  function addSnowflake(stage) {
+    const s = document.createElement('div');
+    s.className = 'snowflake';
+    s.textContent = '❄';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.animationDuration = (3 + Math.random() * 3) + 's';
+    s.style.animationDelay = (Math.random() * 3) + 's';
+    s.style.fontSize = (0.8 + Math.random()) + 'rem';
+    stage.appendChild(s);
+  }
+  function addCloud(stage, left, top, width) {
+    const c = document.createElement('div');
+    c.className = 'cloud';
+    c.style.left = left + 'px';
+    c.style.top = top + 'px';
+    c.style.width = width + 'px';
+    c.style.height = (width * 0.35) + 'px';
+    stage.appendChild(c);
+  }
+  function addStar(stage) {
+    const s = document.createElement('div');
+    s.style.position = 'absolute';
+    s.style.width = '2px';
+    s.style.height = '2px';
+    s.style.background = 'white';
+    s.style.borderRadius = '50%';
+    s.style.left = Math.random() * 100 + '%';
+    s.style.top = Math.random() * 70 + '%';
+    s.style.boxShadow = '0 0 4px white';
+    s.style.animation = `twinkle ${1 + Math.random() * 2}s ease-in-out infinite`;
+    stage.appendChild(s);
+  }
+
   function renderComingSoon(planet) {
     return `
       <button class="close-btn" onclick="closeModal()">✕</button>
@@ -1862,6 +2470,10 @@
     if (planetId === 2) {
       if (!quizPassed2) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
       if (!hasTried2) { alert('Prompt Laboratuvarı\'nda en az bir prompt dene! 🔬'); return; }
+    }
+    if (planetId === 3) {
+      if (demosOpened.size < 3) { alert('Önce 3 demoyu da aç ve dene! 🎨'); return; }
+      if (!quizPassed3) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
     }
     
     if (progress.completedPlanets.includes(planetId)) return;
