@@ -1563,7 +1563,82 @@
     sendMessage2();
   }
 
-  async function sendMessage2() {
+  // =====================================================
+  // SOHBET SİMÜLASYONU — GEZEGEN 2 (Prompt Sanatı)
+  // =====================================================
+  const sim2 = [
+    {
+      // Kısa/belirsiz promptlar
+      keys: ['yardım et','yardım','matematik','hikaye','oyun','bir şey yap','bir şey söyle','bilmiyorum'],
+      reply: 'Hmm... 🤔 Bu biraz belirsiz kaldı! Aklını okuyamıyorum ne yazık ki.\n\n💡 İpucu: Daha iyi bir prompt dene! Örneğin:\n→ "Yardım et" yerine: "Dörtgenler konusunu anlat, örneklerle"\n→ "Hikaye" yerine: "Uzayda geçen 3 cümlelik komik bir hikaye yaz"\n\nNe kadar net, o kadar iyi cevap! 🎯',
+      feedback: 'kötü'
+    },
+    {
+      // İyi prompt örnekleri — kısa ama spesifik
+      keys: ['matematik anlat','fen anlat','tarih anlat','coğrafya anlat','biyoloji anlat'],
+      reply: 'Güzel soru! 📚 Biraz daha spesifik olursa süper olur. Hangi konu? Hangi sınıf? Nasıl anlatmamı istersin? Örnek ister misin? Ne kadar detay?\n\n💡 Tip: "5. sınıf kesirleri adım adım anlat, günlük hayattan örnek ver" gibi yaz — çok daha faydalı cevap alırsın!',
+      feedback: 'orta'
+    },
+    {
+      // Rol verme denemeleri
+      keys: ['rol yap','rol al','gibi davran','gibi konuş','öğretmen gibi','bilim insanı gibi','uzay','astronot'],
+      reply: 'Harika bir teknik kullandın! 🎭 Rol verme, YZ\'yi özelleştirmenin en güçlü yollarından biri.\n\nÖrneğin: "Sen bir astronot gibi konuş ve uzay yolculuğunu anlat" dersen çok daha eğlenceli ve odaklı cevap alırsın. Rol ne kadar detaylı, cevap o kadar iyi!',
+      feedback: 'iyi'
+    },
+    {
+      // Detaylı ve iyi promptlar
+      keys: ['adım adım','örneklerle','basitçe anlat','açıkla','nasıl yapılır','nasıl çalışır'],
+      reply: 'Mükemmel prompt tekniği! ⭐ "Adım adım" veya "örneklerle" demek YZ\'nin cevabını çok daha kullanışlı hale getirir.\n\nBunu bilmek seni bir "prompt ustası" yapıyor! 🏆 İyi promptun sırrı: NE istediğini + NASIL istediğini + NEDEN istediğini yazmak.',
+      feedback: 'iyi'
+    },
+    {
+      // Format isteme
+      keys: ['liste yap','madde madde','tablo','başlık','özet','kısa','uzun'],
+      reply: 'Süper! 📋 Format belirtmek çok akıllıca bir prompt tekniği. "Liste yap", "tablo olarak göster", "3 madde halinde özetle" gibi format komutları YZ\'yi doğru yönlendirir.\n\nÇoğu insan bunu bilmez — sen artık biliyorsun! 😎',
+      feedback: 'iyi'
+    },
+    {
+      // Hedef kitle belirtme
+      keys: ['çocuğa anlat','basit anlat','8 yaşında','ortaokul','lise','annem anlasın','herkes anlasın'],
+      reply: 'Zekice! 🎯 Hedef kitle belirtmek çok güçlü bir teknik. "Bunu 8 yaşında birine anlat" dersin, YZ kendiliğinden basit dil kullanır, büyük kelimelerden kaçınır.\n\nBu tekniğin adı: "Kitle belirleme". Profesyoneller hep kullanır! 💼',
+      feedback: 'iyi'
+    },
+    {
+      keys: ['merhaba','selam','hey'],
+      reply: 'Merhaba! 👋 Ben Prompt Laboratuvarı\'nın asistanıyım. Burası farklı promptlar deneyip farkı görmen için!\n\nKısa bir şey mi deneyelim? "Yardım et" vs "5. sınıf kesirleri 3 adımda anlat" — hangisi daha iyi cevap alır sence? 🤔',
+      feedback: 'nötr'
+    },
+    {
+      keys: ['teşekkür','sağol','harika','süper','mükemmel','anladım'],
+      reply: 'Rica ederim! 😊 Gördüğün gibi, aynı YZ\'ye bile farklı promptlar yazarsan çok farklı sonuçlar alırsın. Bu farkı artık sen de görüyorsun — bu büyük bir güç! 💪\n\nBaşka bir prompt denemek ister misin?',
+      feedback: 'nötr'
+    },
+  ];
+
+  function simReply2(text) {
+    const t = text.toLowerCase().replace(/[?!.,]/g, '');
+    
+    // Çok kısa yazılar (1-2 kelime) → kötü prompt uyarısı
+    const words = t.trim().split(/\s+/);
+    if (words.length <= 2 && !['merhaba','selam','hey','sağol','teşekkür'].some(k => t.includes(k))) {
+      return 'Hmm... 🤔 Bu çok kısa! Sadece ' + words.length + ' kelime yazdın.\n\n💡 İpucu: YZ aklını okuyamaz! Ne istediğini daha ayrıntılı yaz.\nÖrneğin: "' + text + '" yerine ne istediğini tam anlat. Dene bakalım!';
+    }
+
+    for (const scenario of sim2) {
+      if (scenario.keys.some(k => t.includes(k))) {
+        return scenario.reply;
+      }
+    }
+
+    // Uzun ve detaylı prompt → olumlu geri bildirim
+    if (words.length >= 8) {
+      return 'Güçlü bir prompt! 💪 ' + words.length + ' kelime yazdın — bu detay seviyesi YZ\'yi doğru yönlendirir.\n\nGerçek bir YZ\'ye (Claude gibi) bunu yazsaydın, odaklı ve kaliteli bir cevap alırdın. Prompt uzunluğu ve netliği cevap kalitesini doğrudan etkiler! ✨';
+    }
+
+    return 'Fena değil! 🙂 Ama biraz daha detay ekleseydin daha iyi olurdu.\n\n💡 Şunu ekle: Ne için kullanacaksın? Nasıl bir format istiyorsun? Kim okuyacak? Bu 3 soruya cevap veren promptlar çok daha güçlü olur!';
+  }
+
+  function sendMessage2() {
     const input = document.getElementById('chatInput2');
     const text = input.value.trim();
     if (!text) return;
@@ -1582,38 +1657,23 @@
 
     const thinking = document.createElement('div');
     thinking.className = 'chat-message thinking';
-    thinking.textContent = '🤖 Claude düşünüyor...';
+    thinking.textContent = '🤖 Düşünüyor...';
     messages.appendChild(thinking);
     messages.scrollTop = messages.scrollHeight;
 
-    try {
-      const reply = await callGemini(
-        text,
-        "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Eğer kullanıcı çok kısa veya belirsiz bir şey yazarsa (örn: sadece 'yardım et', 'matematik', 'hikaye'), önce kısa ve şaşkın bir cevap ver, sonra şunu söyle: '💡 İpucu: Bana daha net bir şey sorsaydın daha iyi yardım edebilirdim! Örneğin: [daha iyi bir prompt örneği ver]'. Eğer prompt iyiyse normal ve eğlenceli şekilde cevap ver. Cevaplar kısa ve emoji'li olsun."
-      );
+    setTimeout(() => {
       thinking.remove();
+      const reply = simReply2(text);
       const aiMsg = document.createElement('div');
       aiMsg.className = 'chat-message assistant';
       aiMsg.textContent = reply;
       messages.appendChild(aiMsg);
       messages.scrollTop = messages.scrollHeight;
       hasTried2 = true;
-    } catch (err) {
-      thinking.remove();
-      const errMsg = document.createElement('div');
-      errMsg.className = 'chat-message assistant';
-      errMsg.style.borderColor = 'var(--neon-pink)';
-      if (err.message === 'RATE_LIMIT') {
-        errMsg.textContent = '⚠️ Çok hızlı! Biraz bekle ve tekrar dene.';
-      } else {
-        errMsg.textContent = '⚠️ Bir hata oluştu. Tekrar dene.';
-      }
-      messages.appendChild(errMsg);
-    }
-
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Gönder';
-    input.focus();
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Gönder';
+      input.focus();
+    }, 800 + Math.random() * 700);
   }
 
   function renderComingSoon(planet) {
@@ -1671,37 +1731,92 @@
     sendMessage();
   }
   
-  async function sendMessage() {
+  // =====================================================
+  // SOHBET SİMÜLASYONU — GEZEGEN 1 (YZ Nedir?)
+  // =====================================================
+  const sim1 = [
+    {
+      keys: ['merhaba','selam','hey','hi','naber'],
+      reply: 'Merhaba uzay kâşifi! 🚀 Ben YZ Galaksisi\'nin asistanıyım. Yapay zeka hakkında aklına takılan her şeyi sorabilirsin!'
+    },
+    {
+      keys: ['yapay zeka nedir','yz nedir','ai nedir','yapay zeka ne'],
+      reply: 'Yapay zeka (YZ), bilgisayarların insan gibi düşünmesini, öğrenmesini ve problem çözmesini sağlayan teknoloji! 🤖 Tıpkı senin zamanla öğrenmesi gibi, YZ de verilerden öğrenir. Fark şu: YZ milyonlarca örneği saniyeler içinde işleyebilir!'
+    },
+    {
+      keys: ['nasıl çalışır','nasıl öğrenir','nasıl çalışıyor'],
+      reply: 'YZ, devasa miktarda veriyi inceleyerek örüntüler öğrenir. 📚 Örneğin dil modelleri milyarlarca cümleyi okuyarak konuşmayı öğrendi. Beyin nasıl nöronlarla çalışıyorsa, YZ de "yapay nöronlar" adı verilen matematiksel yapılarla çalışır!'
+    },
+    {
+      keys: ['neler yapabilir','ne yapabilir','yetenekleri','yapabilecekleri'],
+      reply: 'YZ bugün inanılmaz şeyler yapabiliyor! 🌟 Metin yazma, çeviri, kod yazma, resim üretme, müzik besteleme, hastalık teşhisi... Ama hepsinin temeli aynı: büyük veriden örüntü öğrenmek.'
+    },
+    {
+      keys: ['neler yapamaz','yapamaz','sınırları','eksikleri','hata'],
+      reply: 'YZ\'nin sınırları da var! 🚫 Gerçek duygular hissetmez, bilinç taşımaz, her zaman doğru söylemez (bazen "hallüsinasyon" denen uydurma bilgiler üretir), ve güncel haberleri bilmeyebilir. Eleştirel düşünmek çok önemli!'
+    },
+    {
+      keys: ['claude nedir','claude kimdir','claude ne'],
+      reply: 'Claude, Anthropic şirketinin geliştirdiği bir yapay zeka asistanı! 🤖✨ Güvenli ve yardımcı olmak için özel olarak eğitildi. Öğrencilere, yazarlara, araştırmacılara yardım eder. Sen de onu claude.ai\'da kullanabilirsin!'
+    },
+    {
+      keys: ['anthropic','şirketi','kim yaptı','kim geliştirdi'],
+      reply: 'Anthropic, 2021\'de kurulan bir yapay zeka güvenlik şirketi! 🏢 Kurucuları arasında eski OpenAI çalışanları var. Hedefleri: güvenli ve insanlığa faydalı YZ sistemleri geliştirmek. Claude onların en önemli ürünü!'
+    },
+    {
+      keys: ['chatgpt','openai','gemini','google','gpt'],
+      reply: 'ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google)... Bunların hepsi büyük dil modeli! 🌍 Aralarında farklar var ama temelde hepsi aynı mantıkla çalışır. Tıpkı farklı markaların araba üretmesi gibi — hepsi araba ama özellikleri farklı!'
+    },
+    {
+      keys: ['tehlikeli mi','zararlı mı','kötü mü','risk','tehlike'],
+      reply: 'YZ\'nin riskleri gerçek ama abartılmıyor da! ⚠️ Yanlış bilgi yayabilir, kötüye kullanılabilir. Bu yüzden YZ okuryazarlığı çok önemli — sen bu kursu alarak zaten iyi bir adım atıyorsun! Teknolojiyi anlamak onu kontrol etmenin ilk adımı.'
+    },
+    {
+      keys: ['gelecek','ileride','meslek','iş','kariyer'],
+      reply: 'YZ geleceği büyük ölçüde şekillendirecek! 🔭 Bazı meslekler dönüşecek, yeni meslekler doğacak. "Prompt mühendisliği", "YZ eğitimi", "YZ etiği" gibi alanlar büyüyor. YZ\'yi kullananlar, kullanamayanlardan önde olacak!'
+    },
+    {
+      keys: ['teşekkür','sağol','eyvallah','harika','süper','mükemmel'],
+      reply: 'Ne güzel! 😊 Merak etmeye devam et — en iyi öğrenme yöntemi soru sormak! Başka aklına takılan bir şey var mı?'
+    },
+  ];
+
+  function simReply1(text) {
+    const t = text.toLowerCase().replace(/[?!.,]/g, '');
+    for (const scenario of sim1) {
+      if (scenario.keys.some(k => t.includes(k))) {
+        return scenario.reply;
+      }
+    }
+    return `Hmm, "${text}" konusunda sana daha iyi yardım edebilmem için biraz daha bilgi lazım. 🤔 Yapay zeka, Claude, YZ'nin yetenekleri veya geleceği hakkında sormak istediğin bir şey var mı? Yukarıdaki örneklerden birini de deneyebilirsin!`;
+  }
+
+  function sendMessage() {
     const input = document.getElementById('chatInput');
     const text = input.value.trim();
     if (!text) return;
-    
+
     const messages = document.getElementById('chatMessages');
     const sendBtn = document.getElementById('sendBtn');
-    
-    // Kullanıcı mesajı
+
     const userMsg = document.createElement('div');
     userMsg.className = 'chat-message user';
     userMsg.textContent = text;
     messages.appendChild(userMsg);
-    
+
     input.value = '';
     sendBtn.disabled = true;
     sendBtn.textContent = '...';
-    
-    // Düşünme animasyonu
+
     const thinking = document.createElement('div');
     thinking.className = 'chat-message thinking';
-    thinking.textContent = '🤖 Claude düşünüyor...';
+    thinking.textContent = '🤖 Düşünüyor...';
     messages.appendChild(thinking);
     messages.scrollTop = messages.scrollHeight;
-    
-    try {
-      const reply = await callGemini(
-        text,
-        "Sen Türkçe konuşan, ortaokul öğrencileri (11-14 yaş) için yardımcı bir yapay zeka asistanısın. Cevapların: kısa (3-4 cümle), eğlenceli, samimi ve emoji'li olsun. Karmaşık konuları basit anlat. Öğrencinin sorularını sevecenlikle yanıtla. Sen YZ Galaksisi macerasında onlara eşlik ediyorsun."
-      );
+
+    setTimeout(() => {
       thinking.remove();
+      const reply = simReply1(text);
       const aiMsg = document.createElement('div');
       aiMsg.className = 'chat-message assistant';
       aiMsg.textContent = reply;
@@ -1709,24 +1824,10 @@
       messages.scrollTop = messages.scrollHeight;
       hasChatted = true;
       checkMissionReady();
-    } catch (err) {
-      thinking.remove();
-      const errMsg = document.createElement('div');
-      errMsg.className = 'chat-message assistant';
-      errMsg.style.borderColor = 'var(--neon-pink)';
-      if (err.message === 'RATE_LIMIT') {
-        errMsg.textContent = '⚠️ Çok hızlı! Biraz bekle ve tekrar dene. (Dakika limiti doldu)';
-      } else if (err.message === 'NO_KEY') {
-        errMsg.textContent = '⚠️ API anahtarı bulunamadı. Sayfayı yenile.';
-      } else {
-        errMsg.textContent = '⚠️ Bir hata oluştu. İnternet bağlantını kontrol et.';
-      }
-      messages.appendChild(errMsg);
-    }
-    
-    sendBtn.disabled = false;
-    sendBtn.textContent = 'Gönder';
-    input.focus();
+      sendBtn.disabled = false;
+      sendBtn.textContent = 'Gönder';
+      input.focus();
+    }, 900 + Math.random() * 600);
   }
   
   function checkMissionReady() {
@@ -2140,7 +2241,6 @@
   createStars();
   loadProgress();
   setInterval(randomShootingStar, 3000);
-  initGeminiAuth();
 </script>
 
 </body>
