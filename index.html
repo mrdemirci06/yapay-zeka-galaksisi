@@ -1200,8 +1200,10 @@
   ];
   
   // =====================================================
-  // PROGRESS YÖNETİMİ (window.storage ile)
+  // PROGRESS YÖNETİMİ (localStorage ile)
   // =====================================================
+  const PROGRESS_KEY = 'yz_galaksisi_progress';
+
   let progress = {
     completedPlanets: [],
     badges: [],
@@ -1209,33 +1211,32 @@
     currentQuizAnswered: {}
   };
   
-  async function loadProgress() {
+  function loadProgress() {
     try {
-      const result = await window.storage.get('yz_galaksisi_progress');
-      if (result && result.value) {
-        progress = JSON.parse(result.value);
+      const data = localStorage.getItem(PROGRESS_KEY);
+      if (data) {
+        progress = JSON.parse(data);
       }
     } catch (e) {
-      // İlk açılış - sorun değil
       console.log('İlk başlangıç');
     }
     updateStats();
     renderPlanets();
   }
   
-  async function saveProgress() {
+  function saveProgress() {
     try {
-      await window.storage.set('yz_galaksisi_progress', JSON.stringify(progress));
+      localStorage.setItem(PROGRESS_KEY, JSON.stringify(progress));
     } catch (e) {
       console.error('Kayıt hatası:', e);
     }
   }
   
-  async function resetProgress() {
+  function resetProgress() {
     if (!confirm('Tüm ilerlemen silinecek. Emin misin?')) return;
     progress = { completedPlanets: [], badges: [], xp: 0, currentQuizAnswered: {} };
     try {
-      await window.storage.delete('yz_galaksisi_progress');
+      localStorage.removeItem(PROGRESS_KEY);
     } catch(e) {}
     updateStats();
     renderPlanets();
