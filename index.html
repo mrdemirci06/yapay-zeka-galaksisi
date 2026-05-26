@@ -1736,47 +1736,63 @@
   // =====================================================
   const sim1 = [
     {
-      keys: ['merhaba','selam','hey','hi','naber'],
-      reply: 'Merhaba uzay kâşifi! 🚀 Ben YZ Galaksisi\'nin asistanıyım. Yapay zeka hakkında aklına takılan her şeyi sorabilirsin!'
+      keys: ['sen kimsin','sen nesin','kimsin','sen kim','sen ne'],
+      reply: 'Ben bir yapay zeka asistanıyım! 🤖 YZ Galaksisi macerasında sana eşlik ediyorum. Gerçek YZ\'ler de tıpkı benim gibi senin sorularına cevap verir — ama onlar çok daha bilgili ve esnek olur. Ben burada öğrendiklerin için bir antrenman partneriyim! 🚀'
+    },
+    {
+      keys: ['fıkra','şaka','espri','komik bir şey','güldür'],
+      reply: 'İşte sana bir fıkra! 😄\n\nBir bilgisayar doktora gitmiş, "Doktor doktor, çok yavaşladım!" demiş.\nDoktor sormuş: "Acaba virüs mü kaptın?"\nBilgisayar cevap vermiş: "Hayır, sadece çok fazla sekme açtım!" 💻\n\nBeni eğlendirmek için sen de bir fıkra anlatır mısın?'
+    },
+    {
+      keys: ['uzay','gezegen','galaksi','yıldız','astronot','mars','güneş','ay hakkında'],
+      reply: 'İşte ilginç bir uzay bilgisi! 🌌\n\nGüneş\'ten gelen ışığın Dünya\'ya ulaşması tam 8 dakika 20 saniye sürer! Yani gökyüzünde gördüğün Güneş, aslında 8 dakika önceki Güneş! 🌞\n\nVe daha ilginci: Samanyolu galaksimizde tahminen 100 milyar yıldız var. Hayal et — her biri kendi gezegenleriyle! 🚀'
+    },
+    {
+      keys: ['matematik bilmece','bilmece','matematik soru','soru sor','bulmaca'],
+      reply: 'Hadi bakalım, işte sana bir bilmece! 🧩\n\n*"Üç tane elma var. Birini aldın. Şimdi kaç tane elman var?"* 🍎\n\nİlk tahminin "iki" mi? 😄 Yanlış! **Bir tane** elman var — çünkü sen "bir tane aldın". Diğer ikisi hâlâ masada!\n\nDikkatli okumak çok önemli, değil mi? Başka bilmece ister misin?'
+    },
+    {
+      keys: ['merhaba','selam','hey','naber','hi'],
+      reply: 'Merhaba uzay kâşifi! 🚀 Ben YZ Galaksisi\'nin asistanıyım. Yapay zeka hakkında aklına takılan her şeyi sorabilirsin — ya da yukarıdaki örneklere tıkla!'
     },
     {
       keys: ['yapay zeka nedir','yz nedir','ai nedir','yapay zeka ne'],
       reply: 'Yapay zeka (YZ), bilgisayarların insan gibi düşünmesini, öğrenmesini ve problem çözmesini sağlayan teknoloji! 🤖 Tıpkı senin zamanla öğrenmesi gibi, YZ de verilerden öğrenir. Fark şu: YZ milyonlarca örneği saniyeler içinde işleyebilir!'
     },
     {
-      keys: ['nasıl çalışır','nasıl öğrenir','nasıl çalışıyor'],
+      keys: ['nasıl çalış','nasıl öğren'],
       reply: 'YZ, devasa miktarda veriyi inceleyerek örüntüler öğrenir. 📚 Örneğin dil modelleri milyarlarca cümleyi okuyarak konuşmayı öğrendi. Beyin nasıl nöronlarla çalışıyorsa, YZ de "yapay nöronlar" adı verilen matematiksel yapılarla çalışır!'
     },
     {
-      keys: ['neler yapabilir','ne yapabilir','yetenekleri','yapabilecekleri'],
+      keys: ['neler yapabilir','ne yapabilir','yetenek','yapabilecek'],
       reply: 'YZ bugün inanılmaz şeyler yapabiliyor! 🌟 Metin yazma, çeviri, kod yazma, resim üretme, müzik besteleme, hastalık teşhisi... Ama hepsinin temeli aynı: büyük veriden örüntü öğrenmek.'
     },
     {
-      keys: ['neler yapamaz','yapamaz','sınırları','eksikleri','hata'],
+      keys: ['yapamaz','sınır','eksik','hata yapar'],
       reply: 'YZ\'nin sınırları da var! 🚫 Gerçek duygular hissetmez, bilinç taşımaz, her zaman doğru söylemez (bazen "hallüsinasyon" denen uydurma bilgiler üretir), ve güncel haberleri bilmeyebilir. Eleştirel düşünmek çok önemli!'
     },
     {
-      keys: ['claude nedir','claude kimdir','claude ne'],
+      keys: ['claude'],
       reply: 'Claude, Anthropic şirketinin geliştirdiği bir yapay zeka asistanı! 🤖✨ Güvenli ve yardımcı olmak için özel olarak eğitildi. Öğrencilere, yazarlara, araştırmacılara yardım eder. Sen de onu claude.ai\'da kullanabilirsin!'
     },
     {
-      keys: ['anthropic','şirketi','kim yaptı','kim geliştirdi'],
+      keys: ['anthropic','kim yaptı','kim geliştirdi'],
       reply: 'Anthropic, 2021\'de kurulan bir yapay zeka güvenlik şirketi! 🏢 Kurucuları arasında eski OpenAI çalışanları var. Hedefleri: güvenli ve insanlığa faydalı YZ sistemleri geliştirmek. Claude onların en önemli ürünü!'
     },
     {
-      keys: ['chatgpt','openai','gemini','google','gpt'],
+      keys: ['chatgpt','openai','gemini','gpt','google ai'],
       reply: 'ChatGPT (OpenAI), Claude (Anthropic), Gemini (Google)... Bunların hepsi büyük dil modeli! 🌍 Aralarında farklar var ama temelde hepsi aynı mantıkla çalışır. Tıpkı farklı markaların araba üretmesi gibi — hepsi araba ama özellikleri farklı!'
     },
     {
-      keys: ['tehlikeli mi','zararlı mı','kötü mü','risk','tehlike'],
+      keys: ['tehlike','zararlı','risk','korkutucu','kötü mü'],
       reply: 'YZ\'nin riskleri gerçek ama abartılmıyor da! ⚠️ Yanlış bilgi yayabilir, kötüye kullanılabilir. Bu yüzden YZ okuryazarlığı çok önemli — sen bu kursu alarak zaten iyi bir adım atıyorsun! Teknolojiyi anlamak onu kontrol etmenin ilk adımı.'
     },
     {
-      keys: ['gelecek','ileride','meslek','iş','kariyer'],
+      keys: ['gelecek','ileride','meslek','iş bulabilir','kariyer','okul'],
       reply: 'YZ geleceği büyük ölçüde şekillendirecek! 🔭 Bazı meslekler dönüşecek, yeni meslekler doğacak. "Prompt mühendisliği", "YZ eğitimi", "YZ etiği" gibi alanlar büyüyor. YZ\'yi kullananlar, kullanamayanlardan önde olacak!'
     },
     {
-      keys: ['teşekkür','sağol','eyvallah','harika','süper','mükemmel'],
+      keys: ['teşekkür','sağol','eyvallah','harika','süper','mükemmel','güzel'],
       reply: 'Ne güzel! 😊 Merak etmeye devam et — en iyi öğrenme yöntemi soru sormak! Başka aklına takılan bir şey var mı?'
     },
   ];
@@ -1788,7 +1804,7 @@
         return scenario.reply;
       }
     }
-    return `Hmm, "${text}" konusunda sana daha iyi yardım edebilmem için biraz daha bilgi lazım. 🤔 Yapay zeka, Claude, YZ'nin yetenekleri veya geleceği hakkında sormak istediğin bir şey var mı? Yukarıdaki örneklerden birini de deneyebilirsin!`;
+    return `İlginç soru! 🤔 "${text}" hakkında doğrudan bir cevabım yok ama YZ ile ilgili şu konularda konuşabiliriz:\n\n• Yapay zeka nedir, nasıl çalışır?\n• YZ neler yapabilir, neler yapamaz?\n• Claude, ChatGPT, Gemini farkları\n• YZ'nin geleceği ve meslekler\n\nYukarıdaki örnek sorulara tıklayabilirsin ya da kendi sorunu yaz! 🚀`;
   }
 
   function sendMessage() {
