@@ -1253,6 +1253,177 @@
     opacity: 0.85;
   }
 
+  /* =====================================================
+     GEZEGEN 4 — SKİLL ATÖLYESİ
+     ===================================================== */
+  .workshop-step {
+    background: var(--space-light);
+    border: 2px solid rgba(94,234,212,0.3);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    transition: border-color 0.3s, opacity 0.3s;
+  }
+  .workshop-step.active {
+    border-color: var(--neon-cyan);
+    box-shadow: 0 0 20px rgba(94,234,212,0.15);
+  }
+  .workshop-step.done {
+    border-color: var(--neon-green);
+    opacity: 0.85;
+  }
+  .workshop-step-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 0.7rem;
+  }
+  .workshop-step-num {
+    background: var(--neon-cyan);
+    color: #000;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+  }
+  .workshop-step.done .workshop-step-num {
+    background: var(--neon-green);
+  }
+  .workshop-step-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--star-white);
+    font-size: 1rem;
+  }
+  .workshop-input {
+    width: 100%;
+    background: var(--space-mid);
+    border: 1.5px solid rgba(94,234,212,0.3);
+    border-radius: 0.5rem;
+    padding: 0.7rem 1rem;
+    color: var(--star-white);
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.95rem;
+    margin-top: 0.4rem;
+    transition: border-color 0.2s;
+  }
+  .workshop-input:focus {
+    outline: none;
+    border-color: var(--neon-cyan);
+  }
+  .workshop-hint {
+    font-size: 0.8rem;
+    color: var(--locked-gray);
+    margin-top: 0.3rem;
+    font-style: italic;
+  }
+  .workshop-btn {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: #000;
+    border: none;
+    padding: 0.7rem 1.4rem;
+    border-radius: 0.6rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 0.7rem;
+    transition: opacity 0.2s, transform 0.1s;
+  }
+  .workshop-btn:hover { opacity: 0.85; transform: translateY(-1px); }
+  .workshop-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+  /* SKILL.md kart önizleme */
+  .skill-card {
+    background: var(--space-deep);
+    border: 2px solid var(--neon-purple);
+    border-radius: 0.8rem;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.88rem;
+    color: var(--star-white);
+    box-shadow: 0 0 25px rgba(139,92,246,0.2);
+    display: none;
+  }
+  .skill-card.show { display: block; }
+  .skill-card-header {
+    color: var(--neon-purple);
+    font-weight: 700;
+    margin-bottom: 0.7rem;
+    border-bottom: 1px solid var(--neon-purple);
+    padding-bottom: 0.4rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+  }
+  .skill-card-line {
+    margin: 0.3rem 0;
+  }
+  .skill-card-key { color: var(--neon-cyan); }
+  .skill-card-val { color: var(--star-white); }
+
+  /* Test alanı */
+  .skill-test {
+    background: var(--space-mid);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    margin-top: 1rem;
+  }
+  .skill-test-result {
+    background: var(--space-deep);
+    border-left: 4px solid var(--neon-green);
+    border-radius: 0.5rem;
+    padding: 0.9rem 1rem;
+    margin-top: 0.7rem;
+    line-height: 1.6;
+    font-size: 0.9rem;
+    display: none;
+  }
+  .skill-test-result.show { display: block; }
+  .skill-test-badge {
+    display: inline-block;
+    background: var(--neon-green);
+    color: #000;
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.3rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Hazır skill örnekleri */
+  .skill-examples {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.7rem;
+    margin: 1rem 0;
+  }
+  .skill-example {
+    background: var(--space-light);
+    border: 1.5px solid rgba(139,92,246,0.4);
+    border-radius: 0.8rem;
+    padding: 0.9rem;
+    text-align: center;
+  }
+  .skill-example-emoji {
+    font-size: 2rem;
+    margin-bottom: 0.4rem;
+  }
+  .skill-example-name {
+    color: var(--neon-purple);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    margin-bottom: 0.3rem;
+  }
+  .skill-example-desc {
+    font-size: 0.72rem;
+    color: var(--locked-gray);
+    line-height: 1.4;
+  }
+
 </style>
 </head>
 <body>
@@ -1397,9 +1568,9 @@
       id: 4,
       emoji: '🛠️',
       name: 'Atölye Gezegeni',
-      desc: 'Skills ile Claude\'a süper güçler kazandır.',
-      content: 'comingSoon',
-      badge: { icon: '⚙️', title: 'Yetenek Mühendisi', desc: '' },
+      desc: 'Skills ile Claude\'a kendi süper güçlerini kazandır!',
+      content: 'workshop',
+      badge: { icon: '⚙️', title: 'Yetenek Mühendisi', desc: 'Claude\'a kendi skill\'ini yarattın — artık o sana özel görevleri yapabiliyor!' },
       xp: 200
     },
     {
@@ -1544,6 +1715,10 @@
       quizPassed3 = false;
       demosOpened = new Set();
       content.innerHTML = renderCreationPlanet(planet);
+    } else if (planet.content === 'workshop') {
+      quizPassed4 = false;
+      skillsCreated = 0;
+      content.innerHTML = renderWorkshopPlanet(planet);
     } else {
       content.innerHTML = renderComingSoon(planet);
     }
@@ -2285,6 +2460,248 @@
     stage.appendChild(s);
   }
 
+  // =====================================================
+  // GEZEGEN 4: ATÖLYE GEZEGENİ (CLAUDE SKILLS)
+  // =====================================================
+  let quizPassed4 = false;
+  let skillsCreated = 0;
+  let currentSkill = { name: '', purpose: '', triggers: '' };
+
+  function renderWorkshopPlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(4);
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Claude Skills: Süper Güç Atölyesi</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🛠️ Skills Nedir?</h3>
+        <p>Bir aşçı düşün 👨‍🍳 Bin bir yemek tarifini ezberden bilmek zor, değil mi? Bunun yerine her yemek için bir <strong>tarif kitabına</strong> bakar.</p>
+        <p>Claude da aynen böyle! 🤖 Her özel görev için bir <strong>"Skill"</strong> (yetenek tarifi) kullanır. Skill, Claude'a "şu işi şöyle yap" diye anlatan küçük bir <strong>talimat paketidir</strong>.</p>
+        <p>✨ <strong>Sihirli kısım:</strong> Claude görevini fark eder etmez, doğru skill'i kendisi yükler ve kullanır. Sen ona "skill kullan" demek zorunda değilsin!</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>📦 Anthropic'in Hazır Skills'i</h3>
+        <p>Anthropic, Claude için bir sürü hazır skill yaptı. Bunlar her zaman aktif, gerektiğinde devreye giriyorlar:</p>
+        <div class="skill-examples">
+          <div class="skill-example">
+            <div class="skill-example-emoji">📊</div>
+            <div class="skill-example-name">PowerPoint</div>
+            <div class="skill-example-desc">Sunum yap istediğinde devreye girer</div>
+          </div>
+          <div class="skill-example">
+            <div class="skill-example-emoji">📈</div>
+            <div class="skill-example-name">Excel</div>
+            <div class="skill-example-desc">Tablo veya formül istediğinde</div>
+          </div>
+          <div class="skill-example">
+            <div class="skill-example-emoji">📝</div>
+            <div class="skill-example-name">Word</div>
+            <div class="skill-example-desc">Belge yaz dediğinde</div>
+          </div>
+          <div class="skill-example">
+            <div class="skill-example-emoji">📄</div>
+            <div class="skill-example-name">PDF</div>
+            <div class="skill-example-desc">PDF oluştur veya düzenle dediğinde</div>
+          </div>
+        </div>
+        <p>Yani "Sınıf gezisi için sunum hazırla" dediğinde Claude <strong>otomatik</strong> PowerPoint skill'ini açar, profesyonel bir sunum çıkarır! 🎯</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>✨ Kendi Skill'in Olabilir!</h3>
+        <p>İşte en güzel kısım: <strong>Sen de kendi skill'ini yazabilirsin!</strong> 🚀</p>
+        <p>Mesela bir öğretmen düşün — her hafta benzer şekilde sınıf gazetesi yapıyor. Bir kez "Sınıf Gazetesi Skill'i" yazarsa, Claude bunu sürekli kullanır:</p>
+        <p>👉 Logo şurada, başlık şu renkte, alt başlıklar şu fontla...</p>
+        <p>Tek bir komutla, hep aynı kalitede gazete! Hep aynı tasarımla! 🎨</p>
+        <p><strong>Skill = "Yap bunu, hep böyle yap"</strong> kuralı diyebiliriz.</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🔬 Skill Atölyesi — Hadi Bir Skill Yaratalım!</h3>
+        <p style="margin-bottom:1.2rem;">Aşağıdaki adımları takip et. Sonunda kendi skill'in hazır olacak ve Claude'un onu nasıl kullandığını göreceksin! 🛠️</p>
+
+        <!-- ADIM 1 -->
+        <div class="workshop-step active" id="ws-step1">
+          <div class="workshop-step-header">
+            <div class="workshop-step-num">1</div>
+            <div class="workshop-step-title">Skill'ine bir isim ver</div>
+          </div>
+          <input type="text" class="workshop-input" id="ws-name" placeholder="Örnek: Sınıf Gazetesi Yapıcı" maxlength="40">
+          <div class="workshop-hint">💡 Ne yaptığını anlatan kısa bir isim yaz</div>
+        </div>
+
+        <!-- ADIM 2 -->
+        <div class="workshop-step" id="ws-step2">
+          <div class="workshop-step-header">
+            <div class="workshop-step-num">2</div>
+            <div class="workshop-step-title">Bu skill ne yapacak?</div>
+          </div>
+          <input type="text" class="workshop-input" id="ws-purpose" placeholder="Örnek: Sınıf için renkli, eğlenceli haber bülteni hazırlar" maxlength="100">
+          <div class="workshop-hint">💡 Skill'in görevini bir cümleyle anlat</div>
+        </div>
+
+        <!-- ADIM 3 -->
+        <div class="workshop-step" id="ws-step3">
+          <div class="workshop-step-header">
+            <div class="workshop-step-num">3</div>
+            <div class="workshop-step-title">Hangi kelimelerde devreye girsin?</div>
+          </div>
+          <input type="text" class="workshop-input" id="ws-triggers" placeholder="Örnek: sınıf gazetesi, bülten, haber, gazete" maxlength="80">
+          <div class="workshop-hint">💡 Virgülle ayırarak yaz — bu kelimeleri gördüğünde Claude skill'ini devreye sokar</div>
+          <button class="workshop-btn" onclick="buildSkill()">⚙️ Skill'i Oluştur</button>
+        </div>
+
+        <!-- SKILL ÖNİZLEME -->
+        <div class="skill-card" id="skillCard">
+          <div class="skill-card-header">📄 SKILL.md — Senin yarattığın skill</div>
+          <div class="skill-card-line"><span class="skill-card-key">name:</span> <span class="skill-card-val" id="sc-name"></span></div>
+          <div class="skill-card-line"><span class="skill-card-key">description:</span> <span class="skill-card-val" id="sc-desc"></span></div>
+          <div class="skill-card-line"><span class="skill-card-key">triggers:</span> <span class="skill-card-val" id="sc-triggers"></span></div>
+          <div style="margin-top:0.7rem;font-size:0.78rem;opacity:0.7;">↑ İşte böyle görünür! Claude bu kurallara göre çalışır.</div>
+        </div>
+
+        <!-- ADIM 4 — TEST -->
+        <div class="workshop-step" id="ws-step4" style="display:none;">
+          <div class="workshop-step-header">
+            <div class="workshop-step-num">4</div>
+            <div class="workshop-step-title">Skill'ini test et!</div>
+          </div>
+          <p style="font-size:0.88rem;margin-bottom:0.7rem;">Şimdi Claude'a bir görev ver. Eğer kelimeler eşleşirse, skill'in devreye girecek!</p>
+          <input type="text" class="workshop-input" id="ws-test" placeholder="Örnek: Bu hafta için bir sınıf gazetesi hazırla">
+          <button class="workshop-btn" onclick="testSkill()">🧪 Test Et</button>
+          <div class="skill-test-result" id="testResult"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="quiz4-section" style="display:none;">
+        <h3>🎯 Mini Quiz</h3>
+        <p style="margin-bottom:1rem;">Tek bir soru:</p>
+        <div class="quiz-question">
+          <p><strong>Claude Skills'in en önemli özelliği nedir?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer4(this, false)">Claude'un bilgisini artırır</button>
+          <button class="quiz-option" onclick="checkAnswer4(this, true)">Bir görevin nasıl yapılacağını adım adım öğretir, gerektiğinde otomatik devreye girer ⚙️</button>
+          <button class="quiz-option" onclick="checkAnswer4(this, false)">Claude'un hızını yükseltir</button>
+          <button class="quiz-option" onclick="checkAnswer4(this, false)">Claude'a yeni dil öğretir</button>
+          <div class="quiz-feedback" id="quizFeedback4"></div>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn4" onclick="completeMission(4)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: Bir skill yarat, test et ve quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Skill oluştur ----------
+  function buildSkill() {
+    const name = document.getElementById('ws-name').value.trim();
+    const purpose = document.getElementById('ws-purpose').value.trim();
+    const triggers = document.getElementById('ws-triggers').value.trim();
+
+    if (!name) { alert('1. adımda bir isim yazmayı unutma! 📛'); return; }
+    if (!purpose) { alert('2. adımda görev tanımı yazmayı unutma! 🎯'); return; }
+    if (!triggers) { alert('3. adımda tetikleyici kelimeler yazmayı unutma! 🔑'); return; }
+
+    currentSkill = { name, purpose, triggers };
+
+    // Adımları "tamamlandı" olarak işaretle
+    document.getElementById('ws-step1').classList.remove('active');
+    document.getElementById('ws-step1').classList.add('done');
+    document.getElementById('ws-step2').classList.add('done');
+    document.getElementById('ws-step3').classList.add('done');
+
+    // Skill kartını göster
+    const card = document.getElementById('skillCard');
+    document.getElementById('sc-name').textContent = name;
+    document.getElementById('sc-desc').textContent = purpose;
+    document.getElementById('sc-triggers').textContent = triggers;
+    card.classList.add('show');
+
+    // Test adımını göster
+    const step4 = document.getElementById('ws-step4');
+    step4.style.display = 'block';
+    step4.classList.add('active');
+    step4.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  // ---------- Skill test ----------
+  function testSkill() {
+    const testInput = document.getElementById('ws-test').value.trim().toLowerCase();
+    if (!testInput) { alert('Bir test cümlesi yaz! 💬'); return; }
+
+    const triggerList = currentSkill.triggers
+      .toLowerCase()
+      .split(',')
+      .map(t => t.trim())
+      .filter(t => t.length > 0);
+
+    const matched = triggerList.some(t => testInput.includes(t));
+    const result = document.getElementById('testResult');
+
+    if (matched) {
+      const matchedWord = triggerList.find(t => testInput.includes(t));
+      result.innerHTML = `
+        <div class="skill-test-badge">✨ SKILL DEVREYE GİRDİ!</div>
+        <p>🎯 Claude "<strong>${matchedWord}</strong>" kelimesini fark etti ve <strong>"${currentSkill.name}"</strong> skill'ini otomatik yükledi!</p>
+        <p style="margin-top:0.7rem;">📝 <em>Skill talimatına göre:</em> ${currentSkill.purpose}</p>
+        <p style="margin-top:0.7rem;color:var(--neon-green);">✅ Tebrikler! Kendi skill'ini yarattın ve test ettin. Artık Skills'in nasıl çalıştığını biliyorsun!</p>
+      `;
+      result.classList.add('show');
+
+      // Step 4'ü tamamlandı işaretle, quiz'i aç
+      document.getElementById('ws-step4').classList.remove('active');
+      document.getElementById('ws-step4').classList.add('done');
+      skillsCreated++;
+
+      // Quiz bölümünü göster
+      const quizSec = document.getElementById('quiz4-section');
+      if (quizSec.style.display === 'none') {
+        quizSec.style.display = 'block';
+        setTimeout(() => quizSec.scrollIntoView({ behavior: 'smooth', block: 'center' }), 400);
+      }
+    } else {
+      result.style.borderLeftColor = 'var(--neon-yellow)';
+      result.innerHTML = `
+        <div class="skill-test-badge" style="background:var(--neon-yellow);">⚠️ SKILL DEVREYE GİRMEDİ</div>
+        <p>🤔 Claude "<strong>${testInput}</strong>" yazısında senin tetikleyici kelimelerinden hiçbirini bulamadı.</p>
+        <p style="margin-top:0.5rem;font-size:0.85rem;">Tetikleyici kelimelerin: <em>${currentSkill.triggers}</em></p>
+        <p style="margin-top:0.7rem;">💡 Bu da iyi bir ders! Skill her cümlede devreye girmez — sadece tetikleyici kelimeler eşleşirse. Test cümlene bu kelimelerden birini ekleyip tekrar dene!</p>
+      `;
+      result.classList.add('show');
+    }
+  }
+
+  // ---------- Quiz 4 ----------
+  function checkAnswer4(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback4');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '⚙️ <strong>Doğru!</strong> Skills, Claude\'a "şu görevi şöyle yap" diyen tariflerdir. En güzeli de: Claude gerektiğinde kendisi yükler, sen ona "skill kullan" demek zorunda değilsin!';
+      quizPassed4 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Skills bilgi veya hız değil — bir tariftir. Tekrar düşün!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+  }
+
   function renderComingSoon(planet) {
     return `
       <button class="close-btn" onclick="closeModal()">✕</button>
@@ -2474,6 +2891,10 @@
     if (planetId === 3) {
       if (demosOpened.size < 3) { alert('Önce 3 demoyu da aç ve dene! 🎨'); return; }
       if (!quizPassed3) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+    }
+    if (planetId === 4) {
+      if (skillsCreated < 1) { alert('Önce atölyede bir skill yarat ve test et! ⚙️'); return; }
+      if (!quizPassed4) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
     }
     
     if (progress.completedPlanets.includes(planetId)) return;

@@ -5,8 +5,8 @@
 ---
 
 ## 📅 Son Güncelleme
-**Tarih:** 26 Mayıs 2026
-**Versiyon:** v0.7 — Gezegen 3 (Yaratım) tamamlandı
+**Tarih:** 27 Mayıs 2026
+**Versiyon:** v0.8 — Gezegen 4 (Atölye) tamamlandı
 
 ---
 
@@ -38,17 +38,29 @@
 ### Gezegen 2: Konuşma ✅
 - [x] 4 bölüm ders + karşılaştırma kutuları
 - [x] Quiz + Prompt Laboratuvarı (akıllı geri bildirim)
-- [x] Kısa/uzun/iyi/kötü prompt analizi
 - [x] Rozet: 💬 Konuşma Ustası (150 XP)
 
-### 🆕 Gezegen 3: Yaratım (v0.7) ✅
-- [x] 4 bölüm ders — Artifacts nedir, ne yapar, nasıl prompt yazılır
+### Gezegen 3: Yaratım (Artifacts) ✅
+- [x] 4 bölüm ders
 - [x] **Mini Galeri — 3 interaktif demo:**
-  - 🌌 **Uzay Animasyonu** — Canvas, 4 hız (warp dahil!)
-  - 🎨 **Çizim Tahtası** — 6 renk, mouse + touch desteği
-  - 🌬️ **Hava Simülatörü** — 5 hava tipi, animasyonlu efektler
-- [x] Quiz + görev şartı (3 demoyu açmak + quiz)
+  - 🌌 Uzay Animasyonu (Canvas, 4 hız)
+  - 🎨 Çizim Tahtası (6 renk, mouse + touch)
+  - 🌬️ Hava Simülatörü (5 hava tipi)
+- [x] Quiz + 3 demoyu açma şartı
 - [x] Rozet: 🎨 Yaratıcı (200 XP)
+
+### 🆕 Gezegen 4: Atölye (Claude Skills) — v0.8 ✅
+- [x] 4 bölüm ders — Skills nedir, hazır skills'ler, kendi skill'in, atölye
+- [x] **Skill Atölyesi — Adım adım skill yaratma:**
+  - Adım 1: Skill adı belirleme
+  - Adım 2: Skill amacı yazma
+  - Adım 3: Tetikleyici kelimeler ekleme
+  - Adım 4: SKILL.md kart önizlemesi
+  - Adım 5: Skill testi (gerçek tetikleme mantığı)
+- [x] Yemek tarifi analojisi ile kavramı anlatma
+- [x] Hazır Anthropic skills'leri (PPT, Excel, Word, PDF)
+- [x] Quiz (skill atölyesi tamamlandıktan sonra açılıyor)
+- [x] Rozet: ⚙️ Yetenek Mühendisi (200 XP)
 
 ---
 
@@ -56,49 +68,50 @@
 
 ### Sohbet Sistemi
 - **Yöntem:** Hazır senaryo + anahtar kelime eşleştirme
-- **Neden:** API gerekmez, sıfır güvenlik riski, sınıfta herkes aynı anda kullanabilir
+- **Neden:** API gerekmez, sıfır güvenlik riski
 
 ### Kayıt Sistemi
 - **Yöntem:** `localStorage` (tarayıcı native API)
-- **Eski yöntem:** `window.storage` — sadece Claude.ai içinde çalışıyordu
 - **Sonuç:** GitHub Pages'te ve tüm tarayıcılarda çalışıyor ✅
 
-### Galeri Demoları
-- Tümü vanilla JS (kütüphane yok)
-- Canvas API (uzay, çizim)
-- CSS animasyonlar (hava efektleri)
+### Galeri Demoları (Gezegen 3)
+- Vanilla JS, Canvas API + CSS animasyonlar
 - Mobil dokunmatik desteği var
+
+### Skill Atölyesi (Gezegen 4)
+- 4 adımlı interaktif yapım süreci
+- Gerçek tetikleyici mantığı simülasyonu
+- SKILL.md formatında görsel önizleme
 
 ---
 
 ## 🔄 Sıradaki Hedefler
 
-### 🥇 Gezegen 4 (Atölye — Skills)
-- Claude Skills'i anlat
-- Skill örnekleri göster
-- Basit simülasyon
+### 🥇 Gezegen 5 (Köprü — MCP)
+- Model Context Protocol'ü anlat
+- Claude'un dış dünyaya nasıl bağlandığını göster
+- Örnek MCP servisleri (Google Drive, Gmail, vb.)
+- İnteraktif "MCP bağlama" simülasyonu fikri
 
 ### Diğer Gezegenler
-- [ ] Gezegen 5 (Köprü) — MCP
-- [ ] Gezegen 6 (Kod) — Claude Code
+- [ ] Gezegen 6 (Kod) — Claude Code, terminal simülasyonu
 - [ ] Gezegen 7 (Takım) — Cowork
 - [ ] Gezegen 8 (Final) — Mini proje seçici
 
 ---
 
-## 💡 Bu Oturumda Öğrenilenler
+## 💡 Önemli Notlar
 
-1. **Gemini API çıkarıldı** — Güvenlik ve yönetim riski
-2. **Simülasyon sistemi** kuruldu — Offline çalışan akıllı sohbet
-3. **`window.storage` → `localStorage`** — Tarayıcı uyumlu kayıt
-4. **3 farklı demo tipi** — Canvas + CSS animasyon + touch input
+- 4/8 gezegen yayında 🎉 (yarısına geldik!)
+- Her gezegen aynı yapıda: 4 ders + interaktif demo/araç + quiz + rozet
+- Toplam XP: 100 + 150 + 200 + 200 = 650 XP, 4 rozet
 
 ---
 
 ## 🐛 Bilinen Notlar
 
 - İlerleme tarayıcı bazlı (farklı cihazda kaybolur — beklenen)
-- Demolar GitHub Pages'te düzgün çalışıyor
+- Tüm gezegenler GitHub Pages'te düzgün çalışıyor
 
 ---
 
