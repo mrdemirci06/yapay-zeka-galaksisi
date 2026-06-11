@@ -5,8 +5,8 @@
 ---
 
 ## 📅 Son Güncelleme
-**Tarih:** 27 Mayıs 2026
-**Versiyon:** v0.8 — Gezegen 4 (Atölye) tamamlandı
+**Tarih:** 28 Mayıs 2026
+**Versiyon:** v0.9 — Gezegen 5 (Köprü/MCP) tamamlandı
 
 ---
 
@@ -22,101 +22,106 @@
 ## ✅ Tamamlananlar
 
 ### Genel Yapı
-- [x] Ana iskelet (HTML/CSS/JS) kuruldu
-- [x] Uzay temalı tasarım (Orbitron + Space Grotesk fontları)
+- [x] HTML/CSS/JS iskelet
+- [x] Uzay temalı tasarım (Orbitron + Space Grotesk)
 - [x] Galaksi haritası: 8 gezegen kart yapısı
-- [x] **localStorage ile ilerleme sistemi** ✅
+- [x] **localStorage ile ilerleme sistemi**
 - [x] Rozet ve XP sistemi
 - [x] Kilit/Açık mantığı
 - [x] GitHub Pages yayında
 
 ### Gezegen 1: Başlangıç ✅
-- [x] 4 bölüm ders + quiz + sohbet alanı
-- [x] **15 senaryolu sohbet simülasyonu**
-- [x] Rozet: 🚀 İlk Adımlar (100 XP)
+- 4 bölüm ders + quiz + sohbet simülasyonu (15 senaryo)
+- Rozet: 🚀 İlk Adımlar (100 XP)
 
 ### Gezegen 2: Konuşma ✅
-- [x] 4 bölüm ders + karşılaştırma kutuları
-- [x] Quiz + Prompt Laboratuvarı (akıllı geri bildirim)
-- [x] Rozet: 💬 Konuşma Ustası (150 XP)
+- 4 bölüm ders + Prompt Laboratuvarı (akıllı geri bildirim)
+- Rozet: 💬 Konuşma Ustası (150 XP)
 
 ### Gezegen 3: Yaratım (Artifacts) ✅
-- [x] 4 bölüm ders
-- [x] **Mini Galeri — 3 interaktif demo:**
-  - 🌌 Uzay Animasyonu (Canvas, 4 hız)
-  - 🎨 Çizim Tahtası (6 renk, mouse + touch)
-  - 🌬️ Hava Simülatörü (5 hava tipi)
-- [x] Quiz + 3 demoyu açma şartı
-- [x] Rozet: 🎨 Yaratıcı (200 XP)
+- 4 bölüm ders + 3 interaktif demo (Uzay/Çizim/Hava)
+- Rozet: 🎨 Yaratıcı (200 XP)
 
-### 🆕 Gezegen 4: Atölye (Claude Skills) — v0.8 ✅
-- [x] 4 bölüm ders — Skills nedir, hazır skills'ler, kendi skill'in, atölye
-- [x] **Skill Atölyesi — Adım adım skill yaratma:**
-  - Adım 1: Skill adı belirleme
-  - Adım 2: Skill amacı yazma
-  - Adım 3: Tetikleyici kelimeler ekleme
-  - Adım 4: SKILL.md kart önizlemesi
-  - Adım 5: Skill testi (gerçek tetikleme mantığı)
-- [x] Yemek tarifi analojisi ile kavramı anlatma
-- [x] Hazır Anthropic skills'leri (PPT, Excel, Word, PDF)
-- [x] Quiz (skill atölyesi tamamlandıktan sonra açılıyor)
-- [x] Rozet: ⚙️ Yetenek Mühendisi (200 XP)
+### Gezegen 4: Atölye (Claude Skills) ✅
+- 4 bölüm ders + Skill Atölyesi (adım adım skill yaratma)
+- Yemek tarifi analojisi, SKILL.md önizleme, tetikleyici testi
+- Rozet: ⚙️ Yetenek Mühendisi (200 XP)
+
+### 🆕 Gezegen 5: Köprü (MCP) — v0.9 ✅
+- [x] 4 bölüm ders — MCP nedir, hangi köprüler, neden önemli, konsol
+- [x] **Köprü Konsolu — 5 servisli interaktif demo:**
+  - 📁 Google Drive (dosya erişimi)
+  - 📧 Gmail (e-posta yönetimi)
+  - 🐙 GitHub (kod depoları)
+  - 📅 Takvim (etkinlikler)
+  - 💬 Slack (mesajlar)
+- [x] Tıklayarak köprü kurma, animasyonlu pulse efekti
+- [x] Her bağlantıda Claude'un yeni yetenekleri listelenir
+- [x] **Kombo Görevler:** 2+ servis bağlayınca senaryo örnekleri
+- [x] Quiz 2 köprü kurulduktan sonra açılıyor
+- [x] **Görev:** En az 2 köprü kur + quiz çöz
+- [x] Rozet: 🔗 Köprü Kurucu (250 XP)
 
 ---
 
 ## 🎯 Teknik Kararlar
 
-### Sohbet Sistemi
-- **Yöntem:** Hazır senaryo + anahtar kelime eşleştirme
-- **Neden:** API gerekmez, sıfır güvenlik riski
+### Sohbet Sistemi (G1, G2)
+- Hazır senaryo + anahtar kelime eşleştirme
+- Sıfır API riski
 
 ### Kayıt Sistemi
-- **Yöntem:** `localStorage` (tarayıcı native API)
-- **Sonuç:** GitHub Pages'te ve tüm tarayıcılarda çalışıyor ✅
+- `localStorage` (tüm tarayıcılarda çalışıyor)
 
-### Galeri Demoları (Gezegen 3)
-- Vanilla JS, Canvas API + CSS animasyonlar
-- Mobil dokunmatik desteği var
-
-### Skill Atölyesi (Gezegen 4)
-- 4 adımlı interaktif yapım süreci
-- Gerçek tetikleyici mantığı simülasyonu
-- SKILL.md formatında görsel önizleme
+### Demolar (G3, G4, G5)
+- Vanilla JS, Canvas API, CSS animasyonlar
+- Mobil dokunmatik desteği
+- API yok, tamamen client-side
 
 ---
 
 ## 🔄 Sıradaki Hedefler
 
-### 🥇 Gezegen 5 (Köprü — MCP)
-- Model Context Protocol'ü anlat
-- Claude'un dış dünyaya nasıl bağlandığını göster
-- Örnek MCP servisleri (Google Drive, Gmail, vb.)
-- İnteraktif "MCP bağlama" simülasyonu fikri
+### 🥇 Gezegen 6 (Kod — Claude Code)
+- Terminal/CLI simülasyonu
+- Claude Code'un ne yaptığı
+- Yapay komut çalıştırma deneyimi
+- "Bir kod yaz" → terminal'de çıktı
 
 ### Diğer Gezegenler
-- [ ] Gezegen 6 (Kod) — Claude Code, terminal simülasyonu
 - [ ] Gezegen 7 (Takım) — Cowork
 - [ ] Gezegen 8 (Final) — Mini proje seçici
 
 ---
 
-## 💡 Önemli Notlar
+## 💡 Genel Durum
 
-- 4/8 gezegen yayında 🎉 (yarısına geldik!)
-- Her gezegen aynı yapıda: 4 ders + interaktif demo/araç + quiz + rozet
-- Toplam XP: 100 + 150 + 200 + 200 = 650 XP, 4 rozet
+**5/8 gezegen yayında 🎉** (yarısını geçtik!)
+
+| Gezegen | Konu | XP | Durum |
+|---|---|---|---|
+| 🚀 1. Başlangıç | YZ Nedir | 100 | ✅ |
+| 💬 2. Konuşma | Prompt | 150 | ✅ |
+| 🎨 3. Yaratım | Artifacts | 200 | ✅ |
+| ⚙️ 4. Atölye | Skills | 200 | ✅ |
+| 🔗 5. Köprü | MCP | 250 | ✅ YENİ! |
+| 💻 6. Kod | Claude Code | 250 | Sıradaki |
+| 👥 7. Takım | Cowork | 300 | - |
+| 🏆 8. Final | Proje | 500 | - |
+
+**Toplam tamamlanan XP:** 900 XP, 5 rozet
 
 ---
 
 ## 🐛 Bilinen Notlar
 
-- İlerleme tarayıcı bazlı (farklı cihazda kaybolur — beklenen)
-- Tüm gezegenler GitHub Pages'te düzgün çalışıyor
+- İlerleme tarayıcı bazlı (beklenen)
+- Tüm gezegenler GitHub Pages'te düzgün
 
 ---
 
 ## 💭 İleride Düşünülecek
 
-- Öğretmen modu (sınıf yönetimi)
-- Sertifika oluşturma (8 gezegen biten için)
+- Öğretmen modu
+- Sertifika oluşturma
 - Sesli anlatım (TTS)

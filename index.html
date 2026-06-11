@@ -1424,6 +1424,145 @@
     line-height: 1.4;
   }
 
+  /* =====================================================
+     GEZEGEN 5 — KÖPRÜ KONSOLU (MCP)
+     ===================================================== */
+  .bridge-console {
+    background: var(--space-deep);
+    border: 2px solid var(--neon-cyan);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin: 1.5rem 0;
+    position: relative;
+  }
+  .bridge-claude {
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    color: #000;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto 1.5rem;
+    padding: 1rem 1.2rem;
+    border-radius: 1rem;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif;
+    box-shadow: 0 0 30px rgba(94,234,212,0.4);
+  }
+  .bridge-claude-emoji { font-size: 2.5rem; }
+  .bridge-claude-name { font-size: 1.1rem; font-weight: 700; margin: 0.3rem 0; }
+  .bridge-claude-stat { font-size: 0.78rem; opacity: 0.85; }
+
+  .bridge-services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+  }
+  .bridge-service {
+    background: var(--space-light);
+    border: 2px solid rgba(94,234,212,0.25);
+    border-radius: 0.8rem;
+    padding: 1rem 0.6rem;
+    cursor: pointer;
+    text-align: center;
+    position: relative;
+    transition: all 0.25s;
+  }
+  .bridge-service:hover {
+    transform: translateY(-3px);
+    border-color: var(--neon-cyan);
+  }
+  .bridge-service.connected {
+    border-color: var(--neon-green);
+    background: rgba(74,222,128,0.08);
+  }
+  .bridge-service.connected::before {
+    content: '🔗';
+    position: absolute;
+    top: -10px; right: -10px;
+    background: var(--neon-green);
+    color: #000;
+    width: 28px; height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    box-shadow: 0 0 12px rgba(74,222,128,0.6);
+    animation: pulseConnect 1.5s ease-in-out infinite;
+  }
+  @keyframes pulseConnect {
+    0%,100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+  }
+  .bridge-service-emoji { font-size: 2rem; margin-bottom: 0.3rem; }
+  .bridge-service-name {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.82rem;
+    color: var(--star-white);
+    margin-bottom: 0.2rem;
+  }
+  .bridge-service-status {
+    font-size: 0.7rem;
+    color: var(--locked-gray);
+  }
+  .bridge-service.connected .bridge-service-status {
+    color: var(--neon-green);
+    font-weight: 700;
+  }
+
+  .bridge-status-bar {
+    background: var(--space-mid);
+    border-radius: 0.6rem;
+    padding: 0.7rem 1rem;
+    text-align: center;
+    font-size: 0.88rem;
+    color: var(--neon-cyan);
+    margin-bottom: 1rem;
+  }
+
+  .bridge-abilities {
+    background: var(--space-mid);
+    border-left: 4px solid var(--neon-green);
+    border-radius: 0.5rem;
+    padding: 0.9rem 1rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .bridge-abilities.show { display: block; }
+  .bridge-abilities-title {
+    color: var(--neon-green);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.88rem;
+    margin-bottom: 0.5rem;
+  }
+  .bridge-abilities ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .bridge-abilities li {
+    padding: 0.3rem 0;
+    font-size: 0.86rem;
+    color: var(--star-white);
+  }
+
+  /* Kombo görevleri */
+  .combo-mission {
+    background: linear-gradient(135deg, rgba(139,92,246,0.15), rgba(94,234,212,0.1));
+    border: 1.5px dashed var(--neon-purple);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .combo-mission.show { display: block; }
+  .combo-mission-title {
+    color: var(--neon-purple);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
 </style>
 </head>
 <body>
@@ -1577,9 +1716,9 @@
       id: 5,
       emoji: '🌐',
       name: 'Köprü Gezegeni',
-      desc: 'MCP ile dış dünyaya bağlan.',
-      content: 'comingSoon',
-      badge: { icon: '🔗', title: 'Köprü Kurucu', desc: '' },
+      desc: 'MCP ile Claude\'u gerçek dünyaya bağla!',
+      content: 'bridge',
+      badge: { icon: '🔗', title: 'Köprü Kurucu', desc: 'Claude\'u dış servislere bağladın — artık o sadece konuşmuyor, gerçek dünyada işler yapıyor!' },
       xp: 250
     },
     {
@@ -1719,6 +1858,10 @@
       quizPassed4 = false;
       skillsCreated = 0;
       content.innerHTML = renderWorkshopPlanet(planet);
+    } else if (planet.content === 'bridge') {
+      quizPassed5 = false;
+      bridgesConnected = new Set();
+      content.innerHTML = renderBridgePlanet(planet);
     } else {
       content.innerHTML = renderComingSoon(planet);
     }
@@ -2702,6 +2845,275 @@
     }
   }
 
+  // =====================================================
+  // GEZEGEN 5: KÖPRÜ GEZEGENİ (MCP)
+  // =====================================================
+  let quizPassed5 = false;
+  let bridgesConnected = new Set();
+
+  const mcpServices = {
+    drive: {
+      emoji: '📁',
+      name: 'Google Drive',
+      desc: 'Dosyalar',
+      abilities: [
+        '📄 Dosyalarını okuyabilir ve özetleyebilir',
+        '🔍 Drive\'da belirli bir dökümanı arayabilir',
+        '✏️ Yeni Google Docs oluşturabilir'
+      ]
+    },
+    gmail: {
+      emoji: '📧',
+      name: 'Gmail',
+      desc: 'E-postalar',
+      abilities: [
+        '📬 Gelen kutunu okuyabilir ve özetleyebilir',
+        '✍️ Senin adına e-posta taslağı yazabilir',
+        '🔎 Belirli bir kişiden gelen maili bulabilir'
+      ]
+    },
+    github: {
+      emoji: '🐙',
+      name: 'GitHub',
+      desc: 'Kod depoları',
+      abilities: [
+        '📂 Kod depolarını inceleyebilir',
+        '🐛 Hataları (issue) okuyup analiz edebilir',
+        '✨ Kod önerisi (pull request) sunabilir'
+      ]
+    },
+    calendar: {
+      emoji: '📅',
+      name: 'Takvim',
+      desc: 'Etkinlikler',
+      abilities: [
+        '📆 Etkinliklerini görebilir',
+        '⏰ Yeni randevu ekleyebilir',
+        '🔔 Boş zamanını bulabilir'
+      ]
+    },
+    slack: {
+      emoji: '💬',
+      name: 'Slack',
+      desc: 'Mesajlar',
+      abilities: [
+        '💭 Konuşmaları özetleyebilir',
+        '📣 Kanallara mesaj gönderebilir',
+        '🔍 Eski mesajlarda arama yapabilir'
+      ]
+    }
+  };
+
+  function renderBridgePlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(5);
+    let serviceCards = '';
+    for (const [key, svc] of Object.entries(mcpServices)) {
+      serviceCards += `
+        <div class="bridge-service" id="bs-${key}" onclick="toggleBridge('${key}')">
+          <div class="bridge-service-emoji">${svc.emoji}</div>
+          <div class="bridge-service-name">${svc.name}</div>
+          <div class="bridge-service-status">Bağlı değil</div>
+        </div>
+      `;
+    }
+
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">MCP: Claude'un Gerçek Dünya Köprüsü</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🌉 MCP Nedir?</h3>
+        <p>Bir nehir düşün — bir tarafta Claude, diğer tarafta da kullandığın tüm uygulamalar (Gmail, Drive, GitHub...). 🏞️</p>
+        <p>Eğer nehir üzerinde köprü yoksa, Claude o tarafa geçemez! Sadece konuşur, ama hiçbir şey yapamaz.</p>
+        <p><strong>MCP</strong> (Model Context Protocol) işte tam olarak bu köprüyü kurar! 🌉 Anthropic'in yaptığı açık bir <em>protokol</em> — yani "standart bir bağlantı yöntemi".</p>
+        <p>Köprü kurulduğunda Claude:</p>
+        <p>📖 <strong>Okur:</strong> Dosyalarını, maillerini, mesajlarını görebilir</p>
+        <p>✏️ <strong>Yazar:</strong> Senin adına mail gönderir, dokümanlar oluşturur</p>
+        <p>🔄 <strong>Yapar:</strong> Gerçek dünyada işler tamamlar!</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🔌 Hangi Köprüler Var?</h3>
+        <p>Şu an Claude için onlarca MCP köprüsü var. Bazıları:</p>
+        <p>📁 <strong>Google Drive</strong> — Dosyalarına erişir</p>
+        <p>📧 <strong>Gmail</strong> — Maillerini okur, yazar</p>
+        <p>🐙 <strong>GitHub</strong> — Kod depolarınla çalışır</p>
+        <p>📅 <strong>Takvim</strong> — Randevularını görür</p>
+        <p>💬 <strong>Slack</strong> — Ekip mesajlarını yönetir</p>
+        <p>...ve daha onlarcası! 🚀 Spotify, Notion, Linear, Asana, Figma — hepsi var.</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>⚡ Neden Bu Kadar Önemli?</h3>
+        <p>Düşün: Çok akıllı bir asistanın var ama sadece konuşabiliyor. Sana mesaj yazamıyor, dosya açamıyor, takvimine bakamıyor. Ne kadar işe yarar? 🤔</p>
+        <p>MCP olunca her şey değişiyor: <strong>"Bu hafta gelen önemli maillerin özetini çıkar ve takvime not olarak ekle"</strong> diyebilirsin — Claude hepsini tek seferde yapar! 🤯</p>
+        <p>İşte buna <strong>"agentic AI"</strong> (eylemci YZ) deniyor — sadece bilen değil, <strong>yapan</strong> yapay zeka.</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🛰️ Köprü Konsolu</h3>
+        <p style="margin-bottom:1rem;">Aşağıdaki servislere tıklayarak Claude'a köprü kur! Her köprüyle Claude yeni yetenekler kazanıyor. <strong>En az 2 köprü kur</strong>, sonra ne olacağını gör! 🚀</p>
+
+        <div class="bridge-console">
+          <div class="bridge-claude">
+            <div class="bridge-claude-emoji">🤖</div>
+            <div class="bridge-claude-name">Claude</div>
+            <div class="bridge-claude-stat" id="claudeStatus">Bağlı köprü: 0/5</div>
+          </div>
+
+          <div class="bridge-status-bar" id="bridgeStatusBar">
+            🔌 Bir servise tıkla — Claude'a köprü kuralım!
+          </div>
+
+          <div class="bridge-services">
+            ${serviceCards}
+          </div>
+
+          <div class="bridge-abilities" id="bridgeAbilities">
+            <div class="bridge-abilities-title">✨ Claude'un Yeni Yetenekleri</div>
+            <ul id="abilitiesList"></ul>
+          </div>
+
+          <div class="combo-mission" id="comboMission">
+            <div class="combo-mission-title">🎯 Kombo Görev!</div>
+            <p id="comboText"></p>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="quiz5-section" style="display:none;">
+        <h3>🎯 Mini Quiz</h3>
+        <p style="margin-bottom:1rem;">Son bir soru:</p>
+        <div class="quiz-question">
+          <p><strong>MCP'nin amacı nedir?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer5(this, false)">Claude'u daha hızlı yapmak</button>
+          <button class="quiz-option" onclick="checkAnswer5(this, false)">Claude'a yeni diller öğretmek</button>
+          <button class="quiz-option" onclick="checkAnswer5(this, true)">Claude'u dış servislere (Gmail, Drive vb.) bağlamak 🌉</button>
+          <button class="quiz-option" onclick="checkAnswer5(this, false)">Claude'un belleğini artırmak</button>
+          <div class="quiz-feedback" id="quizFeedback5"></div>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn5" onclick="completeMission(5)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: En az 2 köprü kur ve quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Köprü bağlama/kesme ----------
+  function toggleBridge(key) {
+    const card = document.getElementById('bs-' + key);
+    const status = card.querySelector('.bridge-service-status');
+    const svc = mcpServices[key];
+
+    if (bridgesConnected.has(key)) {
+      bridgesConnected.delete(key);
+      card.classList.remove('connected');
+      status.textContent = 'Bağlı değil';
+    } else {
+      bridgesConnected.add(key);
+      card.classList.add('connected');
+      status.textContent = '✓ Bağlandı!';
+    }
+
+    updateBridgeUI();
+  }
+
+  function updateBridgeUI() {
+    // Claude durumu
+    document.getElementById('claudeStatus').textContent = `Bağlı köprü: ${bridgesConnected.size}/5`;
+
+    // Status bar
+    const bar = document.getElementById('bridgeStatusBar');
+    if (bridgesConnected.size === 0) {
+      bar.innerHTML = '🔌 Bir servise tıkla — Claude\'a köprü kuralım!';
+    } else if (bridgesConnected.size === 1) {
+      bar.innerHTML = '⚡ 1 köprü kuruldu! Bir tane daha ekleyince <strong>kombo görevler</strong> açılır.';
+    } else {
+      bar.innerHTML = `🌟 ${bridgesConnected.size} köprü aktif! Claude artık bu servisler arasında bilgi taşıyabilir.`;
+    }
+
+    // Yetenekler listesi
+    const abilities = document.getElementById('bridgeAbilities');
+    const list = document.getElementById('abilitiesList');
+    if (bridgesConnected.size > 0) {
+      abilities.classList.add('show');
+      let html = '';
+      bridgesConnected.forEach(key => {
+        mcpServices[key].abilities.forEach(a => {
+          html += `<li>${a}</li>`;
+        });
+      });
+      list.innerHTML = html;
+    } else {
+      abilities.classList.remove('show');
+    }
+
+    // Kombo görev (2+ köprü)
+    const combo = document.getElementById('comboMission');
+    const comboText = document.getElementById('comboText');
+    if (bridgesConnected.size >= 2) {
+      combo.classList.add('show');
+      const combos = getComboFor(bridgesConnected);
+      comboText.innerHTML = combos;
+
+      // Quiz'i aç
+      const quizSec = document.getElementById('quiz5-section');
+      if (quizSec && quizSec.style.display === 'none') {
+        quizSec.style.display = 'block';
+      }
+    } else {
+      combo.classList.remove('show');
+    }
+  }
+
+  function getComboFor(set) {
+    const has = (k) => set.has(k);
+    if (has('gmail') && has('calendar'))
+      return '"Bu haftaki önemli maillerimi özetle ve toplantı önerilerini takvime ekle" → Claude iki servisi birden kullanır! 📧 ➡️ 📅';
+    if (has('drive') && has('gmail'))
+      return '"Drive\'daki proje raporunu okuyup ekibe e-posta ile özet gönder" → Claude dosyayı okur, mail yazar! 📁 ➡️ 📧';
+    if (has('github') && has('slack'))
+      return '"Bu haftaki kod değişikliklerini Slack\'te özetle" → Claude GitHub\'ı tarayıp Slack\'e mesaj atar! 🐙 ➡️ 💬';
+    if (has('drive') && has('calendar'))
+      return '"Drive\'da bu hafta düzenlenen toplantı notlarını bul ve takvime kısa özet ekle" → İki servis bir arada! 📁 ➡️ 📅';
+    if (has('gmail') && has('slack'))
+      return '"Önemli mailleri Slack\'teki ekip kanalına ilet" → Mail → Slack köprüsü! 📧 ➡️ 💬';
+    // Genel
+    const names = Array.from(set).map(k => mcpServices[k].name).join(' + ');
+    return `"${names} servislerini birlikte kullanarak işini halleder!" — İşte gerçek "agentic AI" budur! 🚀`;
+  }
+
+  // ---------- Quiz 5 ----------
+  function checkAnswer5(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback5');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '🌉 <strong>Doğru!</strong> MCP, Claude\'a dış dünyaya köprü kuran açık bir protokoldür. Hız, dil veya bellek değil — bağlantı!';
+      quizPassed5 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> MCP\'nin amacı Claude\'u <em>servislere</em> bağlamak. Tekrar düşün!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+  }
+
   function renderComingSoon(planet) {
     return `
       <button class="close-btn" onclick="closeModal()">✕</button>
@@ -2895,6 +3307,10 @@
     if (planetId === 4) {
       if (skillsCreated < 1) { alert('Önce atölyede bir skill yarat ve test et! ⚙️'); return; }
       if (!quizPassed4) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+    }
+    if (planetId === 5) {
+      if (bridgesConnected.size < 2) { alert('Önce en az 2 köprü kur! 🌉'); return; }
+      if (!quizPassed5) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
     }
     
     if (progress.completedPlanets.includes(planetId)) return;
