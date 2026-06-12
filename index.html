@@ -1563,6 +1563,244 @@
     margin-bottom: 0.5rem;
   }
 
+  /* =====================================================
+     GEZEGEN 6 — KOD GEZEGENİ (TERMINAL)
+     ===================================================== */
+  .terminal {
+    background: #0a0e14;
+    border: 2px solid var(--neon-green);
+    border-radius: 0.8rem;
+    overflow: hidden;
+    margin: 1rem 0;
+    font-family: 'Courier New', monospace;
+    box-shadow: 0 0 30px rgba(74,222,128,0.15);
+  }
+  .terminal-bar {
+    background: #1c2128;
+    padding: 0.5rem 0.9rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-bottom: 1px solid #2d333b;
+  }
+  .terminal-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+  }
+  .terminal-dot.r { background: #ff5f56; }
+  .terminal-dot.y { background: #ffbd2e; }
+  .terminal-dot.g { background: #27c93f; }
+  .terminal-title {
+    color: #768390;
+    font-size: 0.8rem;
+    margin-left: 0.5rem;
+    flex: 1;
+    text-align: center;
+  }
+  .terminal-body {
+    padding: 1rem;
+    min-height: 200px;
+    max-height: 320px;
+    overflow-y: auto;
+    color: #c9d1d9;
+    font-size: 0.85rem;
+    line-height: 1.6;
+  }
+  .terminal-line {
+    margin: 0.2rem 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+  .terminal-line.user {
+    color: var(--neon-cyan);
+  }
+  .terminal-line.user::before {
+    content: '$ ';
+    color: var(--neon-green);
+  }
+  .terminal-line.claude {
+    color: #f0883e;
+  }
+  .terminal-line.claude::before {
+    content: '⚡ Claude › ';
+    color: var(--neon-purple);
+    font-weight: 700;
+  }
+  .terminal-line.success { color: var(--neon-green); }
+  .terminal-line.info { color: #79c0ff; }
+  .terminal-line.gray { color: #768390; }
+  .terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 14px;
+    background: var(--neon-green);
+    vertical-align: middle;
+    animation: blinkCursor 1s steps(2) infinite;
+  }
+  @keyframes blinkCursor { 50% { opacity: 0; } }
+
+  .command-chips {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 0.6rem;
+    margin: 1rem 0;
+  }
+  .cmd-chip {
+    background: var(--space-light);
+    border: 1.5px solid rgba(74,222,128,0.4);
+    color: var(--star-white);
+    border-radius: 0.6rem;
+    padding: 0.7rem 0.8rem;
+    cursor: pointer;
+    text-align: left;
+    transition: all 0.2s;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 0.85rem;
+    position: relative;
+  }
+  .cmd-chip:hover {
+    border-color: var(--neon-green);
+    background: rgba(74,222,128,0.08);
+    transform: translateY(-2px);
+  }
+  .cmd-chip.done {
+    border-color: var(--neon-green);
+    opacity: 0.7;
+  }
+  .cmd-chip.done::after {
+    content: '✓';
+    position: absolute;
+    top: 6px; right: 10px;
+    color: var(--neon-green);
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  .cmd-chip-cmd {
+    color: var(--neon-cyan);
+    font-family: 'Courier New', monospace;
+    font-size: 0.78rem;
+    margin-top: 0.3rem;
+    display: block;
+  }
+
+  /* Önizleme alanı */
+  .preview-area {
+    background: white;
+    border: 2px solid var(--neon-purple);
+    border-radius: 0.6rem;
+    margin-top: 1rem;
+    overflow: hidden;
+    display: none;
+  }
+  .preview-area.show { display: block; }
+  .preview-header {
+    background: var(--space-mid);
+    color: var(--neon-purple);
+    padding: 0.5rem 0.9rem;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 0.8rem;
+    border-bottom: 1px solid var(--neon-purple);
+  }
+  .preview-content {
+    padding: 1rem;
+    min-height: 140px;
+    color: #1a1a1a;
+  }
+
+  /* Mini önizleme — Merhaba Dünya */
+  .preview-hello {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 0.4rem;
+  }
+  .preview-hello h1 {
+    font-size: 2rem;
+    margin: 0;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+  }
+
+  /* Mini önizleme — Hesap Makinesi */
+  .preview-calc {
+    background: #1a1a2e;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .preview-calc-display {
+    background: #0f0f1e;
+    color: #4ade80;
+    text-align: right;
+    padding: 0.7rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 1.3rem;
+    border-radius: 0.4rem;
+    margin-bottom: 0.6rem;
+    min-height: 1.5em;
+  }
+  .preview-calc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.3rem;
+  }
+  .preview-calc-btn {
+    background: #2a2a4e;
+    color: white;
+    border: none;
+    padding: 0.6rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.15s;
+  }
+  .preview-calc-btn:hover { background: #3a3a6e; }
+  .preview-calc-btn.op { background: #f59e0b; color: #000; }
+  .preview-calc-btn.eq { background: #10b981; color: #000; grid-column: span 2; }
+
+  /* Mini önizleme — Tahmin Oyunu */
+  .preview-guess {
+    background: #0f172a;
+    color: white;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    text-align: center;
+  }
+  .preview-guess h3 { color: #5eead4; margin: 0.3rem 0; }
+  .preview-guess input {
+    background: #1e293b;
+    border: 1px solid #5eead4;
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.3rem;
+    text-align: center;
+    width: 100px;
+    margin: 0.5rem;
+  }
+  .preview-guess button {
+    background: #5eead4;
+    color: #000;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.3rem;
+    cursor: pointer;
+    font-weight: 700;
+  }
+  .preview-guess-msg {
+    margin-top: 0.5rem;
+    min-height: 1.2em;
+    font-weight: 700;
+  }
+
+  /* Mini önizleme — SVG sanat */
+  .preview-svg {
+    text-align: center;
+    background: #0f172a;
+    padding: 1rem;
+    border-radius: 0.5rem;
+  }
+
 </style>
 </head>
 <body>
@@ -1725,9 +1963,9 @@
       id: 6,
       emoji: '💻',
       name: 'Kod Gezegeni',
-      desc: 'Claude Code ile gerçek programcı ol.',
-      content: 'comingSoon',
-      badge: { icon: '👨‍💻', title: 'Kod Kâşifi', desc: '' },
+      desc: 'Claude Code ile terminal\'de gerçek kod yaz!',
+      content: 'code',
+      badge: { icon: '👨‍💻', title: 'Kod Kâşifi', desc: 'Terminal\'i keşfettin ve Claude Code\'la kod yazdın — artık gerçek bir geliştirici gibi düşünebiliyorsun!' },
       xp: 300
     },
     {
@@ -1862,6 +2100,10 @@
       quizPassed5 = false;
       bridgesConnected = new Set();
       content.innerHTML = renderBridgePlanet(planet);
+    } else if (planet.content === 'code') {
+      quizPassed6 = false;
+      commandsRun = new Set();
+      content.innerHTML = renderCodePlanet(planet);
     } else {
       content.innerHTML = renderComingSoon(planet);
     }
@@ -3114,6 +3356,362 @@
     }
   }
 
+  // =====================================================
+  // GEZEGEN 6: KOD GEZEGENİ (CLAUDE CODE)
+  // =====================================================
+  let quizPassed6 = false;
+  let commandsRun = new Set();
+
+  function renderCodePlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(6);
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Claude Code: Terminal'deki Programcı Arkadaş</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>💻 Önce: Terminal Nedir?</h3>
+        <p>Bilgisayar kullanırken normalde fareyle ikonlara tıklarsın, pencereleri açarsın. 🖱️ Ama programcılar başka bir yol kullanır: <strong>Terminal</strong>!</p>
+        <p>Terminal = <strong>"yazıyla bilgisayarla konuşma yeri"</strong>. Siyah bir ekran, sadece klavye. ⌨️ Ne yazarsan o olur.</p>
+        <p>Örneğin terminal'de "<code>dosyaları listele</code>" yazınca bilgisayar tüm dosyalarını gösterir. "<code>yeni klasör aç</code>" diyebilirsin. Tıklamaya gerek yok!</p>
+        <p>🎩 <strong>Eskiden:</strong> Bilgisayarlar sadece böyle çalışırdı. Şimdi de profesyoneller hâlâ kullanıyor — çünkü <em>çok daha hızlı!</em></p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🤖 Claude Code Nedir?</h3>
+        <p>Düşün: Terminal'de oturan ve sana yardım eden bir <strong>programcı arkadaşın</strong> var. Sen ona Türkçe yazıyorsun, o anlıyor, kod yazıyor, dosyaları oluşturuyor, hataları düzeltiyor.</p>
+        <p>İşte <strong>Claude Code</strong> bu! 🚀 Anthropic'in programcılar için yaptığı bir araç — terminal üzerinden çalışan bir Claude versiyonu.</p>
+        <p>📝 "Bana bir web sitesi yap" → Claude Code dosyaları oluşturur</p>
+        <p>🐛 "Şu hatayı düzelt" → Claude Code kodu inceler ve onarır</p>
+        <p>🎯 "Bu projeyi anlat" → Claude Code tüm dosyaları okur ve özetler</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>⚡ Neden Önemli?</h3>
+        <p>Geliştirici (programcı) olmak eskiden çok zor bir işti. Her satır kodu kendin yazmak zorundaydın, küçük bir hata saatler kaybettirebilirdi. 😓</p>
+        <p>Claude Code sayesinde işler değişti:</p>
+        <p>🚀 <strong>Hız:</strong> Saatlerce sürecek iş 10 dakikada biter</p>
+        <p>🧠 <strong>Öğrenme:</strong> Yeni başlayanlar Claude'dan öğrenerek kod yazar</p>
+        <p>🛠️ <strong>Güç:</strong> Tek başına büyük projeler yapabilirsin</p>
+        <p>Gelecek nesil programcılar Claude Code gibi araçları kullanarak büyüyecek. Sen de denemek ister misin? 👇</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🖥️ Mini Terminal — Hadi Komut Verelim!</h3>
+        <p style="margin-bottom:0.8rem;">Aşağıdaki komutlardan birine tıkla. Claude Code'un nasıl çalıştığını gör! <strong>En az 2 komut</strong> dene 🎯</p>
+
+        <div class="command-chips">
+          <div class="cmd-chip" id="cmd-hello" onclick="runCommand('hello')">
+            👋 Merhaba Dünya HTML
+            <span class="cmd-chip-cmd">claude "merhaba dünya sayfası yap"</span>
+          </div>
+          <div class="cmd-chip" id="cmd-calc" onclick="runCommand('calc')">
+            🔢 Hesap Makinesi
+            <span class="cmd-chip-cmd">claude "hesap makinesi yap"</span>
+          </div>
+          <div class="cmd-chip" id="cmd-guess" onclick="runCommand('guess')">
+            🎲 Tahmin Oyunu
+            <span class="cmd-chip-cmd">claude "tahmin oyunu yap"</span>
+          </div>
+          <div class="cmd-chip" id="cmd-svg" onclick="runCommand('svg')">
+            🎨 Renkli Yıldız
+            <span class="cmd-chip-cmd">claude "svg yıldız çiz"</span>
+          </div>
+        </div>
+
+        <div class="terminal">
+          <div class="terminal-bar">
+            <div class="terminal-dot r"></div>
+            <div class="terminal-dot y"></div>
+            <div class="terminal-dot g"></div>
+            <div class="terminal-title">~ Claude Code Terminal</div>
+          </div>
+          <div class="terminal-body" id="terminalBody">
+            <div class="terminal-line gray">✨ Claude Code'a hoş geldin!</div>
+            <div class="terminal-line gray">Yukarıdaki bir komuta tıklayarak başla.</div>
+            <div class="terminal-line"><span class="terminal-cursor"></span></div>
+          </div>
+        </div>
+
+        <div class="preview-area" id="previewArea">
+          <div class="preview-header" id="previewHeader">📺 Önizleme</div>
+          <div class="preview-content" id="previewContent"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="quiz6-section" style="display:none;">
+        <h3>🎯 Mini Quiz</h3>
+        <p style="margin-bottom:1rem;">Son soru:</p>
+        <div class="quiz-question">
+          <p><strong>Claude Code'un en güçlü yanı nedir?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer6(this, false)">Renkli arayüzü</button>
+          <button class="quiz-option" onclick="checkAnswer6(this, true)">Doğal dilde komut verince kod yazıp dosya oluşturabilmesi 💻</button>
+          <button class="quiz-option" onclick="checkAnswer6(this, false)">Müzik çalabilmesi</button>
+          <button class="quiz-option" onclick="checkAnswer6(this, false)">Sadece İngilizce çalışması</button>
+          <div class="quiz-feedback" id="quizFeedback6"></div>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn6" onclick="completeMission(6)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: En az 2 komut çalıştır + quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Komut çalıştırma ----------
+  const codeCommands = {
+    hello: {
+      userCmd: 'claude "merhaba dünya sayfası yap"',
+      steps: [
+        { type: 'claude', text: 'Anladım! Basit bir HTML sayfası oluşturacağım.' },
+        { type: 'info',   text: '📂 Çalışma klasörü kontrol ediliyor...' },
+        { type: 'gray',   text: '   /home/projeler/yeni-site' },
+        { type: 'info',   text: '✍️  index.html dosyası yazılıyor...' },
+        { type: 'gray',   text: '   <html>' },
+        { type: 'gray',   text: '     <body style="background:gradient">' },
+        { type: 'gray',   text: '       <h1>Merhaba Dünya!</h1>' },
+        { type: 'gray',   text: '     </body>' },
+        { type: 'gray',   text: '   </html>' },
+        { type: 'success', text: '✓ index.html oluşturuldu (12 satır)' },
+        { type: 'claude', text: 'Tamam! Sayfa hazır. Aşağıda önizlemesi var 👇' },
+      ],
+      preview: { type: 'hello', title: '📺 index.html — Önizleme' }
+    },
+    calc: {
+      userCmd: 'claude "hesap makinesi yap"',
+      steps: [
+        { type: 'claude', text: 'Bir hesap makinesi yapayım. HTML + JavaScript kullanacağım.' },
+        { type: 'info',   text: '📐 Tasarım planlanıyor...' },
+        { type: 'gray',   text: '   - Sayı ekranı' },
+        { type: 'gray',   text: '   - 16 tuş (rakam + işlem)' },
+        { type: 'gray',   text: '   - Karanlık tema' },
+        { type: 'info',   text: '✍️  calc.html yazılıyor...' },
+        { type: 'success', text: '✓ calc.html oluşturuldu (45 satır)' },
+        { type: 'info',   text: '✍️  calc.js yazılıyor...' },
+        { type: 'success', text: '✓ calc.js oluşturuldu (28 satır)' },
+        { type: 'claude', text: 'Tamamlandı! Aşağıdaki hesap makinesi tıklayarak çalışıyor 🔢' },
+      ],
+      preview: { type: 'calc', title: '🔢 calc.html — Çalışan Hesap Makinesi' }
+    },
+    guess: {
+      userCmd: 'claude "1-100 arası tahmin oyunu yap"',
+      steps: [
+        { type: 'claude', text: 'Klasik bir tahmin oyunu! JavaScript ile yapacağım.' },
+        { type: 'info',   text: '🎲 Oyun mantığı kuruluyor...' },
+        { type: 'gray',   text: '   - Bilgisayar 1-100 arası sayı tutar' },
+        { type: 'gray',   text: '   - Kullanıcı tahmin eder' },
+        { type: 'gray',   text: '   - "Daha büyük" / "daha küçük" / "doğru!"' },
+        { type: 'info',   text: '✍️  game.html yazılıyor...' },
+        { type: 'success', text: '✓ game.html oluşturuldu (32 satır)' },
+        { type: 'claude', text: 'Oyun hazır! Aşağıdan oynayabilirsin 🎯' },
+      ],
+      preview: { type: 'guess', title: '🎲 game.html — Tahmin Oyunu' }
+    },
+    svg: {
+      userCmd: 'claude "renkli bir svg yıldız çiz"',
+      steps: [
+        { type: 'claude', text: 'SVG kullanarak renkli bir yıldız çizeyim.' },
+        { type: 'info',   text: '🎨 SVG koordinatları hesaplanıyor...' },
+        { type: 'gray',   text: '   - 5 köşeli yıldız (polygon)' },
+        { type: 'gray',   text: '   - Gradient dolgu: pembe → mor' },
+        { type: 'gray',   text: '   - Glow efekti' },
+        { type: 'info',   text: '✍️  star.svg yazılıyor...' },
+        { type: 'success', text: '✓ star.svg oluşturuldu (8 satır)' },
+        { type: 'claude', text: 'İşte yıldızın! Renkli ve parlak ✨' },
+      ],
+      preview: { type: 'svg', title: '⭐ star.svg — Vektör Sanat' }
+    }
+  };
+
+  function runCommand(key) {
+    const cmd = codeCommands[key];
+    if (!cmd) return;
+
+    commandsRun.add(key);
+    document.getElementById('cmd-' + key).classList.add('done');
+
+    const body = document.getElementById('terminalBody');
+    // Kullanıcı komutunu ekle
+    body.innerHTML = '';
+    const userLine = document.createElement('div');
+    userLine.className = 'terminal-line user';
+    userLine.textContent = cmd.userCmd;
+    body.appendChild(userLine);
+
+    // Adımları sırayla yaz
+    let i = 0;
+    function writeStep() {
+      if (i >= cmd.steps.length) {
+        // Cursor ekle
+        const cur = document.createElement('div');
+        cur.className = 'terminal-line';
+        cur.innerHTML = '<span class="terminal-cursor"></span>';
+        body.appendChild(cur);
+        body.scrollTop = body.scrollHeight;
+        // Önizleme göster
+        showPreview(cmd.preview, key);
+        // Quiz aç
+        if (commandsRun.size >= 2) {
+          const qs = document.getElementById('quiz6-section');
+          if (qs && qs.style.display === 'none') {
+            qs.style.display = 'block';
+          }
+        }
+        return;
+      }
+      const step = cmd.steps[i];
+      const line = document.createElement('div');
+      line.className = 'terminal-line ' + step.type;
+      line.textContent = step.text;
+      body.appendChild(line);
+      body.scrollTop = body.scrollHeight;
+      i++;
+      setTimeout(writeStep, 220 + Math.random() * 200);
+    }
+    writeStep();
+  }
+
+  function showPreview(p, key) {
+    const area   = document.getElementById('previewArea');
+    const header = document.getElementById('previewHeader');
+    const cont   = document.getElementById('previewContent');
+    header.textContent = p.title;
+    area.classList.add('show');
+
+    if (p.type === 'hello') {
+      cont.innerHTML = `<div class="preview-hello"><h1>🌍 Merhaba Dünya!</h1><p>Bu Claude'un yazdığı ilk sayfan</p></div>`;
+    } else if (p.type === 'calc') {
+      cont.innerHTML = `
+        <div class="preview-calc">
+          <div class="preview-calc-display" id="calcDisplay">0</div>
+          <div class="preview-calc-grid">
+            <button class="preview-calc-btn" onclick="calcInput('C')">C</button>
+            <button class="preview-calc-btn op" onclick="calcInput('/')">÷</button>
+            <button class="preview-calc-btn op" onclick="calcInput('*')">×</button>
+            <button class="preview-calc-btn op" onclick="calcInput('-')">−</button>
+            <button class="preview-calc-btn" onclick="calcInput('7')">7</button>
+            <button class="preview-calc-btn" onclick="calcInput('8')">8</button>
+            <button class="preview-calc-btn" onclick="calcInput('9')">9</button>
+            <button class="preview-calc-btn op" onclick="calcInput('+')">+</button>
+            <button class="preview-calc-btn" onclick="calcInput('4')">4</button>
+            <button class="preview-calc-btn" onclick="calcInput('5')">5</button>
+            <button class="preview-calc-btn" onclick="calcInput('6')">6</button>
+            <button class="preview-calc-btn" onclick="calcInput('0')">0</button>
+            <button class="preview-calc-btn" onclick="calcInput('1')">1</button>
+            <button class="preview-calc-btn" onclick="calcInput('2')">2</button>
+            <button class="preview-calc-btn" onclick="calcInput('3')">3</button>
+            <button class="preview-calc-btn eq" onclick="calcInput('=')">=</button>
+          </div>
+        </div>
+      `;
+    } else if (p.type === 'guess') {
+      cont.innerHTML = `
+        <div class="preview-guess">
+          <h3>🎯 1 ile 100 arası bir sayı tutuyorum!</h3>
+          <p style="font-size:0.85rem;opacity:0.8;">Tahmin et:</p>
+          <input type="number" id="guessInput" min="1" max="100" placeholder="?">
+          <button onclick="checkGuess()">Tahmin Et</button>
+          <div class="preview-guess-msg" id="guessMsg">Hadi başla! 🎲</div>
+        </div>
+      `;
+      window._secretNumber = Math.floor(Math.random() * 100) + 1;
+      window._guessAttempts = 0;
+    } else if (p.type === 'svg') {
+      cont.innerHTML = `
+        <div class="preview-svg">
+          <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="starGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#ec4899"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+              <filter id="glow">
+                <feGaussianBlur stdDeviation="3" result="blur"/>
+                <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+              </filter>
+            </defs>
+            <polygon
+              points="100,15 122,75 188,75 135,115 155,180 100,140 45,180 65,115 12,75 78,75"
+              fill="url(#starGrad)"
+              filter="url(#glow)"
+              stroke="#fff" stroke-width="2"/>
+          </svg>
+          <p style="color:white;font-size:0.85rem;margin-top:0.5rem;">↑ Sadece 8 satır kodla çizildi!</p>
+        </div>
+      `;
+    }
+    setTimeout(() => area.scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+  }
+
+  // ---------- Mini Hesap Makinesi mantığı ----------
+  let calcExpr = '';
+  function calcInput(v) {
+    const disp = document.getElementById('calcDisplay');
+    if (!disp) return;
+    if (v === 'C') { calcExpr = ''; disp.textContent = '0'; return; }
+    if (v === '=') {
+      try {
+        const result = Function('"use strict";return (' + calcExpr.replace(/[^0-9+\-*/().]/g, '') + ')')();
+        disp.textContent = result;
+        calcExpr = String(result);
+      } catch { disp.textContent = 'Hata'; calcExpr = ''; }
+      return;
+    }
+    calcExpr += v;
+    disp.textContent = calcExpr;
+  }
+
+  // ---------- Mini Tahmin Oyunu mantığı ----------
+  function checkGuess() {
+    const inp = document.getElementById('guessInput');
+    const msg = document.getElementById('guessMsg');
+    if (!inp || !msg) return;
+    const guess = parseInt(inp.value);
+    if (!guess) { msg.textContent = '🤔 Bir sayı yaz!'; return; }
+    window._guessAttempts++;
+    if (guess === window._secretNumber) {
+      msg.innerHTML = `🎉 Doğru! Sayı <strong>${window._secretNumber}</strong>'dı. ${window._guessAttempts} denemede buldun!`;
+      msg.style.color = '#4ade80';
+    } else if (guess < window._secretNumber) {
+      msg.textContent = '⬆️ Daha büyük bir sayı dene!';
+      msg.style.color = '#facc15';
+    } else {
+      msg.textContent = '⬇️ Daha küçük bir sayı dene!';
+      msg.style.color = '#facc15';
+    }
+    inp.value = '';
+    inp.focus();
+  }
+
+  // ---------- Quiz 6 ----------
+  function checkAnswer6(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback6');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '💻 <strong>Doğru!</strong> Claude Code\'un sihri: Türkçe konuşursun, o terminal\'de gerçek kod yazar ve dosya oluşturur. Sen artık programcı arkadaşı olan biri gibisin!';
+      quizPassed6 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Claude Code\'un en güçlü yanı arayüz veya müzik değil — <em>kod yazma yeteneği</em>!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+  }
+
   function renderComingSoon(planet) {
     return `
       <button class="close-btn" onclick="closeModal()">✕</button>
@@ -3311,6 +3909,10 @@
     if (planetId === 5) {
       if (bridgesConnected.size < 2) { alert('Önce en az 2 köprü kur! 🌉'); return; }
       if (!quizPassed5) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+    }
+    if (planetId === 6) {
+      if (commandsRun.size < 2) { alert('Önce en az 2 komut çalıştır! 💻'); return; }
+      if (!quizPassed6) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
     }
     
     if (progress.completedPlanets.includes(planetId)) return;
