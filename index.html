@@ -1801,6 +1801,263 @@
     border-radius: 0.5rem;
   }
 
+  /* =====================================================
+     GEZEGEN 7 — TAKIM (COWORK)
+     ===================================================== */
+  .team-mission {
+    background: var(--space-light);
+    border: 2px solid rgba(94,234,212,0.3);
+    border-radius: 0.8rem;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .team-mission:hover {
+    border-color: var(--neon-cyan);
+    transform: translateY(-2px);
+  }
+  .team-mission.active {
+    border-color: var(--neon-cyan);
+    background: rgba(94,234,212,0.08);
+  }
+  .team-mission.done {
+    border-color: var(--neon-green);
+    background: rgba(74,222,128,0.06);
+  }
+  .team-mission-icon {
+    font-size: 1.6rem;
+    display: inline-block;
+    margin-right: 0.5rem;
+  }
+  .team-mission-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-cyan);
+    font-size: 0.95rem;
+    display: inline-block;
+    vertical-align: middle;
+  }
+  .team-mission.done .team-mission-title { color: var(--neon-green); }
+  .team-mission-desc {
+    font-size: 0.84rem;
+    color: var(--locked-gray);
+    margin-top: 0.4rem;
+    line-height: 1.5;
+  }
+
+  .agent-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 0.7rem;
+    margin: 1rem 0;
+  }
+  .agent-card {
+    background: var(--space-mid);
+    border: 2px solid rgba(139,92,246,0.3);
+    border-radius: 0.7rem;
+    padding: 0.8rem 0.6rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    position: relative;
+  }
+  .agent-card:hover {
+    border-color: var(--neon-purple);
+    transform: translateY(-2px);
+  }
+  .agent-card.selected {
+    border-color: var(--neon-yellow);
+    background: rgba(250,204,21,0.1);
+    box-shadow: 0 0 15px rgba(250,204,21,0.3);
+  }
+  .agent-card.selected::before {
+    content: '✓';
+    position: absolute;
+    top: 5px; right: 8px;
+    color: var(--neon-yellow);
+    font-weight: bold;
+    font-size: 1.1rem;
+  }
+  .agent-emoji { font-size: 2rem; }
+  .agent-name {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--star-white);
+    font-size: 0.8rem;
+    margin-top: 0.3rem;
+  }
+  .agent-skill {
+    color: var(--locked-gray);
+    font-size: 0.72rem;
+    margin-top: 0.2rem;
+  }
+
+  .team-result {
+    border-radius: 0.7rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    display: none;
+    line-height: 1.6;
+  }
+  .team-result.show { display: block; }
+  .team-result.success {
+    background: rgba(74,222,128,0.1);
+    border: 1.5px solid var(--neon-green);
+  }
+  .team-result.partial {
+    background: rgba(250,204,21,0.1);
+    border: 1.5px solid var(--neon-yellow);
+  }
+  .team-result.fail {
+    background: rgba(236,72,153,0.1);
+    border: 1.5px solid var(--neon-pink);
+  }
+
+  /* =====================================================
+     GEZEGEN 8 — FİNAL
+     ===================================================== */
+  .final-recap {
+    background: linear-gradient(135deg, rgba(94,234,212,0.08), rgba(139,92,246,0.08));
+    border: 1.5px dashed var(--neon-cyan);
+    border-radius: 1rem;
+    padding: 1rem;
+    margin: 1rem 0;
+  }
+  .final-recap-item {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    padding: 0.4rem 0;
+    font-size: 0.88rem;
+  }
+  .final-recap-icon { font-size: 1.4rem; }
+  .final-recap-text { color: var(--star-white); }
+  .final-recap-text strong { color: var(--neon-cyan); }
+
+  .project-card {
+    background: var(--space-light);
+    border: 2px solid rgba(139,92,246,0.3);
+    border-radius: 1rem;
+    padding: 1.2rem;
+    margin: 0.8rem 0;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .project-card:hover {
+    border-color: var(--neon-purple);
+    transform: translateY(-3px);
+    box-shadow: 0 5px 20px rgba(139,92,246,0.2);
+  }
+  .project-card.selected {
+    border-color: var(--neon-yellow);
+    background: rgba(250,204,21,0.06);
+  }
+  .project-header {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-bottom: 0.5rem;
+  }
+  .project-emoji { font-size: 1.8rem; }
+  .project-title {
+    font-family: 'Orbitron', sans-serif;
+    color: var(--neon-purple);
+    font-size: 1rem;
+  }
+  .project-desc {
+    font-size: 0.86rem;
+    color: var(--star-white);
+    line-height: 1.5;
+    margin-bottom: 0.7rem;
+  }
+  .project-skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.6rem;
+  }
+  .project-skill {
+    background: var(--space-mid);
+    border: 1px solid var(--neon-cyan);
+    color: var(--neon-cyan);
+    padding: 0.2rem 0.6rem;
+    border-radius: 0.4rem;
+    font-size: 0.72rem;
+  }
+
+  .project-details {
+    background: var(--space-mid);
+    border-radius: 0.8rem;
+    padding: 1.2rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .project-details.show { display: block; }
+  .project-details h4 {
+    color: var(--neon-yellow);
+    font-family: 'Orbitron', sans-serif;
+    margin-bottom: 0.5rem;
+  }
+  .project-prompt-box {
+    background: var(--space-deep);
+    border-left: 4px solid var(--neon-green);
+    border-radius: 0.5rem;
+    padding: 0.8rem 1rem;
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: var(--neon-green);
+    line-height: 1.5;
+  }
+
+  /* Mezuniyet kutlama */
+  .graduation {
+    text-align: center;
+    padding: 1.5rem 1rem;
+    background: linear-gradient(135deg, var(--neon-cyan), var(--neon-purple));
+    border-radius: 1rem;
+    margin-top: 1rem;
+    display: none;
+  }
+  .graduation.show {
+    display: block;
+    animation: gradPop 0.6s ease-out;
+  }
+  @keyframes gradPop {
+    0% { transform: scale(0.5); opacity: 0; }
+    60% { transform: scale(1.05); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .graduation-emoji {
+    font-size: 3rem;
+    animation: gradFloat 2s ease-in-out infinite;
+  }
+  @keyframes gradFloat {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  .graduation h2 {
+    color: #000;
+    font-family: 'Orbitron', sans-serif;
+    margin: 0.5rem 0;
+    font-size: 1.4rem;
+  }
+  .graduation p {
+    color: #000;
+    font-size: 0.95rem;
+  }
+  .confetti {
+    position: absolute;
+    width: 8px; height: 8px;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .confetti.fall {
+    animation: confettiFall 3s ease-out forwards;
+  }
+  @keyframes confettiFall {
+    0% { opacity: 1; transform: translateY(0) rotate(0deg); }
+    100% { opacity: 0; transform: translateY(400px) rotate(720deg); }
+  }
+
 </style>
 </head>
 <body>
@@ -1972,18 +2229,18 @@
       id: 7,
       emoji: '🤝',
       name: 'Takım Gezegeni',
-      desc: 'Cowork: Claude ile takım çalışması.',
-      content: 'comingSoon',
-      badge: { icon: '👥', title: 'Takım Oyuncusu', desc: '' },
+      desc: 'Cowork ile AI takımları kur ve birlikte çalış!',
+      content: 'team',
+      badge: { icon: '👥', title: 'Takım Oyuncusu', desc: 'Birden çok AI agent\'ı koordine etmeyi öğrendin — gerçek bir takım lideri gibi!' },
       xp: 250
     },
     {
       id: 8,
       emoji: '⭐',
       name: 'Final Gezegeni',
-      desc: 'Kendi mini projeni yap ve YZ Uzmanı ol!',
-      content: 'comingSoon',
-      badge: { icon: '👑', title: 'YZ Uzmanı', desc: '' },
+      desc: 'Tüm öğrendiklerinle bir mini proje seç ve YZ Uzmanı ol!',
+      content: 'final',
+      badge: { icon: '👑', title: 'YZ Uzmanı', desc: 'Galaksideki tüm gezegenleri keşfettin! Artık yapay zeka konusunda gerçek bir uzmanlaştın 🏆' },
       xp: 500
     }
   ];
@@ -2104,6 +2361,14 @@
       quizPassed6 = false;
       commandsRun = new Set();
       content.innerHTML = renderCodePlanet(planet);
+    } else if (planet.content === 'team') {
+      quizPassed7 = false;
+      teamMissionsDone = 0;
+      content.innerHTML = renderTeamPlanet(planet);
+    } else if (planet.content === 'final') {
+      quizPassed8 = false;
+      projectSelected = false;
+      content.innerHTML = renderFinalPlanet(planet);
     } else {
       content.innerHTML = renderComingSoon(planet);
     }
@@ -3712,6 +3977,483 @@
     }
   }
 
+  // =====================================================
+  // GEZEGEN 7: TAKIM GEZEGENİ (COWORK)
+  // =====================================================
+  let quizPassed7 = false;
+  let teamMissionsDone = 0;
+  let currentTeamMission = null;
+  let selectedAgents = new Set();
+
+  // Görevler ve doğru takımlar
+  const teamMissions = {
+    gazete: {
+      icon: '📰',
+      title: 'Sınıf Gazetesi Hazırla',
+      desc: 'Okulun bu ayki gazetesi için bir haber yazılacak. Doğru takımı kurmalısın!',
+      need: ['researcher','writer','editor']
+    },
+    sunum: {
+      icon: '🎤',
+      title: 'Bilim Fuarı Sunumu',
+      desc: 'Yarın bilim fuarına katılıyorsun. Etkileyici bir sunum hazırlamak için takım kur.',
+      need: ['researcher','designer','writer']
+    },
+    web: {
+      icon: '🌐',
+      title: 'Hobi Web Sitesi',
+      desc: 'Sevdiğin bir hobi hakkında web sitesi yapacaksın. Hangi uzmanları seçeceksin?',
+      need: ['designer','coder','writer']
+    },
+    sorun: {
+      icon: '🧩',
+      title: 'Mantık Bulmacası',
+      desc: 'Zor bir matematik problemini çözmen gerekiyor. Adım adım analiz lazım.',
+      need: ['analyst','researcher']
+    }
+  };
+
+  const agents = {
+    researcher: { emoji: '🔍', name: 'Araştırmacı', skill: 'Bilgi toplar' },
+    writer:     { emoji: '✍️', name: 'Yazar',       skill: 'Metin yazar' },
+    editor:     { emoji: '📝', name: 'Editör',      skill: 'Kontrol eder' },
+    designer:   { emoji: '🎨', name: 'Tasarımcı',   skill: 'Görsel yapar' },
+    coder:      { emoji: '💻', name: 'Kodcu',       skill: 'Kod yazar' },
+    analyst:    { emoji: '🧠', name: 'Analist',     skill: 'Mantık kurar' },
+  };
+
+  function renderTeamPlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(7);
+
+    let missionsHtml = '';
+    for (const [key, m] of Object.entries(teamMissions)) {
+      missionsHtml += `
+        <div class="team-mission" id="tm-${key}" onclick="selectMission('${key}')">
+          <span class="team-mission-icon">${m.icon}</span>
+          <span class="team-mission-title">${m.title}</span>
+          <div class="team-mission-desc">${m.desc}</div>
+        </div>
+      `;
+    }
+
+    let agentsHtml = '';
+    for (const [key, a] of Object.entries(agents)) {
+      agentsHtml += `
+        <div class="agent-card" id="ag-${key}" onclick="toggleAgent('${key}')">
+          <div class="agent-emoji">${a.emoji}</div>
+          <div class="agent-name">${a.name}</div>
+          <div class="agent-skill">${a.skill}</div>
+        </div>
+      `;
+    }
+
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji">${planet.emoji}</div>
+        <h2 class="modal-title">${planet.name}</h2>
+        <p style="opacity:0.7;margin-top:0.5rem;">Cowork: AI Takımı Kur, Birlikte Çalış!</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎬 Cowork Nedir?</h3>
+        <p>Bir film düşün 🎥 Yönetmen, oyuncular, kameraman, senarist, ses uzmanı, ışıkçı... <strong>Hepsi farklı bir uzmanlık</strong> ama birlikte muhteşem bir film yapıyorlar!</p>
+        <p>Anthropic'in <strong>Cowork</strong> sistemi de tıpkı böyle: Birden çok AI'ı bir takım gibi çalıştırıyor. Her birinin farklı bir görevi var, hepsi <em>aynı projede</em> birlikte çalışıyor.</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>👥 AI Takım Üyeleri Kimler?</h3>
+        <p>Bir AI takımında genellikle şu uzmanlar olur:</p>
+        <p>🔍 <strong>Araştırmacı:</strong> Bilgi toplar, kaynak bulur</p>
+        <p>✍️ <strong>Yazar:</strong> Metni yazar, ifade eder</p>
+        <p>📝 <strong>Editör:</strong> Yazılanı kontrol eder, hataları bulur</p>
+        <p>🎨 <strong>Tasarımcı:</strong> Görselleri yapar, düzeni kurar</p>
+        <p>💻 <strong>Kodcu:</strong> Programlama işlerini halleder</p>
+        <p>🧠 <strong>Analist:</strong> Mantığı kurar, problemleri çözer</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>⚡ Neden Takım Önemli?</h3>
+        <p>Tek bir AI her şeyi <em>idare eder</em> ama bir takım <strong>mükemmel yapar!</strong></p>
+        <p>Örnek: Bir blog yazısı hazırlamak için tek başına çalışırsın → bir saatte biter ama hatalı olur.</p>
+        <p>Ama bir takım çalışırsa: Araştırmacı bilgi toplar → Yazar metni yazar → Editör hataları düzeltir → Tasarımcı görsel ekler → İşte mükemmel sonuç! 🌟</p>
+        <p>Buna <strong>"multi-agent system"</strong> (çoklu agent sistemi) deniyor — geleceğin en güçlü AI yaklaşımı.</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎯 Takım Kurma Atölyesi</h3>
+        <p style="margin-bottom:1rem;">Aşağıdan bir görev seç, ona uygun takımı kur ve sonucu gör! <strong>1 görevi başarıyla tamamla</strong> 🚀</p>
+
+        <p style="font-family:'Orbitron',sans-serif;color:var(--neon-cyan);margin-bottom:0.5rem;font-size:0.9rem;">1️⃣ Bir görev seç:</p>
+        ${missionsHtml}
+
+        <div id="teamWorkspace" style="display:none;">
+          <p style="font-family:'Orbitron',sans-serif;color:var(--neon-yellow);margin:1rem 0 0.5rem;font-size:0.9rem;">2️⃣ Takım üyelerini seç (en az 2):</p>
+          <div class="agent-grid">
+            ${agentsHtml}
+          </div>
+          <button class="workshop-btn" onclick="runTeamMission()" style="width:100%;">▶️ Takımı Görevle Gönder</button>
+          <div class="team-result" id="teamResult"></div>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="quiz7-section" style="display:none;">
+        <h3>🎯 Mini Quiz</h3>
+        <p style="margin-bottom:1rem;">Son soru:</p>
+        <div class="quiz-question">
+          <p><strong>Cowork (çoklu agent) yaklaşımının ana fikri nedir?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer7(this, false)">Tek bir AI'ın daha hızlı çalışması</button>
+          <button class="quiz-option" onclick="checkAnswer7(this, true)">Farklı uzmanlık alanlarındaki AI'ların bir takım gibi birlikte çalışması 👥</button>
+          <button class="quiz-option" onclick="checkAnswer7(this, false)">AI'ın insanlardan tamamen bağımsız olması</button>
+          <button class="quiz-option" onclick="checkAnswer7(this, false)">Sadece İngilizce konuşmaları</button>
+          <div class="quiz-feedback" id="quizFeedback7"></div>
+        </div>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn7" onclick="completeMission(7)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Görev Tamamlandı' : '🚀 Görevi Tamamla'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Görevi tamamlamak için: 1 takım görevini başar + quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Görev seç ----------
+  function selectMission(key) {
+    currentTeamMission = key;
+    selectedAgents = new Set();
+    // Tüm görevleri reset
+    document.querySelectorAll('.team-mission').forEach(el => el.classList.remove('active'));
+    document.getElementById('tm-' + key).classList.add('active');
+    // Tüm agent'ları reset
+    document.querySelectorAll('.agent-card').forEach(el => el.classList.remove('selected'));
+    // Workspace'i göster
+    document.getElementById('teamWorkspace').style.display = 'block';
+    document.getElementById('teamResult').classList.remove('show');
+    setTimeout(() => document.getElementById('teamWorkspace').scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+  }
+
+  function toggleAgent(key) {
+    const card = document.getElementById('ag-' + key);
+    if (selectedAgents.has(key)) {
+      selectedAgents.delete(key);
+      card.classList.remove('selected');
+    } else {
+      selectedAgents.add(key);
+      card.classList.add('selected');
+    }
+  }
+
+  function runTeamMission() {
+    if (!currentTeamMission) { alert('Önce bir görev seç! 🎯'); return; }
+    if (selectedAgents.size < 2) { alert('En az 2 takım üyesi seç! 👥'); return; }
+
+    const mission = teamMissions[currentTeamMission];
+    const required = mission.need;
+    const result = document.getElementById('teamResult');
+    result.className = 'team-result show';
+
+    const hasAllRequired = required.every(r => selectedAgents.has(r));
+    const matchCount = required.filter(r => selectedAgents.has(r)).length;
+    const extraCount = selectedAgents.size - matchCount;
+    const selectedNames = Array.from(selectedAgents).map(k => `${agents[k].emoji} ${agents[k].name}`).join(', ');
+    const requiredNames = required.map(k => `${agents[k].emoji} ${agents[k].name}`).join(', ');
+
+    if (hasAllRequired && extraCount === 0) {
+      // Mükemmel takım
+      result.classList.add('success');
+      result.innerHTML = `
+        <h4 style="color:var(--neon-green);margin-bottom:0.5rem;font-family:'Orbitron',sans-serif;">🎉 Mükemmel Takım!</h4>
+        <p>Takımın: <strong>${selectedNames}</strong></p>
+        <p style="margin-top:0.5rem;">İhtiyaç vardı: <strong>${requiredNames}</strong></p>
+        <p style="margin-top:0.7rem;">Senin takımın görevi <strong>kusursuz</strong> tamamladı! Her uzman tam olarak ihtiyaç duyulan yerde işini yaptı. 👏</p>
+        <p style="margin-top:0.5rem;color:var(--neon-green);">⭐ Bu Cowork'ün gücü: doğru takım = mükemmel sonuç!</p>
+      `;
+      teamMissionsDone++;
+      document.getElementById('tm-' + currentTeamMission).classList.add('done');
+      // Quiz'i aç
+      const qs = document.getElementById('quiz7-section');
+      if (qs && qs.style.display === 'none') {
+        qs.style.display = 'block';
+      }
+    } else if (hasAllRequired) {
+      // Doğrular var ama fazlalık da var
+      result.classList.add('partial');
+      result.innerHTML = `
+        <h4 style="color:var(--neon-yellow);margin-bottom:0.5rem;font-family:'Orbitron',sans-serif;">✅ Görev Başarılı! Ama...</h4>
+        <p>Takımın: <strong>${selectedNames}</strong></p>
+        <p style="margin-top:0.5rem;">İdeal takım: <strong>${requiredNames}</strong></p>
+        <p style="margin-top:0.7rem;">Görev tamamlandı ama takımda <strong>fazladan üye</strong> var. Gereksiz uzmanlar zaman ve kaynak kaybeder. 💡</p>
+        <p style="margin-top:0.5rem;">İpucu: <em>"Sadece ihtiyacın olanı al"</em> ilkesi takım kurmanın altın kuralı!</p>
+      `;
+      teamMissionsDone++;
+      document.getElementById('tm-' + currentTeamMission).classList.add('done');
+      // Quiz'i aç
+      const qs = document.getElementById('quiz7-section');
+      if (qs && qs.style.display === 'none') {
+        qs.style.display = 'block';
+      }
+    } else {
+      // Eksik takım
+      const missing = required.filter(r => !selectedAgents.has(r))
+        .map(k => `${agents[k].emoji} ${agents[k].name}`).join(', ');
+      result.classList.add('fail');
+      result.innerHTML = `
+        <h4 style="color:var(--neon-pink);margin-bottom:0.5rem;font-family:'Orbitron',sans-serif;">❌ Görev Tamamlanamadı</h4>
+        <p>Takımın: <strong>${selectedNames}</strong></p>
+        <p style="margin-top:0.5rem;color:var(--neon-pink);">Eksik üye(ler): <strong>${missing}</strong></p>
+        <p style="margin-top:0.7rem;">Bu görev için bazı uzmanlıklar eksikti. Tekrar dene — doğru takım = başarılı görev! 💪</p>
+        <p style="margin-top:0.5rem;font-size:0.85rem;opacity:0.85;">İpucu: Görev açıklamasını tekrar oku ve hangi yeteneklerin gerektiğini düşün.</p>
+      `;
+    }
+  }
+
+  // ---------- Quiz 7 ----------
+  function checkAnswer7(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback7');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '👥 <strong>Doğru!</strong> Cowork = "birlikte çalışmak". Farklı AI uzmanları bir araya gelip büyük işler başarır. Geleceğin AI sistemleri böyle çalışacak!';
+      quizPassed7 = true;
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Cowork hız veya bağımsızlık değil — <em>takım</em> kavramı!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2200);
+    }
+  }
+
+  // =====================================================
+  // GEZEGEN 8: FİNAL GEZEGENİ
+  // =====================================================
+  let quizPassed8 = false;
+  let projectSelected = false;
+
+  const finalProjects = {
+    gazete: {
+      emoji: '📰',
+      title: 'Sınıf Gazetesi Yap',
+      desc: 'Sınıfın için renkli, eğlenceli bir gazete hazırla. Haberler, bulmacalar, fotoğraflar... Hepsi senin tasarımınla!',
+      skills: ['Prompt', 'Artifacts', 'Skills'],
+      prompt: 'Sınıfımız için bir gazete sayfası tasarla. Manşet "Bilim Köşesi", içinde 3 kısa haber, bir bulmaca ve renkli başlıklar olsun. HTML/CSS ile yap.'
+    },
+    oyun: {
+      emoji: '🎮',
+      title: 'Eğitici Mini Oyun',
+      desc: 'Bir konuyu öğretmek için eğlenceli bir oyun yaz! Quiz, hafıza oyunu veya tahmin oyunu... Sınıfta arkadaşlarınla oynayabilirsin.',
+      skills: ['Prompt', 'Artifacts', 'Claude Code'],
+      prompt: 'Çarpım tablosu öğreten bir hafıza oyunu yap. Kartları çevir, doğru eşleşmeyi bulan kazansın. Renkli ve animasyonlu olsun.'
+    },
+    sunum: {
+      emoji: '🎤',
+      title: 'Bilim Fuarı Sunumu',
+      desc: 'Bir konuyu derinlemesine araştır ve etkileyici bir sunum hazırla. Görsellerle, animasyonlarla, fikirlerle...',
+      skills: ['Prompt', 'Cowork', 'Artifacts'],
+      prompt: 'Uzay teleskoplarının tarihçesi hakkında 5 slaytlık interaktif sunum yap. Her slaytta görsel + kısa metin olsun. Cyan ve mor temalı.'
+    },
+    asistan: {
+      emoji: '🤖',
+      title: 'Kişisel Asistan Tasarla',
+      desc: 'Kendi YZ asistanını yarat! İsim, kişilik, ne işe yarayacak, hangi konuda uzman olacak — hepsi senin elinde.',
+      skills: ['Skills', 'Prompt', 'MCP fikirleri'],
+      prompt: 'Bana "Spor Koçu" gibi davranan bir AI asistan kişiliği oluştur. Sporcu motivasyonu yapsın, ev egzersizleri önersin, beslenme tüyoları versin.'
+    }
+  };
+
+  function renderFinalPlanet(planet) {
+    const alreadyDone = progress.completedPlanets.includes(8);
+    let projectsHtml = '';
+    for (const [key, p] of Object.entries(finalProjects)) {
+      projectsHtml += `
+        <div class="project-card" id="pj-${key}" onclick="selectProject('${key}')">
+          <div class="project-header">
+            <div class="project-emoji">${p.emoji}</div>
+            <div class="project-title">${p.title}</div>
+          </div>
+          <div class="project-desc">${p.desc}</div>
+          <div class="project-skills">
+            ${p.skills.map(s => `<span class="project-skill">${s}</span>`).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    return `
+      <button class="close-btn" onclick="closeModal()">✕</button>
+      <div class="modal-header">
+        <div class="modal-emoji" style="font-size:3.5rem;">${planet.emoji}</div>
+        <h2 class="modal-title" style="color:var(--neon-yellow);">${planet.name}</h2>
+        <p style="opacity:0.85;margin-top:0.5rem;font-family:'Orbitron',sans-serif;">Final Sınavı: Kendi Projeni Seç ve YZ Uzmanı Ol! 👑</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🏆 Tebrikler, Uzay Kâşifi!</h3>
+        <p>Buraya kadar geldin! Galaksinin <strong>tüm 7 gezegenini</strong> keşfettin. Şimdi son durakta, öğrendiklerinin hepsini birleştirme zamanı! 🚀</p>
+      </div>
+
+      <div class="lesson-section">
+        <h3>📚 Bu Galaksiden Neler Öğrendin?</h3>
+        <div class="final-recap">
+          <div class="final-recap-item">
+            <div class="final-recap-icon">🚀</div>
+            <div class="final-recap-text"><strong>Gezegen 1:</strong> Yapay zeka nedir, nasıl çalışır</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">💬</div>
+            <div class="final-recap-text"><strong>Gezegen 2:</strong> İyi prompt yazma sanatı</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">🎨</div>
+            <div class="final-recap-text"><strong>Gezegen 3:</strong> Claude Artifacts ile yaratma</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">⚙️</div>
+            <div class="final-recap-text"><strong>Gezegen 4:</strong> Skills ile özelleştirme</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">🔗</div>
+            <div class="final-recap-text"><strong>Gezegen 5:</strong> MCP ile dış dünyaya bağlanma</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">💻</div>
+            <div class="final-recap-text"><strong>Gezegen 6:</strong> Claude Code ile kod yazma</div>
+          </div>
+          <div class="final-recap-item">
+            <div class="final-recap-icon">👥</div>
+            <div class="final-recap-text"><strong>Gezegen 7:</strong> Cowork ile takım çalışması</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="lesson-section">
+        <h3>🎯 Şimdi Sıra Sende — Bir Mini Proje Seç!</h3>
+        <p>Aşağıdaki projelerden birini seç. Bu projeyi <strong>gerçek Claude'a</strong> götürüp birlikte yapabilirsin! Her projede farklı gezegenlerdeki bilgilerini kullanacaksın 🚀</p>
+
+        ${projectsHtml}
+
+        <div class="project-details" id="projectDetails">
+          <h4 id="pdTitle">🎯 Proje Detayları</h4>
+          <p id="pdDesc"></p>
+          <div style="margin-top:0.8rem;">
+            <strong style="color:var(--neon-cyan);">Kullanacağın gezegenler:</strong>
+            <div id="pdSkills" style="margin-top:0.4rem;"></div>
+          </div>
+          <div style="margin-top:1rem;">
+            <strong style="color:var(--neon-green);">💡 Başlangıç promptu (Claude.ai'da kullan):</strong>
+            <div class="project-prompt-box" id="pdPrompt"></div>
+          </div>
+          <p style="margin-top:0.8rem;font-size:0.85rem;opacity:0.85;">↑ Bu promptu kopyala, <a href="https://claude.ai" target="_blank" style="color:var(--neon-cyan);">claude.ai</a>'a git ve projeni başlat!</p>
+        </div>
+      </div>
+
+      <div class="lesson-section" id="quiz8-section" style="display:none;">
+        <h3>🎯 Final Quiz</h3>
+        <p style="margin-bottom:1rem;">Son sorunun cevabı sende! 🌟</p>
+        <div class="quiz-question">
+          <p><strong>Bu galakside öğrendiğin en önemli ders nedir?</strong></p>
+          <button class="quiz-option" onclick="checkAnswer8(this, false)">YZ her şeyi tek başına yapabilir</button>
+          <button class="quiz-option" onclick="checkAnswer8(this, false)">YZ tehlikelidir, ondan uzak durmalı</button>
+          <button class="quiz-option" onclick="checkAnswer8(this, true)">YZ bir araç — onunla NASIL konuştuğum, sonucu belirler! 🎯</button>
+          <button class="quiz-option" onclick="checkAnswer8(this, false)">YZ insanların yerini alacak</button>
+          <div class="quiz-feedback" id="quizFeedback8"></div>
+        </div>
+      </div>
+
+      <div class="graduation" id="graduation">
+        <div class="graduation-emoji">🎓</div>
+        <h2>🏆 TEBRİKLER, YZ UZMANI! 🏆</h2>
+        <p>Yapay Zeka Galaksisi'nin tüm gezegenlerini keşfettin!</p>
+        <p style="margin-top:0.5rem;font-weight:700;">Artık yapay zeka konusunda gerçek bir uzmansın 🌟</p>
+      </div>
+
+      <button class="complete-mission" id="completeMissionBtn8" onclick="completeMission(8)"
+        ${alreadyDone ? 'disabled' : ''}>
+        ${alreadyDone ? '✓ Galaksi Tamamlandı 👑' : '👑 YZ Uzmanı Ol!'}
+      </button>
+
+      <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-top:1rem;">
+        Galaksiyi tamamlamak için: 1 proje seç + final quiz'i çöz!
+      </p>
+    `;
+  }
+
+  // ---------- Proje seç ----------
+  function selectProject(key) {
+    projectSelected = true;
+    document.querySelectorAll('.project-card').forEach(el => el.classList.remove('selected'));
+    document.getElementById('pj-' + key).classList.add('selected');
+
+    const proj = finalProjects[key];
+    document.getElementById('pdTitle').innerHTML = `${proj.emoji} ${proj.title}`;
+    document.getElementById('pdDesc').textContent = proj.desc;
+    document.getElementById('pdSkills').innerHTML = proj.skills.map(s =>
+      `<span class="project-skill">${s}</span>`).join(' ');
+    document.getElementById('pdPrompt').textContent = '"' + proj.prompt + '"';
+
+    document.getElementById('projectDetails').classList.add('show');
+
+    // Quiz'i aç
+    const qs = document.getElementById('quiz8-section');
+    if (qs && qs.style.display === 'none') qs.style.display = 'block';
+
+    setTimeout(() => document.getElementById('projectDetails').scrollIntoView({ behavior: 'smooth', block: 'center' }), 200);
+  }
+
+  // ---------- Quiz 8 ----------
+  function checkAnswer8(btn, isCorrect) {
+    const allOptions = btn.parentElement.querySelectorAll('.quiz-option');
+    allOptions.forEach(o => o.disabled = true);
+    const feedback = document.getElementById('quizFeedback8');
+    if (isCorrect) {
+      btn.classList.add('correct');
+      feedback.className = 'quiz-feedback show success';
+      feedback.innerHTML = '👑 <strong>Mükemmel!</strong> İşte bu! YZ ne tehlikeli ne sihirli — sadece bir <em>araç</em>. Onunla NASIL konuştuğun her şeyi belirler. Bu galakside öğrendiğin en değerli ders bu!';
+      quizPassed8 = true;
+      // Mezuniyet animasyonunu göster
+      setTimeout(() => {
+        document.getElementById('graduation').classList.add('show');
+        spawnConfetti();
+      }, 800);
+    } else {
+      btn.classList.add('wrong');
+      feedback.className = 'quiz-feedback show error';
+      feedback.innerHTML = '🤔 <strong>Yanlış!</strong> Tekrar düşün — bu galakside hep söylediğimiz bir şey vardı. <em>Araç + kullanım = sonuç</em>!';
+      setTimeout(() => {
+        allOptions.forEach(o => { o.disabled = false; o.classList.remove('wrong'); });
+        feedback.classList.remove('show');
+      }, 2400);
+    }
+  }
+
+  // ---------- Konfeti animasyonu ----------
+  function spawnConfetti() {
+    const grad = document.getElementById('graduation');
+    if (!grad) return;
+    grad.style.position = 'relative';
+    const colors = ['#5eead4','#ec4899','#fb923c','#4ade80','#8b5cf6','#facc15'];
+    for (let i = 0; i < 40; i++) {
+      const c = document.createElement('div');
+      c.className = 'confetti fall';
+      c.style.background = colors[Math.floor(Math.random() * colors.length)];
+      c.style.left = (Math.random() * 100) + '%';
+      c.style.top = '0';
+      c.style.animationDelay = (Math.random() * 0.8) + 's';
+      c.style.animationDuration = (2 + Math.random() * 1.5) + 's';
+      if (Math.random() > 0.5) c.style.borderRadius = '50%';
+      grad.appendChild(c);
+      setTimeout(() => c.remove(), 4500);
+    }
+  }
+
   function renderComingSoon(planet) {
     return `
       <button class="close-btn" onclick="closeModal()">✕</button>
@@ -3913,6 +4655,14 @@
     if (planetId === 6) {
       if (commandsRun.size < 2) { alert('Önce en az 2 komut çalıştır! 💻'); return; }
       if (!quizPassed6) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+    }
+    if (planetId === 7) {
+      if (teamMissionsDone < 1) { alert('Önce 1 takım görevini başar! 👥'); return; }
+      if (!quizPassed7) { alert('Önce quiz\'i doğru cevapla! 🎯'); return; }
+    }
+    if (planetId === 8) {
+      if (!projectSelected) { alert('Önce bir mini proje seç! 🎯'); return; }
+      if (!quizPassed8) { alert('Önce final quiz\'i çöz! 👑'); return; }
     }
     
     if (progress.completedPlanets.includes(planetId)) return;
